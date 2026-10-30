@@ -1,0 +1,975 @@
+UAEvsUSA
+######## match_info example rows
+cqlsh:matches_data> select * from match_info where match_id = 174057;
+
+@ Row 1
+----------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ match_id                   | 174057
+ alert_type                 | auto
+ complete                   | True
+ day_night                  | False
+ day_number                 | null
+ domestic                   | False
+ external_playing_xi_change | {7883: 'IN', 8351: 'OUT', 8362: 'IN', 8426: 'IN', 8773: 'IN', 9748: 'IN', 11315: 'IN', 14734: 'IN', 20241: 'IN', 26232: 'IN', 1464045: 'IN'}
+ external_team1             | {id: 15, name: 'United States of America', player_details: [{id: 8350, name: 'Smit Patel', full_name: 'Smit Patel', nick_name: 'Smit Patel', captain: False, role: 'WK-Batsman', keeper: True, substitute: False, team_id: 15, batting_style: 'RIGHT', bowling_style: null, team_name: 'USA', face_image_id: 156152, country_image_id: null, playing_xi_change: null, in_match_change: null, spl_substitute: null, is_overseas: null, is_unavailable: null, is_support_staff: null}, {id: 14732, name: 'Monank Patel', full_name: 'Monank Patel', nick_name: 'Monank Patel', captain: True, role: 'WK-Batsman', keeper: False, substitute: False, team_id: 15, batting_style: 'RIGHT', bowling_style: null, team_name: 'USA', face_image_id: 846083, country_image_id: null, playing_xi_change: null, in_match_change: null, spl_substitute: null, is_overseas: null, is_unavailable: null, is_support_staff: null}, {id: 26232, name: 'Saiteja Mukkamalla', full_name: 'Saiteja Mukkamalla', nick_name: 'Saiteja Mukkamalla', captain: False, role: 'Batsman', keeper: False, substitute: False, team_id: 15, batting_style: 'RIGHT', bowling_style: 'Right Arm off break', team_name: 'USA', face_image_id: 846086, country_image_id: null, playing_xi_change: 'IN', in_match_change: null, spl_substitute: null, is_overseas: null, is_unavailable: null, is_support_staff: null}, {id: 8773, name: 'Milind Kumar', full_name: 'Milind Kumar', nick_name: 'Milind Kumar', captain: False, role: 'Batting Allrounder', keeper: False, substitute: False, team_id: 15, batting_style: 'RIGHT', bowling_style: 'Right Arm off break', team_name: 'USA', face_image_id: 846078, country_image_id: null, playing_xi_change: 'IN', in_match_change: null, spl_substitute: null, is_overseas: null, is_unavailable: null, is_support_staff: null}, {id: 20241, name: 'Sanjay Krishnamurthi', full_name: 'Sanjay Krishnamurthi', nick_name: 'Sanjay Krishnamurthi', captain: False, role: 'Bowling Allrounder', keeper: False, substitute: False, team_id: 15, batting_style: 'RIGHT', bowling_style: 'Left arm orthodox', team_name: 'USA', face_image_id: 846088, country_image_id: null, playing_xi_change: 'IN', in_match_change: null, spl_substitute: null, is_overseas: null, is_unavailable: null, is_support_staff: null}, {id: 7883, name: 'Shehan Jayasuriya', full_name: 'Shehan Jayasuriya', nick_name: 'Shehan Jayasuriya', captain: False, role: 'Batting Allrounder', keeper: False, substitute: False, team_id: 15, batting_style: 'LEFT', bowling_style: 'Right Arm off break', team_name: 'USA', face_image_id: 160009, country_image_id: null, playing_xi_change: 'IN', in_match_change: null, spl_substitute: null, is_overseas: null, is_unavailable: null, is_support_staff: null}, {id: 11315, name: 'Shubham Ranjane', full_name: 'Shubham Ranjane', nick_name: 'Shubham Ranjane', captain: False, role: 'Batting Allrounder', keeper: False, substitute: False, team_id: 15, batting_style: 'RIGHT', bowling_style: 'Right Arm medium', team_name: 'USA', face_image_id: 846097, country_image_id: null, playing_xi_change: 'IN', in_match_change: null, spl_substitute: null, is_overseas: null, is_unavailable: null, is_support_staff: null}, {id: 8426, name: 'Harmeet Singh', full_name: 'Harmeet Singh', nick_name: 'Harmeet Singh', captain: False, role: 'Bowling Allrounder', keeper: False, substitute: False, team_id: 15, batting_style: 'LEFT', bowling_style: 'Left arm orthodox', team_name: 'USA', face_image_id: 846066, country_image_id: null, playing_xi_change: 'IN', in_match_change: null, spl_substitute: null, is_overseas: null, is_unavailable: null, is_support_staff: null}, {id: 9748, name: 'Saurabh Netravalkar', full_name: 'Saurabh Netravalkar', nick_name: 'Saurabh Netravalkar', captain: False, role: 'Bowler', keeper: False, substitute: False, team_id: 15, batting_style: 'RIGHT', bowling_style: 'Left Arm fast medium', team_name: 'USA', face_image_id: 846089, country_image_id: null, playing_xi_change: 'IN', in_match_change: null, spl_substitute: null, is_overseas: null, is_unavailable: null, is_support_staff: null}, {id: 14734, name: 'Jasdeep Singh', full_name: 'Jasdeep Singh', nick_name: 'Jasdeep Singh', captain: False, role: 'Bowler', keeper: False, substitute: False, team_id: 15, batting_style: 'RIGHT', bowling_style: 'Right Arm medium', team_name: 'USA', face_image_id: 846071, country_image_id: null, playing_xi_change: 'IN', in_match_change: null, spl_substitute: null, is_overseas: null, is_unavailable: null, is_support_staff: null}, {id: 8362, name: 'Ehsan Adil', full_name: 'Ehsan Adil', nick_name: 'Ehsan Adil', captain: False, role: 'Bowler', keeper: False, substitute: False, team_id: 15, batting_style: 'RIGHT', bowling_style: 'Right Arm fast', team_name: 'USA', face_image_id: 155836, country_image_id: null, playing_xi_change: 'IN', in_match_change: null, spl_substitute: null, is_overseas: null, is_unavailable: null, is_support_staff: null}, {id: 14729, name: 'Nosthush Kenjige', full_name: 'Nosthush Kenjige', nick_name: 'Nosthush Kenjige', captain: False, role: 'Bowler', keeper: False, substitute: True, team_id: 15, batting_style: 'RIGHT', bowling_style: 'Left arm orthodox', team_name: 'USA', face_image_id: 846085, country_image_id: null, playing_xi_change: null, in_match_change: null, spl_substitute: null, is_overseas: null, is_unavailable: null, is_support_staff: null}, {id: 18155, name: 'Shayan Jahangir', full_name: 'Shayan Jahangir', nick_name: 'Shayan Jahangir', captain: False, role: 'Batsman', keeper: False, substitute: True, team_id: 15, batting_style: 'RIGHT', bowling_style: 'Right Arm medium', team_name: 'USA', face_image_id: 846094, country_image_id: null, playing_xi_change: null, in_match_change: null, spl_substitute: null, is_overseas: null, is_unavailable: null, is_support_staff: null}, {id: 22901, name: 'Yasir Mohammad', full_name: 'Yasir Mohammad', nick_name: 'Yasir Mohammad', captain: False, role: 'Bowler', keeper: False, substitute: True, team_id: 15, batting_style: 'LEFT', bowling_style: 'Right Arm leg break', team_name: 'USA', face_image_id: 182026, country_image_id: null, playing_xi_change: null, in_match_change: null, spl_substitute: null, is_overseas: null, is_unavailable: null, is_support_staff: null}, {id: 11450, name: 'Ali Khan', full_name: 'Ali Khan', nick_name: 'Ali Khan', captain: False, role: 'Bowler', keeper: False, substitute: True, team_id: 15, batting_style: 'RIGHT', bowling_style: 'Right Arm fast medium', team_name: 'USA', face_image_id: 846061, country_image_id: null, playing_xi_change: null, in_match_change: null, spl_substitute: null, is_overseas: null, is_unavailable: null, is_support_staff: null}, {id: 3565, name: 'Pubudu Dassanayake', full_name: 'Pubudu Dassanayake', nick_name: 'Dassanayake', captain: null, role: 'Head Coach', keeper: null, substitute: null, team_id: 15, batting_style: null, bowling_style: null, team_name: 'USA', face_image_id: 155878, country_image_id: null, playing_xi_change: null, in_match_change: null, spl_substitute: null, is_overseas: null, is_unavailable: null, is_support_staff: True}, {id: 1464001, name: 'Vincent Kumar', full_name: 'Vincent Kumar', nick_name: 'Vincent Kumar', captain: null, role: 'Assistant Coach', keeper: null, substitute: null, team_id: 15, batting_style: null, bowling_style: null, team_name: 'USA', face_image_id: 182026, country_image_id: null, playing_xi_change: null, in_match_change: null, spl_substitute: null, is_overseas: null, is_unavailable: null, is_support_staff: True}, {id: 516, name: 'Dhammika Prasad', full_name: 'Dhammika Prasad', nick_name: 'Dhammika', captain: null, role: 'Bowling Coach', keeper: null, substitute: null, team_id: 15, batting_style: null, bowling_style: null, team_name: 'USA', face_image_id: 153246, country_image_id: null, playing_xi_change: null, in_match_change: null, spl_substitute: null, is_overseas: null, is_unavailable: null, is_support_staff: True}, {id: 1464012, name: 'Rishi Bhardwaj', full_name: 'Rishi Bhardwaj', nick_name: 'Rishi Bhardwaj', captain: null, role: 'Batting Coach', keeper: null, substitute: null, team_id: 15, batting_style: null, bowling_style: null, team_name: 'USA', face_image_id: 182026, country_image_id: null, playing_xi_change: null, in_match_change: null, spl_substitute: null, is_overseas: null, is_unavailable: null, is_support_staff: True}], short_name: 'USA'}
+ external_team2             | {id: 7, name: 'United Arab Emirates', player_details: [{id: 6322, name: 'Harpreet Singh', full_name: 'Harpreet Singh Bhatia', nick_name: 'Harpreet Singh', captain: True, role: 'Batsman', keeper: False, substitute: False, team_id: 7, batting_style: 'LEFT', bowling_style: 'Right Arm medium', team_name: 'UAE', face_image_id: 153367, country_image_id: null, playing_xi_change: null, in_match_change: null, spl_substitute: null, is_overseas: null, is_unavailable: null, is_support_staff: null}, {id: 1471008, name: 'Adeeb Usmani', full_name: 'Adeeb Usmani', nick_name: 'Adeeb Usmani', captain: False, role: 'WK-Batsman', keeper: True, substitute: False, team_id: 7, batting_style: 'RIGHT', bowling_style: 'Right Arm off break', team_name: 'UAE', face_image_id: 182026, country_image_id: null, playing_xi_change: null, in_match_change: null, spl_substitute: null, is_overseas: null, is_unavailable: null, is_support_staff: null}, {id: 1464045, name: 'Muhammad Shahdad', full_name: 'Muhammad Shahdad', nick_name: 'Muhammad Shahdad', captain: False, role: 'Bowling Allrounder', keeper: False, substitute: False, team_id: 7, batting_style: 'RIGHT', bowling_style: 'Right Arm leg break', team_name: 'UAE', face_image_id: 182026, country_image_id: null, playing_xi_change: 'IN', in_match_change: null, spl_substitute: null, is_overseas: null, is_unavailable: null, is_support_staff: null}, {id: 1464054, name: 'Sohaib Khan', full_name: 'Sohaib Khan', nick_name: 'Sohaib Khan', captain: False, role: 'Batsman', keeper: False, substitute: False, team_id: 7, batting_style: 'RIGHT', bowling_style: null, team_name: 'UAE', face_image_id: 845893, country_image_id: null, playing_xi_change: null, in_match_change: null, spl_substitute: null, is_overseas: null, is_unavailable: null, is_support_staff: null}, {id: 52666, name: 'Rahul Chopra', full_name: 'Rahul Chopra', nick_name: 'Rahul Chopra', captain: False, role: 'WK-Batsman', keeper: False, substitute: False, team_id: 7, batting_style: 'RIGHT', bowling_style: null, team_name: 'UAE', face_image_id: 182026, country_image_id: null, playing_xi_change: null, in_match_change: null, spl_substitute: null, is_overseas: null, is_unavailable: null, is_support_staff: null}, {id: 53128, name: 'Tanish Suri', full_name: 'Tanish Suri', nick_name: 'Tanish Suri', captain: False, role: 'WK-Batsman', keeper: False, substitute: False, team_id: 7, batting_style: 'RIGHT', bowling_style: null, team_name: 'UAE', face_image_id: 182026, country_image_id: null, playing_xi_change: null, in_match_change: null, spl_substitute: null, is_overseas: null, is_unavailable: null, is_support_staff: null}, {id: 15842, name: 'Basil Hameed', full_name: 'Basil Hameed', nick_name: 'Basil Hameed', captain: False, role: 'Batting Allrounder', keeper: False, substitute: False, team_id: 7, batting_style: 'RIGHT', bowling_style: 'Right Arm off break', team_name: 'UAE', face_image_id: 244731, country_image_id: null, playing_xi_change: null, in_match_change: null, spl_substitute: null, is_overseas: null, is_unavailable: null, is_support_staff: null}, {id: 23016, name: 'Aayan Khan', full_name: 'Aayan Afzal Khan', nick_name: 'Aayan Khan', captain: False, role: 'Bowling Allrounder', keeper: False, substitute: False, team_id: 7, batting_style: 'RIGHT', bowling_style: 'Left arm orthodox', team_name: 'UAE', face_image_id: 244730, country_image_id: null, playing_xi_change: null, in_match_change: null, spl_substitute: null, is_overseas: null, is_unavailable: null, is_support_staff: null}, {id: 16083, name: 'Ali Naseer', full_name: 'Ali Naseer', nick_name: 'Ali Naseer', captain: False, role: 'Batting Allrounder', keeper: False, substitute: False, team_id: 7, batting_style: 'LEFT', bowling_style: 'Right Arm medium', team_name: 'UAE', face_image_id: 182026, country_image_id: null, playing_xi_change: null, in_match_change: null, spl_substitute: null, is_overseas: null, is_unavailable: null, is_support_staff: null}, {id: 1447465, name: 'Khuzaima Tanveer', full_name: 'Khuzaima Tanveer', nick_name: 'Khuzaima Tanveer', captain: False, role: 'Bowler', keeper: False, substitute: False, team_id: 7, batting_style: 'RIGHT', bowling_style: 'Right Arm fast', team_name: 'UAE', face_image_id: 182026, country_image_id: null, playing_xi_change: null, in_match_change: null, spl_substitute: null, is_overseas: null, is_unavailable: null, is_support_staff: null}, {id: 1447401, name: 'Ibrar Ahmad', full_name: 'Ibrar Ahmad', nick_name: 'Ibrar Ahmad', captain: False, role: 'Bowler', keeper: False, substitute: False, team_id: 7, batting_style: 'RIGHT', bowling_style: 'Right Arm fast medium', team_name: 'UAE', face_image_id: 182026, country_image_id: null, playing_xi_change: null, in_match_change: null, spl_substitute: null, is_overseas: null, is_unavailable: null, is_support_staff: null}, {id: 8351, name: 'Akshdeep Nath', full_name: 'Akshdeep Nath', nick_name: 'Akshdeep Nath', captain: False, role: 'Batting Allrounder', keeper: False, substitute: True, team_id: 7, batting_style: 'RIGHT', bowling_style: 'Right Arm fast medium', team_name: 'UAE', face_image_id: 182026, country_image_id: null, playing_xi_change: 'OUT', in_match_change: null, spl_substitute: null, is_overseas: null, is_unavailable: null, is_support_staff: null}, {id: 1480190, name: 'Awais Ali Shah', full_name: 'Awais Ali Shah', nick_name: 'Awais Ali Shah', captain: False, role: 'Bowling Allrounder', keeper: False, substitute: True, team_id: 7, batting_style: 'LEFT', bowling_style: 'Left arm orthodox', team_name: 'UAE', face_image_id: 182026, country_image_id: null, playing_xi_change: null, in_match_change: null, spl_substitute: null, is_overseas: null, is_unavailable: null, is_support_staff: null}, {id: 1466455, name: 'Ayaan Misbah', full_name: 'Ayaan Misbah', nick_name: 'Ayaan Misbah', captain: False, role: 'Bowling Allrounder', keeper: False, substitute: True, team_id: 7, batting_style: 'RIGHT', bowling_style: 'Right Arm medium', team_name: 'UAE', face_image_id: 182026, country_image_id: null, playing_xi_change: null, in_match_change: null, spl_substitute: null, is_overseas: null, is_unavailable: null, is_support_staff: null}, {id: 1448301, name: 'Muhammad Arfan', full_name: 'Muhammad Arfan', nick_name: 'Muhammad Arfan', captain: False, role: 'Bowler', keeper: False, substitute: True, team_id: 7, batting_style: 'LEFT', bowling_style: 'Right Arm medium', team_name: 'UAE', face_image_id: 845787, country_image_id: null, playing_xi_change: null, in_match_change: null, spl_substitute: null, is_overseas: null, is_unavailable: null, is_support_staff: null}, {id: 3866, name: 'Lalchand Rajput', full_name: 'Lalchand Rajput', nick_name: 'Rajput', captain: null, role: 'Head Coach', keeper: null, substitute: null, team_id: 7, batting_style: null, bowling_style: null, team_name: 'UAE', face_image_id: 182026, country_image_id: null, playing_xi_change: null, in_match_change: null, spl_substitute: null, is_overseas: null, is_unavailable: null, is_support_staff: True}, {id: 494, name: 'Yasir Arafat', full_name: 'Yasir Arafat', nick_name: 'Arafat', captain: null, role: 'Bowling Coach', keeper: null, substitute: null, team_id: 7, batting_style: null, bowling_style: null, team_name: 'UAE', face_image_id: 155805, country_image_id: null, playing_xi_change: null, in_match_change: null, spl_substitute: null, is_overseas: null, is_unavailable: null, is_support_staff: True}, {id: 1468930, name: 'Stanley Chioza', full_name: 'Stanley Chioza', nick_name: 'Stanley Chioza', captain: null, role: 'Fielding Coach', keeper: null, substitute: null, team_id: 7, batting_style: null, bowling_style: null, team_name: 'UAE', face_image_id: 182026, country_image_id: null, playing_xi_change: null, in_match_change: null, spl_substitute: null, is_overseas: null, is_unavailable: null, is_support_staff: True}], short_name: 'UAE'}
+ external_update            | True
+ fantasy_enabled            | null
+ hys_enabled                | 0
+ is_forecast_enabled        | null
+ is_match_not_covered       | False
+ is_poll_enabled            | False
+ livestream_enabled         | null
+ livestream_enabled_geo     | null
+ match_complete_timestamp   | 1791242445040
+ match_description          | 129th Match
+ match_format               | ODI
+ match_image_id             | null
+ match_start_timestamp      | 1791212400000
+ match_team_info            | [{batting_team_id: 7, batting_team_short_name: 'UAE', bowling_team_id: 15, bowling_team_short_name: 'USA'}, {batting_team_id: 15, batting_team_short_name: 'USA', bowling_team_id: 7, bowling_team_short_name: 'UAE'}]
+ match_type                 | International
+ players_of_the_match       | [{id: 8773, name: 'Milind Kumar', full_name: 'Milind Kumar', nick_name: 'Milind Kumar', captain: False, role: null, keeper: False, substitute: False, team_id: 0, batting_style: null, bowling_style: null, team_name: 'United States of America', face_image_id: null, country_image_id: null, playing_xi_change: null, in_match_change: null, spl_substitute: null, is_overseas: null, is_unavailable: null, is_support_staff: null}]
+ players_of_the_series      | null
+ referee                    | {id: 4236, name: 'Reon King', country: 'WI'}
+ result                     | {result_type: 'win', winning_team: 'United States of America', winning_team_id: 15, winning_margin: 6, win_by_runs: False, win_by_innings: False}
+ revised_target             | null
+ series                     | {id: 7572, name: 'ICC Cricket World Cup League Two 2023-27', series_type: null, start_date: 1707868800000, end_date: 1830124800000, series_folder: '', odi_series_result: '''''', t20_series_result: '', test_series_result: '', tournament: True}
+ series_image_id            | 1087595
+ state                      | complete
+ status                     | United States of America opt to bowl
+ team1                      | {id: 15, name: 'United States of America', player_details: [{id: 8350, name: 'Smit Patel', full_name: 'Smit Patel', nick_name: 'Smit Patel', captain: False, role: 'WK-Batsman', keeper: True, substitute: False, team_id: 15, batting_style: 'RIGHT', bowling_style: null, team_name: null, face_image_id: null, country_image_id: null, playing_xi_change: null, in_match_change: null, spl_substitute: null, is_overseas: null, is_unavailable: null, is_support_staff: null}, {id: 14732, name: 'Monank Patel', full_name: 'Monank Patel', nick_name: 'Monank Patel', captain: True, role: 'WK-Batsman', keeper: False, substitute: False, team_id: 15, batting_style: 'RIGHT', bowling_style: null, team_name: null, face_image_id: null, country_image_id: null, playing_xi_change: null, in_match_change: null, spl_substitute: null, is_overseas: null, is_unavailable: null, is_support_staff: null}, {id: 26232, name: 'Saiteja Mukkamalla', full_name: 'Saiteja Mukkamalla', nick_name: 'Saiteja Mukkamalla', captain: False, role: 'Batsman', keeper: False, substitute: False, team_id: 15, batting_style: 'RIGHT', bowling_style: 'Right Arm off break', team_name: null, face_image_id: null, country_image_id: null, playing_xi_change: null, in_match_change: null, spl_substitute: null, is_overseas: null, is_unavailable: null, is_support_staff: null}, {id: 8773, name: 'Milind Kumar', full_name: 'Milind Kumar', nick_name: 'Milind Kumar', captain: False, role: 'Batting Allrounder', keeper: False, substitute: False, team_id: 15, batting_style: 'RIGHT', bowling_style: 'Right Arm off break', team_name: null, face_image_id: null, country_image_id: null, playing_xi_change: null, in_match_change: null, spl_substitute: null, is_overseas: null, is_unavailable: null, is_support_staff: null}, {id: 20241, name: 'Sanjay Krishnamurthi', full_name: 'Sanjay Krishnamurthi', nick_name: 'Sanjay Krishnamurthi', captain: False, role: 'Bowling Allrounder', keeper: False, substitute: False, team_id: 15, batting_style: 'RIGHT', bowling_style: 'Left arm orthodox', team_name: null, face_image_id: null, country_image_id: null, playing_xi_change: null, in_match_change: null, spl_substitute: null, is_overseas: null, is_unavailable: null, is_support_staff: null}, {id: 7883, name: 'Shehan Jayasuriya', full_name: 'Shehan Jayasuriya', nick_name: 'Shehan Jayasuriya', captain: False, role: 'Batting Allrounder', keeper: False, substitute: False, team_id: 15, batting_style: 'LEFT', bowling_style: 'Right Arm off break', team_name: null, face_image_id: null, country_image_id: null, playing_xi_change: null, in_match_change: null, spl_substitute: null, is_overseas: null, is_unavailable: null, is_support_staff: null}, {id: 11315, name: 'Shubham Ranjane', full_name: 'Shubham Ranjane', nick_name: 'Shubham Ranjane', captain: False, role: 'Batting Allrounder', keeper: False, substitute: False, team_id: 15, batting_style: 'RIGHT', bowling_style: 'Right Arm medium', team_name: null, face_image_id: null, country_image_id: null, playing_xi_change: null, in_match_change: null, spl_substitute: null, is_overseas: null, is_unavailable: null, is_support_staff: null}, {id: 8426, name: 'Harmeet Singh', full_name: 'Harmeet Singh', nick_name: 'Harmeet Singh', captain: False, role: 'Bowling Allrounder', keeper: False, substitute: False, team_id: 15, batting_style: 'LEFT', bowling_style: 'Left arm orthodox', team_name: null, face_image_id: null, country_image_id: null, playing_xi_change: null, in_match_change: null, spl_substitute: null, is_overseas: null, is_unavailable: null, is_support_staff: null}, {id: 9748, name: 'Saurabh Netravalkar', full_name: 'Saurabh Netravalkar', nick_name: 'Saurabh Netravalkar', captain: False, role: 'Bowler', keeper: False, substitute: False, team_id: 15, batting_style: 'RIGHT', bowling_style: 'Left Arm fast medium', team_name: null, face_image_id: null, country_image_id: null, playing_xi_change: null, in_match_change: null, spl_substitute: null, is_overseas: null, is_unavailable: null, is_support_staff: null}, {id: 14734, name: 'Jasdeep Singh', full_name: 'Jasdeep Singh', nick_name: 'Jasdeep Singh', captain: False, role: 'Bowler', keeper: False, substitute: False, team_id: 15, batting_style: 'RIGHT', bowling_style: 'Right Arm medium', team_name: null, face_image_id: null, country_image_id: null, playing_xi_change: null, in_match_change: null, spl_substitute: null, is_overseas: null, is_unavailable: null, is_support_staff: null}, {id: 8362, name: 'Ehsan Adil', full_name: 'Ehsan Adil', nick_name: 'Ehsan Adil', captain: False, role: 'Bowler', keeper: False, substitute: False, team_id: 15, batting_style: 'RIGHT', bowling_style: 'Right Arm fast', team_name: null, face_image_id: null, country_image_id: null, playing_xi_change: null, in_match_change: null, spl_substitute: null, is_overseas: null, is_unavailable: null, is_support_staff: null}, {id: 14729, name: 'Nosthush Kenjige', full_name: 'Nosthush Kenjige', nick_name: 'Nosthush Kenjige', captain: False, role: 'Bowler', keeper: False, substitute: True, team_id: 15, batting_style: 'RIGHT', bowling_style: 'Left arm orthodox', team_name: null, face_image_id: null, country_image_id: null, playing_xi_change: null, in_match_change: null, spl_substitute: null, is_overseas: null, is_unavailable: null, is_support_staff: null}, {id: 18155, name: 'Shayan Jahangir', full_name: 'Shayan Jahangir', nick_name: 'Shayan Jahangir', captain: False, role: 'Batsman', keeper: False, substitute: True, team_id: 15, batting_style: 'RIGHT', bowling_style: 'Right Arm medium', team_name: null, face_image_id: null, country_image_id: null, playing_xi_change: null, in_match_change: null, spl_substitute: null, is_overseas: null, is_unavailable: null, is_support_staff: null}, {id: 22901, name: 'Yasir Mohammad', full_name: 'Yasir Mohammad', nick_name: 'Yasir Mohammad', captain: False, role: 'Bowler', keeper: False, substitute: True, team_id: 15, batting_style: 'LEFT', bowling_style: 'Right Arm leg break', team_name: null, face_image_id: null, country_image_id: null, playing_xi_change: null, in_match_change: null, spl_substitute: null, is_overseas: null, is_unavailable: null, is_support_staff: null}, {id: 11450, name: 'Ali Khan', full_name: 'Ali Khan', nick_name: 'Ali Khan', captain: False, role: 'Bowler', keeper: False, substitute: True, team_id: 15, batting_style: 'RIGHT', bowling_style: 'Right Arm fast medium', team_name: null, face_image_id: null, country_image_id: null, playing_xi_change: null, in_match_change: null, spl_substitute: null, is_overseas: null, is_unavailable: null, is_support_staff: null}], short_name: 'USA'}
+ team2                      | {id: 7, name: 'United Arab Emirates', player_details: [{id: 6322, name: 'Harpreet Singh', full_name: 'Harpreet Singh Bhatia', nick_name: 'Harpreet Singh', captain: True, role: 'Batsman', keeper: False, substitute: False, team_id: 7, batting_style: 'LEFT', bowling_style: 'Right Arm medium', team_name: null, face_image_id: null, country_image_id: null, playing_xi_change: null, in_match_change: null, spl_substitute: null, is_overseas: null, is_unavailable: null, is_support_staff: null}, {id: 1471008, name: 'Adeeb Usmani', full_name: 'Adeeb Usmani', nick_name: 'Adeeb Usmani', captain: False, role: 'WK-Batsman', keeper: True, substitute: False, team_id: 7, batting_style: 'RIGHT', bowling_style: 'Right Arm off break', team_name: null, face_image_id: null, country_image_id: null, playing_xi_change: null, in_match_change: null, spl_substitute: null, is_overseas: null, is_unavailable: null, is_support_staff: null}, {id: 1464045, name: 'Muhammad Shahdad', full_name: 'Muhammad Shahdad', nick_name: 'Muhammad Shahdad', captain: False, role: 'Bowling Allrounder', keeper: False, substitute: False, team_id: 7, batting_style: 'RIGHT', bowling_style: 'Right Arm leg break', team_name: null, face_image_id: null, country_image_id: null, playing_xi_change: null, in_match_change: null, spl_substitute: null, is_overseas: null, is_unavailable: null, is_support_staff: null}, {id: 1464054, name: 'Sohaib Khan', full_name: 'Sohaib Khan', nick_name: 'Sohaib Khan', captain: False, role: 'Batsman', keeper: False, substitute: False, team_id: 7, batting_style: 'RIGHT', bowling_style: null, team_name: null, face_image_id: null, country_image_id: null, playing_xi_change: null, in_match_change: null, spl_substitute: null, is_overseas: null, is_unavailable: null, is_support_staff: null}, {id: 52666, name: 'Rahul Chopra', full_name: 'Rahul Chopra', nick_name: 'Rahul Chopra', captain: False, role: 'WK-Batsman', keeper: False, substitute: False, team_id: 7, batting_style: 'RIGHT', bowling_style: null, team_name: null, face_image_id: null, country_image_id: null, playing_xi_change: null, in_match_change: null, spl_substitute: null, is_overseas: null, is_unavailable: null, is_support_staff: null}, {id: 53128, name: 'Tanish Suri', full_name: 'Tanish Suri', nick_name: 'Tanish Suri', captain: False, role: 'WK-Batsman', keeper: False, substitute: False, team_id: 7, batting_style: 'RIGHT', bowling_style: null, team_name: null, face_image_id: null, country_image_id: null, playing_xi_change: null, in_match_change: null, spl_substitute: null, is_overseas: null, is_unavailable: null, is_support_staff: null}, {id: 15842, name: 'Basil Hameed', full_name: 'Basil Hameed', nick_name: 'Basil Hameed', captain: False, role: 'Batting Allrounder', keeper: False, substitute: False, team_id: 7, batting_style: 'RIGHT', bowling_style: 'Right Arm off break', team_name: null, face_image_id: null, country_image_id: null, playing_xi_change: null, in_match_change: null, spl_substitute: null, is_overseas: null, is_unavailable: null, is_support_staff: null}, {id: 23016, name: 'Aayan Khan', full_name: 'Aayan Afzal Khan', nick_name: 'Aayan Khan', captain: False, role: 'Bowling Allrounder', keeper: False, substitute: False, team_id: 7, batting_style: 'RIGHT', bowling_style: 'Left arm orthodox', team_name: null, face_image_id: null, country_image_id: null, playing_xi_change: null, in_match_change: null, spl_substitute: null, is_overseas: null, is_unavailable: null, is_support_staff: null}, {id: 16083, name: 'Ali Naseer', full_name: 'Ali Naseer', nick_name: 'Ali Naseer', captain: False, role: 'Batting Allrounder', keeper: False, substitute: False, team_id: 7, batting_style: 'LEFT', bowling_style: 'Right Arm medium', team_name: null, face_image_id: null, country_image_id: null, playing_xi_change: null, in_match_change: null, spl_substitute: null, is_overseas: null, is_unavailable: null, is_support_staff: null}, {id: 1447465, name: 'Khuzaima Tanveer', full_name: 'Khuzaima Tanveer', nick_name: 'Khuzaima Tanveer', captain: False, role: 'Bowler', keeper: False, substitute: False, team_id: 7, batting_style: 'RIGHT', bowling_style: 'Right Arm fast', team_name: null, face_image_id: null, country_image_id: null, playing_xi_change: null, in_match_change: null, spl_substitute: null, is_overseas: null, is_unavailable: null, is_support_staff: null}, {id: 1447401, name: 'Ibrar Ahmad', full_name: 'Ibrar Ahmad', nick_name: 'Ibrar Ahmad', captain: False, role: 'Bowler', keeper: False, substitute: False, team_id: 7, batting_style: 'RIGHT', bowling_style: 'Right Arm fast medium', team_name: null, face_image_id: null, country_image_id: null, playing_xi_change: null, in_match_change: null, spl_substitute: null, is_overseas: null, is_unavailable: null, is_support_staff: null}, {id: 8351, name: 'Akshdeep Nath', full_name: 'Akshdeep Nath', nick_name: 'Akshdeep Nath', captain: False, role: 'Batting Allrounder', keeper: False, substitute: True, team_id: 7, batting_style: 'RIGHT', bowling_style: 'Right Arm fast medium', team_name: null, face_image_id: null, country_image_id: null, playing_xi_change: null, in_match_change: null, spl_substitute: null, is_overseas: null, is_unavailable: null, is_support_staff: null}, {id: 1480190, name: 'Awais Ali Shah', full_name: 'Awais Ali Shah', nick_name: 'Awais Ali Shah', captain: False, role: 'Bowling Allrounder', keeper: False, substitute: True, team_id: 7, batting_style: 'LEFT', bowling_style: 'Left arm orthodox', team_name: null, face_image_id: null, country_image_id: null, playing_xi_change: null, in_match_change: null, spl_substitute: null, is_overseas: null, is_unavailable: null, is_support_staff: null}, {id: 1466455, name: 'Ayaan Misbah', full_name: 'Ayaan Misbah', nick_name: 'Ayaan Misbah', captain: False, role: 'Bowling Allrounder', keeper: False, substitute: True, team_id: 7, batting_style: 'RIGHT', bowling_style: 'Right Arm medium', team_name: null, face_image_id: null, country_image_id: null, playing_xi_change: null, in_match_change: null, spl_substitute: null, is_overseas: null, is_unavailable: null, is_support_staff: null}, {id: 1448301, name: 'Muhammad Arfan', full_name: 'Muhammad Arfan', nick_name: 'Muhammad Arfan', captain: False, role: 'Bowler', keeper: False, substitute: True, team_id: 7, batting_style: 'LEFT', bowling_style: 'Right Arm medium', team_name: null, face_image_id: null, country_image_id: null, playing_xi_change: null, in_match_change: null, spl_substitute: null, is_overseas: null, is_unavailable: null, is_support_staff: null}], short_name: 'UAE'}
+ toss_results               | {toss_winner_id: 15, toss_winner_name: 'United States of America', decision: 'Bowling'}
+ umpire1                    | {id: 1424095, name: 'Aditya Gajjar', country: 'USA'}
+ umpire2                    | {id: 402, name: 'Deighton Butler', country: 'WI'}
+ umpire3                    | {id: null, name: null, country: null}
+ venue                      | {id: 1668, name: 'Grand Prairie Stadium', city: 'Dallas', country: 'United States', timezone: '-05:00', latitude: '32.67942', longitude: '-97.028338'}
+ year                       | 2026
+
+(1 rows)
+
+
+
+######## match_bbb_full_scorecard example rows
+cqlsh:matches_data> select * from match_bbb_full_scorecard where match_id = 174057 group by innings_id;
+
+@ Row 1
+----------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ match_id             | 174057
+ innings_id           | 2
+ ball_nbr             | 293
+ time_score           | 2026-10-05 23:20:23.237000+0000
+ bat_team_id          | 15
+ bat_team_name        | United States of America
+ bat_team_short_name  | USA
+ batsmen_data         | {'bat_1': {bat_id: 8350, bat_name: 'Smit Patel', bat_short_name: 'Smit Patel', is_captain: False, is_keeper: True, runs: 27, balls: 22, dots: 11, fours: 5, sixes: 0, mins: 9, strike_rate: 122.73, out_desc: 'lbw       b Aayan Khan', bowler_id: 23016, fielder_id_1: 0, fielder_id_2: 0, fielder_id_3: 0, ones: 5, twos: 1, threes: 0, fives: 0, boundaries: 5, sixers: 0}, 'bat_10': {bat_id: 14734, bat_name: 'Jasdeep Singh', bat_short_name: 'Jasdeep Singh', is_captain: False, is_keeper: False, runs: 0, balls: 0, dots: 0, fours: 0, sixes: 0, mins: 0, strike_rate: 0, out_desc: '', bowler_id: 0, fielder_id_1: 0, fielder_id_2: 0, fielder_id_3: 0, ones: 0, twos: 0, threes: 0, fives: 0, boundaries: 0, sixers: 0}, 'bat_11': {bat_id: 8362, bat_name: 'Ehsan Adil', bat_short_name: 'Ehsan Adil', is_captain: False, is_keeper: False, runs: 0, balls: 0, dots: 0, fours: 0, sixes: 0, mins: 0, strike_rate: 0, out_desc: '', bowler_id: 0, fielder_id_1: 0, fielder_id_2: 0, fielder_id_3: 0, ones: 0, twos: 0, threes: 0, fives: 0, boundaries: 0, sixers: 0}, 'bat_2': {bat_id: 14732, bat_name: 'Monank Patel', bat_short_name: 'Monank Patel', is_captain: True, is_keeper: False, runs: 55, balls: 62, dots: 23, fours: 3, sixes: 0, mins: 82, strike_rate: 88.71, out_desc: 'c Aayan Khan       b Muhammad Shahdad', bowler_id: 1464045, fielder_id_1: 23016, fielder_id_2: 0, fielder_id_3: 0, ones: 30, twos: 5, threes: 1, fives: 0, boundaries: 3, sixers: 0}, 'bat_3': {bat_id: 7883, bat_name: 'Shehan Jayasuriya', bat_short_name: 'Shehan Jayasuriya', is_captain: False, is_keeper: False, runs: 9, balls: 15, dots: 10, fours: 1, sixes: 0, mins: 9, strike_rate: 60, out_desc: 'c Ali Naseer       b Ibrar Ahmad', bowler_id: 1447401, fielder_id_1: 16083, fielder_id_2: 0, fielder_id_3: 0, ones: 3, twos: 1, threes: 0, fives: 0, boundaries: 1, sixers: 0}, 'bat_4': {bat_id: 26232, bat_name: 'Saiteja Mukkamalla', bat_short_name: 'Saiteja Mukkamalla', is_captain: False, is_keeper: False, runs: 56, balls: 62, dots: 26, fours: 2, sixes: 2, mins: 88, strike_rate: 90.32, out_desc: 'c Adeeb Usmani       b Ali Naseer', bowler_id: 16083, fielder_id_1: 1471008, fielder_id_2: 0, fielder_id_3: 0, ones: 28, twos: 4, threes: 0, fives: 0, boundaries: 2, sixers: 2}, 'bat_5': {bat_id: 8773, bat_name: 'Milind Kumar', bat_short_name: 'Milind Kumar', is_captain: False, is_keeper: False, runs: 116, balls: 84, dots: 25, fours: 7, sixes: 5, mins: 110, strike_rate: 138.1, out_desc: 'not out', bowler_id: 0, fielder_id_1: 0, fielder_id_2: 0, fielder_id_3: 0, ones: 37, twos: 9, threes: 1, fives: 0, boundaries: 7, sixers: 5}, 'bat_6': {bat_id: 11315, bat_name: 'Shubham Ranjane', bat_short_name: 'Shubham Ranjane', is_captain: False, is_keeper: False, runs: 57, balls: 49, dots: 15, fours: 2, sixes: 3, mins: 84, strike_rate: 116.33, out_desc: 'not out', bowler_id: 0, fielder_id_1: 0, fielder_id_2: 0, fielder_id_3: 0, ones: 27, twos: 2, threes: 0, fives: 0, boundaries: 2, sixers: 3}, 'bat_7': {bat_id: 20241, bat_name: 'Sanjay Krishnamurthi', bat_short_name: 'Sanjay Krishnamurthi', is_captain: False, is_keeper: False, runs: 0, balls: 0, dots: 0, fours: 0, sixes: 0, mins: 0, strike_rate: 0, out_desc: '', bowler_id: 0, fielder_id_1: 0, fielder_id_2: 0, fielder_id_3: 0, ones: 0, twos: 0, threes: 0, fives: 0, boundaries: 0, sixers: 0}, 'bat_8': {bat_id: 8426, bat_name: 'Harmeet Singh', bat_short_name: 'Harmeet Singh', is_captain: False, is_keeper: False, runs: 0, balls: 0, dots: 0, fours: 0, sixes: 0, mins: 0, strike_rate: 0, out_desc: '', bowler_id: 0, fielder_id_1: 0, fielder_id_2: 0, fielder_id_3: 0, ones: 0, twos: 0, threes: 0, fives: 0, boundaries: 0, sixers: 0}, 'bat_9': {bat_id: 9748, bat_name: 'Saurabh Netravalkar', bat_short_name: 'Saurabh Netravalkar', is_captain: False, is_keeper: False, runs: 0, balls: 0, dots: 0, fours: 0, sixes: 0, mins: 0, strike_rate: 0, out_desc: '', bowler_id: 0, fielder_id_1: 0, fielder_id_2: 0, fielder_id_3: 0, ones: 0, twos: 0, threes: 0, fives: 0, boundaries: 0, sixers: 0}}
+ bowl_team_id         | 7
+ bowl_team_name       | United Arab Emirates
+ bowl_team_short_name | UAE
+ bowlers_data         | {'bowl_1': {bowler_id: 1447465, bowl_name: 'Khuzaima Tanveer', bowl_short_name: 'Khuzaima Tanveer', is_captain: False, is_keeper: False, overs: 8, maidens: 1, runs: 47, wickets: 0, economy: 5.9, no_balls: 0, wides: 0}, 'bowl_2': {bowler_id: 1447401, bowl_name: 'Ibrar Ahmad', bowl_short_name: 'Ibrar Ahmad', is_captain: False, is_keeper: False, overs: 9, maidens: 0, runs: 82, wickets: 1, economy: 9.1, no_balls: 1, wides: 4}, 'bowl_3': {bowler_id: 23016, bowl_name: 'Aayan Afzal Khan', bowl_short_name: 'Aayan Khan', is_captain: False, is_keeper: False, overs: 10, maidens: 0, runs: 72, wickets: 1, economy: 7.2, no_balls: 0, wides: 5}, 'bowl_4': {bowler_id: 16083, bowl_name: 'Ali Naseer', bowl_short_name: 'Ali Naseer', is_captain: False, is_keeper: False, overs: 9.5, maidens: 0, runs: 60, wickets: 1, economy: 6.1, no_balls: 0, wides: 1}, 'bowl_5': {bowler_id: 15842, bowl_name: 'Basil Hameed', bowl_short_name: 'Basil Hameed', is_captain: False, is_keeper: False, overs: 7, maidens: 0, runs: 38, wickets: 0, economy: 5.4, no_balls: 0, wides: 0}, 'bowl_6': {bowler_id: 1464045, bowl_name: 'Muhammad Shahdad', bowl_short_name: 'Muhammad Shahdad', is_captain: False, is_keeper: False, overs: 5, maidens: 0, runs: 32, wickets: 1, economy: 6.4, no_balls: 0, wides: 0}}
+ extras_data          | {'byes': 0, 'legByes': 1, 'noBalls': 1, 'penalty': 0, 'total': 12, 'wides': 10}
+ is_declared          | False
+ is_follow_on         | False
+ overs                | 48.5
+ partnerships_data    | {'pat_1': {bat1id: 8350, bat1name: 'Smit Patel', bat1runs: 27, bat1fours: 5, bat1sixes: 0, bat2id: 14732, bat2name: 'Monank Patel', bat2runs: 10, bat2fours: 0, bat2sixes: 0, totalruns: 38, totalballs: 34, bat1balls: 22, bat2balls: 12, bat1ones: 5, bat1twos: 1, bat1threes: 0, bat1fives: 0, bat1boundaries: 5, bat1sixers: 0, bat2ones: 5, bat2twos: 1, bat2threes: 1, bat2fives: 0, bat2boundaries: 0, bat2sixers: 0}, 'pat_2': {bat1id: 7883, bat1name: 'Shehan Jayasuriya', bat1runs: 9, bat1fours: 1, bat1sixes: 0, bat2id: 14732, bat2name: 'Monank Patel', bat2runs: 11, bat2fours: 2, bat2sixes: 0, totalruns: 22, totalballs: 24, bat1balls: 15, bat2balls: 9, bat1ones: 3, bat1twos: 1, bat1threes: 0, bat1fives: 0, bat1boundaries: 1, bat1sixers: 0, bat2ones: 3, bat2twos: 0, bat2threes: 0, bat2fives: 0, bat2boundaries: 2, bat2sixers: 0}, 'pat_3': {bat1id: 26232, bat1name: 'Saiteja Mukkamalla', bat1runs: 39, bat1fours: 1, bat1sixes: 2, bat2id: 14732, bat2name: 'Monank Patel', bat2runs: 34, bat2fours: 1, bat2sixes: 0, totalruns: 74, totalballs: 83, bat1balls: 42, bat2balls: 41, bat1ones: 19, bat1twos: 2, bat1threes: 0, bat1fives: 0, bat1boundaries: 1, bat1sixers: 2, bat2ones: 22, bat2twos: 4, bat2threes: 0, bat2fives: 0, bat2boundaries: 1, bat2sixers: 0}, 'pat_4': {bat1id: 26232, bat1name: 'Saiteja Mukkamalla', bat1runs: 17, bat1fours: 1, bat1sixes: 0, bat2id: 8773, bat2name: 'Milind Kumar', bat2runs: 21, bat2fours: 1, bat2sixes: 1, totalruns: 38, totalballs: 42, bat1balls: 20, bat2balls: 22, bat1ones: 9, bat1twos: 2, bat1threes: 0, bat1fives: 0, bat1boundaries: 1, bat1sixers: 0, bat2ones: 9, bat2twos: 1, bat2threes: 0, bat2fives: 0, bat2boundaries: 1, bat2sixers: 1}, 'pat_5': {bat1id: 11315, bat1name: 'Shubham Ranjane', bat1runs: 57, bat1fours: 2, bat1sixes: 3, bat2id: 8773, bat2name: 'Milind Kumar', bat2runs: 95, bat2fours: 6, bat2sixes: 4, totalruns: 160, totalballs: 110, bat1balls: 49, bat2balls: 62, bat1ones: 27, bat1twos: 2, bat1threes: 0, bat1fives: 0, bat1boundaries: 2, bat1sixers: 3, bat2ones: 28, bat2twos: 8, bat2threes: 1, bat2fives: 0, bat2boundaries: 6, bat2sixers: 4}}
+ pp_data              | {'pp_1': {pp_id: 30, pp_overs_from: 0.1, pp_overs_to: 10, pp_type: 'mandatory', runs_scored: 60}}
+ revised_overs        | null
+ run_rate             | 6.8
+ runs                 | 332
+ wickets              | 4
+ wickets_data         | {'wkt_1': {bat_id: 8350, bat_name: 'Smit Patel', wkt_nbr: 1, wkt_over: 5.4, wkt_runs: 38}, 'wkt_2': {bat_id: 7883, bat_name: 'Shehan Jayasuriya', wkt_nbr: 2, wkt_over: 9.4, wkt_runs: 60}, 'wkt_3': {bat_id: 14732, bat_name: 'Monank Patel', wkt_nbr: 3, wkt_over: 23.3, wkt_runs: 134}, 'wkt_4': {bat_id: 26232, bat_name: 'Saiteja Mukkamalla', wkt_nbr: 4, wkt_over: 30.3, wkt_runs: 172}}
+
+@ Row 2
+----------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ match_id             | 174057
+ innings_id           | 1
+ ball_nbr             | 300
+ time_score           | 2026-10-05 19:46:56.361000+0000
+ bat_team_id          | 7
+ bat_team_name        | United Arab Emirates
+ bat_team_short_name  | UAE
+ batsmen_data         | {'bat_1': {bat_id: 53128, bat_name: 'Tanish Suri', bat_short_name: 'Tanish Suri', is_captain: False, is_keeper: False, runs: 78, balls: 78, dots: 43, fours: 10, sixes: 2, mins: 123, strike_rate: 100, out_desc: 'c Milind Kumar       b Ehsan Adil', bowler_id: 8362, fielder_id_1: 8773, fielder_id_2: 0, fielder_id_3: 0, ones: 21, twos: 1, threes: 1, fives: 0, boundaries: 10, sixers: 2}, 'bat_10': {bat_id: 23016, bat_name: 'Aayan Afzal Khan', bat_short_name: 'Aayan Khan', is_captain: False, is_keeper: False, runs: 6, balls: 5, dots: 1, fours: 0, sixes: 0, mins: 16, strike_rate: 120, out_desc: 'not out', bowler_id: 0, fielder_id_1: 0, fielder_id_2: 0, fielder_id_3: 0, ones: 2, twos: 2, threes: 0, fives: 0, boundaries: 0, sixers: 0}, 'bat_11': {bat_id: 1447401, bat_name: 'Ibrar Ahmad', bat_short_name: 'Ibrar Ahmad', is_captain: False, is_keeper: False, runs: 0, balls: 0, dots: 0, fours: 0, sixes: 0, mins: 0, strike_rate: 0, out_desc: '', bowler_id: 0, fielder_id_1: 0, fielder_id_2: 0, fielder_id_3: 0, ones: 0, twos: 0, threes: 0, fives: 0, boundaries: 0, sixers: 0}, 'bat_2': {bat_id: 1471008, bat_name: 'Adeeb Usmani', bat_short_name: 'Adeeb Usmani', is_captain: False, is_keeper: True, runs: 36, balls: 37, dots: 20, fours: 4, sixes: 1, mins: 54, strike_rate: 97.3, out_desc: 'c Smit Patel       b Shubham Ranjane', bowler_id: 11315, fielder_id_1: 8350, fielder_id_2: 0, fielder_id_3: 0, ones: 10, twos: 2, threes: 0, fives: 0, boundaries: 4, sixers: 1}, 'bat_3': {bat_id: 1464045, bat_name: 'Muhammad Shahdad', bat_short_name: 'Muhammad Shahdad', is_captain: False, is_keeper: False, runs: 114, balls: 107, dots: 42, fours: 9, sixes: 3, mins: 155, strike_rate: 106.54, out_desc: 'c Sanjay Krishnamurthi       b Harmeet Singh', bowler_id: 8426, fielder_id_1: 20241, fielder_id_2: 0, fielder_id_3: 0, ones: 46, twos: 7, threes: 0, fives: 0, boundaries: 9, sixers: 3}, 'bat_4': {bat_id: 6322, bat_name: 'Harpreet Singh Bhatia', bat_short_name: 'Harpreet Singh', is_captain: True, is_keeper: False, runs: 24, balls: 31, dots: 14, fours: 0, sixes: 1, mins: 44, strike_rate: 77.42, out_desc: 'c Milind Kumar       b Saurabh Netravalkar', bowler_id: 9748, fielder_id_1: 8773, fielder_id_2: 0, fielder_id_3: 0, ones: 14, twos: 2, threes: 0, fives: 0, boundaries: 0, sixers: 1}, 'bat_5': {bat_id: 52666, bat_name: 'Rahul Chopra', bat_short_name: 'Rahul Chopra', is_captain: False, is_keeper: False, runs: 8, balls: 6, dots: 3, fours: 0, sixes: 1, mins: 9, strike_rate: 133.33, out_desc: '       b Jasdeep Singh', bowler_id: 14734, fielder_id_1: 0, fielder_id_2: 0, fielder_id_3: 0, ones: 2, twos: 0, threes: 0, fives: 0, boundaries: 0, sixers: 1}, 'bat_6': {bat_id: 1464054, bat_name: 'Sohaib Khan', bat_short_name: 'Sohaib Khan', is_captain: False, is_keeper: False, runs: 24, balls: 21, dots: 7, fours: 1, sixes: 1, mins: 29, strike_rate: 114.29, out_desc: '       b Harmeet Singh', bowler_id: 8426, fielder_id_1: 0, fielder_id_2: 0, fielder_id_3: 0, ones: 10, twos: 2, threes: 0, fives: 0, boundaries: 1, sixers: 1}, 'bat_7': {bat_id: 1447465, bat_name: 'Khuzaima Tanveer', bat_short_name: 'Khuzaima Tanveer', is_captain: False, is_keeper: False, runs: 1, balls: 4, dots: 3, fours: 0, sixes: 0, mins: 2, strike_rate: 25, out_desc: '       b Harmeet Singh', bowler_id: 8426, fielder_id_1: 0, fielder_id_2: 0, fielder_id_3: 0, ones: 1, twos: 0, threes: 0, fives: 0, boundaries: 0, sixers: 0}, 'bat_8': {bat_id: 15842, bat_name: 'Basil Hameed', bat_short_name: 'Basil Hameed', is_captain: False, is_keeper: False, runs: 24, balls: 11, dots: 4, fours: 0, sixes: 3, mins: 25, strike_rate: 218.18, out_desc: 'not out', bowler_id: 0, fielder_id_1: 0, fielder_id_2: 0, fielder_id_3: 0, ones: 2, twos: 2, threes: 0, fives: 0, boundaries: 0, sixers: 3}, 'bat_9': {bat_id: 16083, bat_name: 'Ali Naseer', bat_short_name: 'Ali Naseer', is_captain: False, is_keeper: False, runs: 0, balls: 2, dots: 2, fours: 0, sixes: 0, mins: 0, strike_rate: 0, out_desc: 'c Smit Patel       b Harmeet Singh', bowler_id: 8426, fielder_id_1: 8350, fielder_id_2: 0, fielder_id_3: 0, ones: 0, twos: 0, threes: 0, fives: 0, boundaries: 0, sixers: 0}}
+ bowl_team_id         | 15
+ bowl_team_name       | United States of America
+ bowl_team_short_name | USA
+ bowlers_data         | {'bowl_1': {bowler_id: 9748, bowl_name: 'Saurabh Netravalkar', bowl_short_name: 'Saurabh Netravalkar', is_captain: False, is_keeper: False, overs: 8.1, maidens: 2, runs: 38, wickets: 1, economy: 4.7, no_balls: 0, wides: 0}, 'bowl_2': {bowler_id: 8362, bowl_name: 'Ehsan Adil', bowl_short_name: 'Ehsan Adil', is_captain: False, is_keeper: False, overs: 9, maidens: 0, runs: 63, wickets: 1, economy: 7, no_balls: 0, wides: 0}, 'bowl_3': {bowler_id: 14734, bowl_name: 'Jasdeep Singh', bowl_short_name: 'Jasdeep Singh', is_captain: False, is_keeper: False, overs: 7.5, maidens: 0, runs: 72, wickets: 1, economy: 9.2, no_balls: 2, wides: 2}, 'bowl_4': {bowler_id: 8426, bowl_name: 'Harmeet Singh', bowl_short_name: 'Harmeet Singh', is_captain: False, is_keeper: False, overs: 10, maidens: 0, runs: 65, wickets: 4, economy: 6.5, no_balls: 0, wides: 7}, 'bowl_5': {bowler_id: 11315, bowl_name: 'Shubham Ranjane', bowl_short_name: 'Shubham Ranjane', is_captain: False, is_keeper: False, overs: 10, maidens: 0, runs: 54, wickets: 1, economy: 5.4, no_balls: 0, wides: 0}, 'bowl_6': {bowler_id: 8773, bowl_name: 'Milind Kumar', bowl_short_name: 'Milind Kumar', is_captain: False, is_keeper: False, overs: 5, maidens: 0, runs: 34, wickets: 0, economy: 6.8, no_balls: 0, wides: 0}}
+ extras_data          | {'byes': 0, 'legByes': 4, 'noBalls': 2, 'penalty': 0, 'total': 15, 'wides': 9}
+ is_declared          | False
+ is_follow_on         | False
+ overs                | 50
+ partnerships_data    | {'pat_1': {bat1id: 53128, bat1name: 'Tanish Suri', bat1runs: 32, bat1fours: 6, bat1sixes: 0, bat2id: 1471008, bat2name: 'Adeeb Usmani', bat2runs: 36, bat2fours: 4, bat2sixes: 1, totalruns: 70, totalballs: 75, bat1balls: 36, bat2balls: 40, bat1ones: 5, bat1twos: 0, bat1threes: 1, bat1fives: 0, bat1boundaries: 6, bat1sixers: 0, bat2ones: 10, bat2twos: 2, bat2threes: 0, bat2fives: 0, bat2boundaries: 4, bat2sixers: 1}, 'pat_2': {bat1id: 53128, bat1name: 'Tanish Suri', bat1runs: 46, bat1fours: 4, bat1sixes: 2, bat2id: 1464045, bat2name: 'Muhammad Shahdad', bat2runs: 27, bat2fours: 1, bat2sixes: 0, totalruns: 80, totalballs: 87, bat1balls: 42, bat2balls: 45, bat1ones: 16, bat1twos: 1, bat1threes: 0, bat1fives: 0, bat1boundaries: 4, bat1sixers: 2, bat2ones: 21, bat2twos: 1, bat2threes: 0, bat2fives: 0, bat2boundaries: 1, bat2sixers: 0}, 'pat_3': {bat1id: 6322, bat1name: 'Harpreet Singh', bat1runs: 24, bat1fours: 0, bat1sixes: 1, bat2id: 1464045, bat2name: 'Muhammad Shahdad', bat2runs: 41, bat2fours: 3, bat2sixes: 2, totalruns: 65, totalballs: 65, bat1balls: 31, bat2balls: 34, bat1ones: 14, bat1twos: 2, bat1threes: 0, bat1fives: 0, bat1boundaries: 0, bat1sixers: 1, bat2ones: 9, bat2twos: 4, bat2threes: 0, bat2fives: 0, bat2boundaries: 3, bat2sixers: 2}, 'pat_4': {bat1id: 52666, bat1name: 'Rahul Chopra', bat1runs: 8, bat1fours: 0, bat1sixes: 1, bat2id: 1464045, bat2name: 'Muhammad Shahdad', bat2runs: 6, bat2fours: 0, bat2sixes: 0, totalruns: 14, totalballs: 11, bat1balls: 6, bat2balls: 5, bat1ones: 2, bat1twos: 0, bat1threes: 0, bat1fives: 0, bat1boundaries: 0, bat1sixers: 1, bat2ones: 4, bat2twos: 1, bat2threes: 0, bat2fives: 0, bat2boundaries: 0, bat2sixers: 0}, 'pat_5': {bat1id: 1464054, bat1name: 'Sohaib Khan', bat1runs: 24, bat1fours: 1, bat1sixes: 1, bat2id: 1464045, bat2name: 'Muhammad Shahdad', bat2runs: 22, bat2fours: 3, bat2sixes: 0, totalruns: 47, totalballs: 35, bat1balls: 21, bat2balls: 14, bat1ones: 10, bat1twos: 2, bat1threes: 0, bat1fives: 0, bat1boundaries: 1, bat1sixers: 1, bat2ones: 10, bat2twos: 0, bat2threes: 0, bat2fives: 0, bat2boundaries: 3, bat2sixers: 0}, 'pat_6': {bat1id: 1447465, bat1name: 'Khuzaima Tanveer', bat1runs: 1, bat1fours: 0, bat1sixes: 0, bat2id: 1464045, bat2name: 'Muhammad Shahdad', bat2runs: 1, bat2fours: 0, bat2sixes: 0, totalruns: 2, totalballs: 5, bat1balls: 4, bat2balls: 1, bat1ones: 1, bat1twos: 0, bat1threes: 0, bat1fives: 0, bat1boundaries: 0, bat1sixers: 0, bat2ones: 1, bat2twos: 0, bat2threes: 0, bat2fives: 0, bat2boundaries: 0, bat2sixers: 0}, 'pat_7': {bat1id: 15842, bat1name: 'Basil Hameed', bat1runs: 0, bat1fours: 0, bat1sixes: 0, bat2id: 1464045, bat2name: 'Muhammad Shahdad', bat2runs: 17, bat2fours: 2, bat2sixes: 1, totalruns: 17, totalballs: 8, bat1balls: 0, bat2balls: 8, bat1ones: 0, bat1twos: 0, bat1threes: 0, bat1fives: 0, bat1boundaries: 0, bat1sixers: 0, bat2ones: 1, bat2twos: 1, bat2threes: 0, bat2fives: 0, bat2boundaries: 2, bat2sixers: 1}, 'pat_8': {bat1id: 15842, bat1name: 'Basil Hameed', bat1runs: 0, bat1fours: 0, bat1sixes: 0, bat2id: 16083, bat2name: 'Ali Naseer', bat2runs: 0, bat2fours: 0, bat2sixes: 0, totalruns: 1, totalballs: 2, bat1balls: 0, bat2balls: 2, bat1ones: 0, bat1twos: 0, bat1threes: 0, bat1fives: 0, bat1boundaries: 0, bat1sixers: 0, bat2ones: 0, bat2twos: 0, bat2threes: 0, bat2fives: 0, bat2boundaries: 0, bat2sixers: 0}, 'pat_9': {bat1id: 15842, bat1name: 'Basil Hameed', bat1runs: 24, bat1fours: 0, bat1sixes: 3, bat2id: 23016, bat2name: 'Aayan Khan', bat2runs: 6, bat2fours: 0, bat2sixes: 0, totalruns: 34, totalballs: 14, bat1balls: 11, bat2balls: 5, bat1ones: 2, bat1twos: 2, bat1threes: 0, bat1fives: 0, bat1boundaries: 0, bat1sixers: 3, bat2ones: 2, bat2twos: 2, bat2threes: 0, bat2fives: 0, bat2boundaries: 0, bat2sixers: 0}}
+ pp_data              | {'pp_1': {pp_id: 29, pp_overs_from: 0.1, pp_overs_to: 10, pp_type: 'mandatory', runs_scored: 50}}
+ revised_overs        | null
+ run_rate             | 6.6
+ runs                 | 330
+ wickets              | 8
+ wickets_data         | {'wkt_1': {bat_id: 1471008, bat_name: 'Adeeb Usmani', wkt_nbr: 1, wkt_over: 12.1, wkt_runs: 70}, 'wkt_2': {bat_id: 53128, bat_name: 'Tanish Suri', wkt_nbr: 2, wkt_over: 26.4, wkt_runs: 150}, 'wkt_3': {bat_id: 6322, bat_name: 'Harpreet Singh Bhatia', wkt_nbr: 3, wkt_over: 37.3, wkt_runs: 215}, 'wkt_4': {bat_id: 52666, bat_name: 'Rahul Chopra', wkt_nbr: 4, wkt_over: 39.2, wkt_runs: 229}, 'wkt_5': {bat_id: 1464054, bat_name: 'Sohaib Khan', wkt_nbr: 5, wkt_over: 45.1, wkt_runs: 276}, 'wkt_6': {bat_id: 1447465, bat_name: 'Khuzaima Tanveer', wkt_nbr: 6, wkt_over: 45.6, wkt_runs: 278}, 'wkt_7': {bat_id: 1464045, bat_name: 'Muhammad Shahdad', wkt_nbr: 7, wkt_over: 47.2, wkt_runs: 295}, 'wkt_8': {bat_id: 16083, bat_name: 'Ali Naseer', wkt_nbr: 8, wkt_over: 47.4, wkt_runs: 296}}
+
+(2 rows)
+
+
+######## match_bbb_miniscore example rows
+@ Row 1
+--------------------------+-------------------------------------------------------------------------
+ match_id                 | 174057
+ innings_id               | 1
+ ball_nbr                 | 295
+ time_score               | 2026-10-05 18:59:30.762000+0000
+ bat_non_striker_balls    | 5
+ bat_non_striker_dots     | 1
+ bat_non_striker_fours    | 0
+ bat_non_striker_id       | 23016
+ bat_non_striker_mins     | 11
+ bat_non_striker_name     | Aayan Afzal Khan
+ bat_non_striker_runs     | 6
+ bat_non_striker_sixes    | 0
+ bat_non_striker_strk     | 120
+ bat_striker_balls        | 6
+ bat_striker_dots         | 3
+ bat_striker_fours        | 0
+ bat_striker_id           | 15842
+ bat_striker_mins         | 19
+ bat_striker_name         | Basil Hameed
+ bat_striker_runs         | 8
+ bat_striker_sixes        | 1
+ bat_striker_strk         | 133.33
+ bat_team_id              | 7
+ bat_team_score           | 314
+ bat_team_wkts            | 8
+ bowl_non_striker_economy | 4.7
+ bowl_non_striker_id      | 9748
+ bowl_non_striker_maidens | 2
+ bowl_non_striker_name    | Saurabh Netravalkar
+ bowl_non_striker_noballs | 0
+ bowl_non_striker_ovs     | 8.1
+ bowl_non_striker_runs    | 38
+ bowl_non_striker_wides   | 0
+ bowl_non_striker_wkts    | 1
+ bowl_striker_economy     | 5.3
+ bowl_striker_id          | 8426
+ bowl_striker_maidens     | 0
+ bowl_striker_name        | Harmeet Singh
+ bowl_striker_noballs     | 0
+ bowl_striker_ovs         | 9.1
+ bowl_striker_runs        | 49
+ bowl_striker_wides       | 7
+ bowl_striker_wkts        | 4
+ comm_format              | null
+ comm_style               | delivery-default
+ comm_txt                 | Harmeet Singh to Basil Hameed, no run
+ complete_over            | False
+ crr                      | 6.39
+ cur_ovr_stats            | .
+ cust_status              |
+ extra_code               | NONE
+ fielder_id_1             | 0
+ fielder_id_2             | 0
+ fielder_id_3             | 0
+ highlights_id            | 0
+ is_ad_plugin             | False
+ is_bat_strike_rotate     | False
+ is_declared              | False
+ is_follow_on             | False
+ last_wkt                 | Ali Naseer  c Smit Patel b Harmeet Singh 0(2)  - 296/8 in 47.4 ov.
+ latest_perf              | {'last10Runs': 83, 'last10Wkts': 5, 'last5Runs': 38, 'last5Wkts': 4}
+ legal_runs               | 0
+ match_state              | inprogress
+ out_batsman_id           | 0
+ partnership_balls        | 9
+ partnership_runs         | 18
+ rrr                      | 0
+ scorebook_id             | 8990
+ shot_position            |
+ shot_x_coord             | 0
+ shot_y_coord             | 0
+ target                   | null
+ total_runs               | 0
+ video_id                 | null
+ wkt_code                 | NONE
+
+@ Row 2
+--------------------------+-------------------------------------------------------------------------
+ match_id                 | 174057
+ innings_id               | 1
+ ball_nbr                 | 294
+ time_score               | 2026-10-05 18:57:57.062000+0000
+ bat_non_striker_balls    | 5
+ bat_non_striker_dots     | 2
+ bat_non_striker_fours    | 0
+ bat_non_striker_id       | 15842
+ bat_non_striker_mins     | 19
+ bat_non_striker_name     | Basil Hameed
+ bat_non_striker_runs     | 8
+ bat_non_striker_sixes    | 1
+ bat_non_striker_strk     | 160
+ bat_striker_balls        | 5
+ bat_striker_dots         | 1
+ bat_striker_fours        | 0
+ bat_striker_id           | 23016
+ bat_striker_mins         | 8
+ bat_striker_name         | Aayan Afzal Khan
+ bat_striker_runs         | 6
+ bat_striker_sixes        | 0
+ bat_striker_strk         | 120
+ bat_team_id              | 7
+ bat_team_score           | 314
+ bat_team_wkts            | 8
+ bowl_non_striker_economy | 4.65
+ bowl_non_striker_id      | 9748
+ bowl_non_striker_maidens | 2
+ bowl_non_striker_name    | Saurabh Netravalkar
+ bowl_non_striker_noballs | 0
+ bowl_non_striker_ovs     | 8.1
+ bowl_non_striker_runs    | 38
+ bowl_non_striker_wides   | 0
+ bowl_non_striker_wkts    | 1
+ bowl_striker_economy     | 5.44
+ bowl_striker_id          | 8426
+ bowl_striker_maidens     | 0
+ bowl_striker_name        | Harmeet Singh
+ bowl_striker_noballs     | 0
+ bowl_striker_ovs         | 9
+ bowl_striker_runs        | 49
+ bowl_striker_wides       | 7
+ bowl_striker_wkts        | 4
+ comm_format              | null
+ comm_style               | delivery-default
+ comm_txt                 | Saurabh Netravalkar to Aayan Khan, 2 runs
+ complete_over            | True
+ crr                      | 6.41
+ cur_ovr_stats            | Wd N6 L1 . 2 1 . N1 2
+ cust_status              |
+ extra_code               | NONE
+ fielder_id_1             | 0
+ fielder_id_2             | 0
+ fielder_id_3             | 0
+ highlights_id            | 0
+ is_ad_plugin             | False
+ is_bat_strike_rotate     | True
+ is_declared              | False
+ is_follow_on             | False
+ last_wkt                 | Ali Naseer  c Smit Patel b Harmeet Singh 0(2)  - 296/8 in 47.4 ov.
+ latest_perf              | {'last10Runs': 86, 'last10Wkts': 5, 'last5Runs': 46, 'last5Wkts': 4}
+ legal_runs               | 2
+ match_state              | inprogress
+ out_batsman_id           | 0
+ partnership_balls        | 8
+ partnership_runs         | 18
+ rrr                      | 0
+ scorebook_id             | 8989
+ shot_position            |
+ shot_x_coord             | 0
+ shot_y_coord             | 0
+ target                   | null
+ total_runs               | 2
+ video_id                 | null
+ wkt_code                 | NONE
+
+@ Row 3
+--------------------------+-------------------------------------------------------------------------
+ match_id                 | 174057
+ innings_id               | 1
+ ball_nbr                 | 294
+ time_score               | 2026-10-05 18:56:27.215000+0000
+ bat_non_striker_balls    | 4
+ bat_non_striker_dots     | 1
+ bat_non_striker_fours    | 0
+ bat_non_striker_id       | 23016
+ bat_non_striker_mins     | 8
+ bat_non_striker_name     | Aayan Afzal Khan
+ bat_non_striker_runs     | 4
+ bat_non_striker_sixes    | 0
+ bat_non_striker_strk     | 100
+ bat_striker_balls        | 5
+ bat_striker_dots         | 2
+ bat_striker_fours        | 0
+ bat_striker_id           | 15842
+ bat_striker_mins         | 14
+ bat_striker_name         | Basil Hameed
+ bat_striker_runs         | 8
+ bat_striker_sixes        | 1
+ bat_striker_strk         | 160
+ bat_team_id              | 7
+ bat_team_score           | 312
+ bat_team_wkts            | 8
+ bowl_non_striker_economy | 5.4
+ bowl_non_striker_id      | 8426
+ bowl_non_striker_maidens | 0
+ bowl_non_striker_name    | Harmeet Singh
+ bowl_non_striker_noballs | 0
+ bowl_non_striker_ovs     | 9
+ bowl_non_striker_runs    | 49
+ bowl_non_striker_wides   | 7
+ bowl_non_striker_wkts    | 4
+ bowl_striker_economy     | 9.2
+ bowl_striker_id          | 14734
+ bowl_striker_maidens     | 0
+ bowl_striker_name        | Jasdeep Singh
+ bowl_striker_noballs     | 2
+ bowl_striker_ovs         | 7.5
+ bowl_striker_runs        | 72
+ bowl_striker_wides       | 2
+ bowl_striker_wkts        | 1
+ comm_format              | {'bold': {format_id: ['B0$'], format_value: ['no ball']}}
+ comm_style               | delivery-default
+ comm_txt                 | Jasdeep Singh to Basil Hameed, B0$, 1 run
+ complete_over            | False
+ crr                      | 6.39
+ cur_ovr_stats            | Wd N6 L1 . 2 1 . N1
+ cust_status              |
+ extra_code               | N
+ fielder_id_1             | 0
+ fielder_id_2             | 0
+ fielder_id_3             | 0
+ highlights_id            | 0
+ is_ad_plugin             | False
+ is_bat_strike_rotate     | True
+ is_declared              | False
+ is_follow_on             | False
+ last_wkt                 | Ali Naseer  c Smit Patel b Harmeet Singh 0(2)  - 296/8 in 47.4 ov.
+ latest_perf              | {'last10Runs': 84, 'last10Wkts': 5, 'last5Runs': 44, 'last5Wkts': 4}
+ legal_runs               | 1
+ match_state              | inprogress
+ out_batsman_id           | 0
+ partnership_balls        | 7
+ partnership_runs         | 16
+ rrr                      | 0
+ scorebook_id             | 8988
+ shot_position            |
+ shot_x_coord             | 0
+ shot_y_coord             | 0
+ target                   | null
+ total_runs               | 2
+ video_id                 | null
+ wkt_code                 | NONE
+
+@ Row 4
+--------------------------+-------------------------------------------------------------------------
+ match_id                 | 174057
+ innings_id               | 1
+ ball_nbr                 | 293
+ time_score               | 2026-10-05 18:56:22.868000+0000
+ bat_non_striker_balls    | 5
+ bat_non_striker_dots     | 2
+ bat_non_striker_fours    | 0
+ bat_non_striker_id       | 15842
+ bat_non_striker_mins     | 18
+ bat_non_striker_name     | Basil Hameed
+ bat_non_striker_runs     | 8
+ bat_non_striker_sixes    | 1
+ bat_non_striker_strk     | 160
+ bat_striker_balls        | 4
+ bat_striker_dots         | 1
+ bat_striker_fours        | 0
+ bat_striker_id           | 23016
+ bat_striker_mins         | 9
+ bat_striker_name         | Aayan Afzal Khan
+ bat_striker_runs         | 4
+ bat_striker_sixes        | 0
+ bat_striker_strk         | 100
+ bat_team_id              | 7
+ bat_team_score           | 312
+ bat_team_wkts            | 8
+ bowl_non_striker_economy | 5.44
+ bowl_non_striker_id      | 8426
+ bowl_non_striker_maidens | 0
+ bowl_non_striker_name    | Harmeet Singh
+ bowl_non_striker_noballs | 0
+ bowl_non_striker_ovs     | 9
+ bowl_non_striker_runs    | 49
+ bowl_non_striker_wides   | 7
+ bowl_non_striker_wkts    | 4
+ bowl_striker_economy     | 4.5
+ bowl_striker_id          | 9748
+ bowl_striker_maidens     | 2
+ bowl_striker_name        | Saurabh Netravalkar
+ bowl_striker_noballs     | 0
+ bowl_striker_ovs         | 8
+ bowl_striker_runs        | 36
+ bowl_striker_wides       | 0
+ bowl_striker_wkts        | 1
+ comm_format              | null
+ comm_style               | delivery-default
+ comm_txt                 | Jasdeep Singh to Basil Hameed, no run
+ complete_over            | False
+ crr                      | 6.35
+ cur_ovr_stats            | Wd N6 L1 . 2 1 .
+ cust_status              |
+ extra_code               | NONE
+ fielder_id_1             | 0
+ fielder_id_2             | 0
+ fielder_id_3             | 0
+ highlights_id            | 0
+ is_ad_plugin             | False
+ is_bat_strike_rotate     | False
+ is_declared              | False
+ is_follow_on             | False
+ last_wkt                 | Ali Naseer  c Smit Patel b Harmeet Singh 0(2)  - 296/8 in 47.4 ov.
+ latest_perf              | {'last10Runs': 82, 'last10Wkts': 5, 'last5Runs': 42, 'last5Wkts': 4}
+ legal_runs               | 0
+ match_state              | inprogress
+ out_batsman_id           | 0
+ partnership_balls        | 7
+ partnership_runs         | 16
+ rrr                      | 0
+ scorebook_id             | 8987
+ shot_position            |
+ shot_x_coord             | 0
+ shot_y_coord             | 0
+ target                   | null
+ total_runs               | 0
+ video_id                 | null
+ wkt_code                 | NONE
+
+@ Row 5
+--------------------------+-------------------------------------------------------------------------
+ match_id                 | 174057
+ innings_id               | 1
+ ball_nbr                 | 292
+ time_score               | 2026-10-05 18:53:39.043000+0000
+ bat_non_striker_balls    | 3
+ bat_non_striker_dots     | 1
+ bat_non_striker_fours    | 0
+ bat_non_striker_id       | 15842
+ bat_non_striker_mins     | 14
+ bat_non_striker_name     | Basil Hameed
+ bat_non_striker_runs     | 7
+ bat_non_striker_sixes    | 1
+ bat_non_striker_strk     | 233.33
+ bat_striker_balls        | 4
+ bat_striker_dots         | 1
+ bat_striker_fours        | 0
+ bat_striker_id           | 23016
+ bat_striker_mins         | 2
+ bat_striker_name         | Aayan Afzal Khan
+ bat_striker_runs         | 4
+ bat_striker_sixes        | 0
+ bat_striker_strk         | 100
+ bat_team_id              | 7
+ bat_team_score           | 310
+ bat_team_wkts            | 8
+ bowl_non_striker_economy | 5.4
+ bowl_non_striker_id      | 8426
+ bowl_non_striker_maidens | 0
+ bowl_non_striker_name    | Harmeet Singh
+ bowl_non_striker_noballs | 0
+ bowl_non_striker_ovs     | 9
+ bowl_non_striker_runs    | 49
+ bowl_non_striker_wides   | 7
+ bowl_non_striker_wkts    | 4
+ bowl_striker_economy     | 9.1
+ bowl_striker_id          | 14734
+ bowl_striker_maidens     | 0
+ bowl_striker_name        | Jasdeep Singh
+ bowl_striker_noballs     | 1
+ bowl_striker_ovs         | 7.4
+ bowl_striker_runs        | 70
+ bowl_striker_wides       | 2
+ bowl_striker_wkts        | 1
+ comm_format              | null
+ comm_style               | delivery-default
+ comm_txt                 | Jasdeep Singh to Aayan Khan, 1 run
+ complete_over            | False
+ crr                      | 6.37
+ cur_ovr_stats            | Wd N6 L1 . 2 1
+ cust_status              |
+ extra_code               | NONE
+ fielder_id_1             | 0
+ fielder_id_2             | 0
+ fielder_id_3             | 0
+ highlights_id            | 0
+ is_ad_plugin             | False
+ is_bat_strike_rotate     | True
+ is_declared              | False
+ is_follow_on             | False
+ last_wkt                 | Ali Naseer  c Smit Patel b Harmeet Singh 0(2)  - 296/8 in 47.4 ov.
+ latest_perf              | {'last10Runs': 82, 'last10Wkts': 5, 'last5Runs': 42, 'last5Wkts': 4}
+ legal_runs               | 1
+ match_state              | inprogress
+ out_batsman_id           | 0
+ partnership_balls        | 6
+ partnership_runs         | 14
+ rrr                      | 0
+ scorebook_id             | 8984
+ shot_position            |
+ shot_x_coord             | 0
+ shot_y_coord             | 0
+ target                   | null
+ total_runs               | 1
+ video_id                 | null
+ wkt_code                 | NONE
+
+@ Row 6
+--------------------------+-------------------------------------------------------------------------
+ match_id                 | 174057
+ innings_id               | 1
+ ball_nbr                 | 291
+ time_score               | 2026-10-05 18:52:51.002000+0000
+ bat_non_striker_balls    | 3
+ bat_non_striker_dots     | 1
+ bat_non_striker_fours    | 0
+ bat_non_striker_id       | 15842
+ bat_non_striker_mins     | 14
+ bat_non_striker_name     | Basil Hameed
+ bat_non_striker_runs     | 7
+ bat_non_striker_sixes    | 1
+ bat_non_striker_strk     | 233.33
+ bat_striker_balls        | 3
+ bat_striker_dots         | 1
+ bat_striker_fours        | 0
+ bat_striker_id           | 23016
+ bat_striker_mins         | 2
+ bat_striker_name         | Aayan Afzal Khan
+ bat_striker_runs         | 3
+ bat_striker_sixes        | 0
+ bat_striker_strk         | 100
+ bat_team_id              | 7
+ bat_team_score           | 309
+ bat_team_wkts            | 8
+ bowl_non_striker_economy | 5.4
+ bowl_non_striker_id      | 8426
+ bowl_non_striker_maidens | 0
+ bowl_non_striker_name    | Harmeet Singh
+ bowl_non_striker_noballs | 0
+ bowl_non_striker_ovs     | 9
+ bowl_non_striker_runs    | 49
+ bowl_non_striker_wides   | 7
+ bowl_non_striker_wkts    | 4
+ bowl_striker_economy     | 9.2
+ bowl_striker_id          | 14734
+ bowl_striker_maidens     | 0
+ bowl_striker_name        | Jasdeep Singh
+ bowl_striker_noballs     | 1
+ bowl_striker_ovs         | 7.3
+ bowl_striker_runs        | 69
+ bowl_striker_wides       | 2
+ bowl_striker_wkts        | 1
+ comm_format              | null
+ comm_style               | delivery-default
+ comm_txt                 | Jasdeep Singh to Aayan Khan, 2 runs
+ complete_over            | False
+ crr                      | 6.37
+ cur_ovr_stats            | Wd N6 L1 . 2
+ cust_status              |
+ extra_code               | NONE
+ fielder_id_1             | 0
+ fielder_id_2             | 0
+ fielder_id_3             | 0
+ highlights_id            | 0
+ is_ad_plugin             | False
+ is_bat_strike_rotate     | False
+ is_declared              | False
+ is_follow_on             | False
+ last_wkt                 | Ali Naseer  c Smit Patel b Harmeet Singh 0(2)  - 296/8 in 47.4 ov.
+ latest_perf              | {'last10Runs': 81, 'last10Wkts': 5, 'last5Runs': 41, 'last5Wkts': 4}
+ legal_runs               | 2
+ match_state              | inprogress
+ out_batsman_id           | 0
+ partnership_balls        | 5
+ partnership_runs         | 13
+ rrr                      | 0
+ scorebook_id             | 8983
+ shot_position            |
+ shot_x_coord             | 0
+ shot_y_coord             | 0
+ target                   | null
+ total_runs               | 2
+ video_id                 | null
+ wkt_code                 | NONE
+
+@ Row 7
+--------------------------+-------------------------------------------------------------------------
+ match_id                 | 174057
+ innings_id               | 1
+ ball_nbr                 | 290
+ time_score               | 2026-10-05 18:52:00.808000+0000
+ bat_non_striker_balls    | 3
+ bat_non_striker_dots     | 1
+ bat_non_striker_fours    | 0
+ bat_non_striker_id       | 15842
+ bat_non_striker_mins     | 13
+ bat_non_striker_name     | Basil Hameed
+ bat_non_striker_runs     | 7
+ bat_non_striker_sixes    | 1
+ bat_non_striker_strk     | 233.33
+ bat_striker_balls        | 2
+ bat_striker_dots         | 1
+ bat_striker_fours        | 0
+ bat_striker_id           | 23016
+ bat_striker_mins         | 2
+ bat_striker_name         | Aayan Afzal Khan
+ bat_striker_runs         | 1
+ bat_striker_sixes        | 0
+ bat_striker_strk         | 50
+ bat_team_id              | 7
+ bat_team_score           | 307
+ bat_team_wkts            | 8
+ bowl_non_striker_economy | 5.4
+ bowl_non_striker_id      | 8426
+ bowl_non_striker_maidens | 0
+ bowl_non_striker_name    | Harmeet Singh
+ bowl_non_striker_noballs | 0
+ bowl_non_striker_ovs     | 9
+ bowl_non_striker_runs    | 49
+ bowl_non_striker_wides   | 7
+ bowl_non_striker_wkts    | 4
+ bowl_striker_economy     | 9.1
+ bowl_striker_id          | 14734
+ bowl_striker_maidens     | 0
+ bowl_striker_name        | Jasdeep Singh
+ bowl_striker_noballs     | 1
+ bowl_striker_ovs         | 7.2
+ bowl_striker_runs        | 67
+ bowl_striker_wides       | 2
+ bowl_striker_wkts        | 1
+ comm_format              | null
+ comm_style               | delivery-default
+ comm_txt                 | Jasdeep Singh to Aayan Khan, no run
+ complete_over            | False
+ crr                      | 6.35
+ cur_ovr_stats            | Wd N6 L1 .
+ cust_status              |
+ extra_code               | NONE
+ fielder_id_1             | 0
+ fielder_id_2             | 0
+ fielder_id_3             | 0
+ highlights_id            | 0
+ is_ad_plugin             | False
+ is_bat_strike_rotate     | False
+ is_declared              | False
+ is_follow_on             | False
+ last_wkt                 | Ali Naseer  c Smit Patel b Harmeet Singh 0(2)  - 296/8 in 47.4 ov.
+ latest_perf              | {'last10Runs': 79, 'last10Wkts': 5, 'last5Runs': 39, 'last5Wkts': 4}
+ legal_runs               | 0
+ match_state              | inprogress
+ out_batsman_id           | 0
+ partnership_balls        | 4
+ partnership_runs         | 11
+ rrr                      | 0
+ scorebook_id             | 8982
+ shot_position            |
+ shot_x_coord             | 0
+ shot_y_coord             | 0
+ target                   | null
+ total_runs               | 0
+ video_id                 | null
+ wkt_code                 | NONE
+
+@ Row 8
+--------------------------+-------------------------------------------------------------------------
+ match_id                 | 174057
+ innings_id               | 1
+ ball_nbr                 | 289
+ time_score               | 2026-10-05 18:50:34.543000+0000
+ bat_non_striker_balls    | 1
+ bat_non_striker_dots     | 0
+ bat_non_striker_fours    | 0
+ bat_non_striker_id       | 23016
+ bat_non_striker_mins     | 2
+ bat_non_striker_name     | Aayan Afzal Khan
+ bat_non_striker_runs     | 1
+ bat_non_striker_sixes    | 0
+ bat_non_striker_strk     | 100
+ bat_striker_balls        | 3
+ bat_striker_dots         | 1
+ bat_striker_fours        | 0
+ bat_striker_id           | 15842
+ bat_striker_mins         | 8
+ bat_striker_name         | Basil Hameed
+ bat_striker_runs         | 7
+ bat_striker_sixes        | 1
+ bat_striker_strk         | 233.33
+ bat_team_id              | 7
+ bat_team_score           | 307
+ bat_team_wkts            | 8
+ bowl_non_striker_economy | 5.4
+ bowl_non_striker_id      | 8426
+ bowl_non_striker_maidens | 0
+ bowl_non_striker_name    | Harmeet Singh
+ bowl_non_striker_noballs | 0
+ bowl_non_striker_ovs     | 9
+ bowl_non_striker_runs    | 49
+ bowl_non_striker_wides   | 7
+ bowl_non_striker_wkts    | 4
+ bowl_striker_economy     | 9.3
+ bowl_striker_id          | 14734
+ bowl_striker_maidens     | 0
+ bowl_striker_name        | Jasdeep Singh
+ bowl_striker_noballs     | 1
+ bowl_striker_ovs         | 7.1
+ bowl_striker_runs        | 67
+ bowl_striker_wides       | 2
+ bowl_striker_wkts        | 1
+ comm_format              | null
+ comm_style               | delivery-default
+ comm_txt                 | Jasdeep Singh to Basil Hameed, leg byes, 1 run
+ complete_over            | False
+ crr                      | 6.37
+ cur_ovr_stats            | Wd N6 L1
+ cust_status              |
+ extra_code               | L
+ fielder_id_1             | 0
+ fielder_id_2             | 0
+ fielder_id_3             | 0
+ highlights_id            | 0
+ is_ad_plugin             | False
+ is_bat_strike_rotate     | True
+ is_declared              | False
+ is_follow_on             | False
+ last_wkt                 | Ali Naseer  c Smit Patel b Harmeet Singh 0(2)  - 296/8 in 47.4 ov.
+ latest_perf              | {'last10Runs': 79, 'last10Wkts': 5, 'last5Runs': 39, 'last5Wkts': 4}
+ legal_runs               | 0
+ match_state              | inprogress
+ out_batsman_id           | 0
+ partnership_balls        | 3
+ partnership_runs         | 11
+ rrr                      | 0
+ scorebook_id             | 8981
+ shot_position            |
+ shot_x_coord             | 0
+ shot_y_coord             | 0
+ target                   | null
+ total_runs               | 1
+ video_id                 | null
+ wkt_code                 | NONE
+
+@ Row 9
+--------------------------+-------------------------------------------------------------------------
+ match_id                 | 174057
+ innings_id               | 1
+ ball_nbr                 | 289
+ time_score               | 2026-10-05 18:49:43.328000+0000
+ bat_non_striker_balls    | 1
+ bat_non_striker_dots     | 0
+ bat_non_striker_fours    | 0
+ bat_non_striker_id       | 23016
+ bat_non_striker_mins     | 1
+ bat_non_striker_name     | Aayan Afzal Khan
+ bat_non_striker_runs     | 1
+ bat_non_striker_sixes    | 0
+ bat_non_striker_strk     | 100
+ bat_striker_balls        | 2
+ bat_striker_dots         | 0
+ bat_striker_fours        | 0
+ bat_striker_id           | 15842
+ bat_striker_mins         | 8
+ bat_striker_name         | Basil Hameed
+ bat_striker_runs         | 7
+ bat_striker_sixes        | 1
+ bat_striker_strk         | 350
+ bat_team_id              | 7
+ bat_team_score           | 306
+ bat_team_wkts            | 8
+ bowl_non_striker_economy | 5.4
+ bowl_non_striker_id      | 8426
+ bowl_non_striker_maidens | 0
+ bowl_non_striker_name    | Harmeet Singh
+ bowl_non_striker_noballs | 0
+ bowl_non_striker_ovs     | 9
+ bowl_non_striker_runs    | 49
+ bowl_non_striker_wides   | 7
+ bowl_non_striker_wkts    | 4
+ bowl_striker_economy     | 9.6
+ bowl_striker_id          | 14734
+ bowl_striker_maidens     | 0
+ bowl_striker_name        | Jasdeep Singh
+ bowl_striker_noballs     | 1
+ bowl_striker_ovs         | 7
+ bowl_striker_runs        | 67
+ bowl_striker_wides       | 2
+ bowl_striker_wkts        | 1
+ comm_format              | {'bold': {format_id: ['B0$', 'B1$'], format_value: ['no ball', 'SIX']}}
+ comm_style               | delivery-default
+ comm_txt                 | Jasdeep Singh to Basil Hameed, B0$, B1$
+ complete_over            | False
+ crr                      | 6.38
+ cur_ovr_stats            | Wd N6
+ cust_status              |
+ extra_code               | N
+ fielder_id_1             | 0
+ fielder_id_2             | 0
+ fielder_id_3             | 0
+ highlights_id            | 8196
+ is_ad_plugin             | False
+ is_bat_strike_rotate     | False
+ is_declared              | False
+ is_follow_on             | False
+ last_wkt                 | Ali Naseer  c Smit Patel b Harmeet Singh 0(2)  - 296/8 in 47.4 ov.
+ latest_perf              | {'last10Runs': 89, 'last10Wkts': 5, 'last5Runs': 47, 'last5Wkts': 4}
+ legal_runs               | 6
+ match_state              | inprogress
+ out_batsman_id           | 0
+ partnership_balls        | 2
+ partnership_runs         | 10
+ rrr                      | 0
+ scorebook_id             | 8980
+ shot_position            |
+ shot_x_coord             | 0
+ shot_y_coord             | 0
+ target                   | null
+ total_runs               | 7
+ video_id                 | null
+ wkt_code                 | NONE
+
+@ Row 10
+--------------------------+-------------------------------------------------------------------------
+ match_id                 | 174057
+ innings_id               | 1
+ ball_nbr                 | 289
+ time_score               | 2026-10-05 18:49:00.332000+0000
+ bat_non_striker_balls    | 1
+ bat_non_striker_dots     | 0
+ bat_non_striker_fours    | 0
+ bat_non_striker_id       | 23016
+ bat_non_striker_mins     | 1
+ bat_non_striker_name     | Aayan Afzal Khan
+ bat_non_striker_runs     | 1
+ bat_non_striker_sixes    | 0
+ bat_non_striker_strk     | 100
+ bat_striker_balls        | 1
+ bat_striker_dots         | 0
+ bat_striker_fours        | 0
+ bat_striker_id           | 15842
+ bat_striker_mins         | 10
+ bat_striker_name         | Basil Hameed
+ bat_striker_runs         | 1
+ bat_striker_sixes        | 0
+ bat_striker_strk         | 100
+ bat_team_id              | 7
+ bat_team_score           | 299
+ bat_team_wkts            | 8
+ bowl_non_striker_economy | 5.4
+ bowl_non_striker_id      | 8426
+ bowl_non_striker_maidens | 0
+ bowl_non_striker_name    | Harmeet Singh
+ bowl_non_striker_noballs | 0
+ bowl_non_striker_ovs     | 9
+ bowl_non_striker_runs    | 49
+ bowl_non_striker_wides   | 7
+ bowl_non_striker_wkts    | 4
+ bowl_striker_economy     | 8.6
+ bowl_striker_id          | 14734
+ bowl_striker_maidens     | 0
+ bowl_striker_name        | Jasdeep Singh
+ bowl_striker_noballs     | 0
+ bowl_striker_ovs         | 7
+ bowl_striker_runs        | 60
+ bowl_striker_wides       | 2
+ bowl_striker_wkts        | 1
+ comm_format              | {'bold': {format_id: ['B0$'], format_value: ['wide']}}
+ comm_style               | delivery-default
+ comm_txt                 | Jasdeep Singh to Basil Hameed, B0$
+ complete_over            | False
+ crr                      | 6.23
+ cur_ovr_stats            | Wd
+ cust_status              |
+ extra_code               | Wd
+ fielder_id_1             | 0
+ fielder_id_2             | 0
+ fielder_id_3             | 0
+ highlights_id            | 0
+ is_ad_plugin             | False
+ is_bat_strike_rotate     | False
+ is_declared              | False
+ is_follow_on             | False
+ last_wkt                 | Ali Naseer  c Smit Patel b Harmeet Singh 0(2)  - 296/8 in 47.4 ov.
+ latest_perf              | {'last10Runs': 82, 'last10Wkts': 5, 'last5Runs': 40, 'last5Wkts': 4}
+ legal_runs               | 0
+ match_state              | inprogress
+ out_batsman_id           | 0
+ partnership_balls        | 2
+ partnership_runs         | 3
+ rrr                      | 0
+ scorebook_id             | 8978
+ shot_position            |
+ shot_x_coord             | 0
+ shot_y_coord             | 0
+ target                   | null
+ total_runs               | 1
+ video_id                 | null
+ wkt_code                 | NONE
+
+
+
+
+## match_bbb_commentary example rows
+
+cqlsh:matches_data> select * from match_bbb_commentary where match_id = 173647 and innings_id = 2 and time_score = '2026-09-22 15:12:52.726+0000' and ball_nbr = 13;
+
+@ Row 1
+--------------------------+--------------------------------------------------------------------------------------------------------------------------
+ match_id                 | 173647
+ innings_id               | 2
+ time_score               | 2026-09-22 15:12:52.726000+0000
+ ball_nbr                 | 13
+ bat_non_striker_balls    | 8
+ bat_non_striker_dots     | 8
+ bat_non_striker_fours    | 0
+ bat_non_striker_id       | 35374
+ bat_non_striker_mins     | 1
+ bat_non_striker_name     | Raymond Coker
+ bat_non_striker_runs     | 0
+ bat_non_striker_sixes    | 0
+ bat_non_striker_strk     | 0
+ bat_striker_balls        | 6
+ bat_striker_dots         | 3
+ bat_striker_fours        | 1
+ bat_striker_id           | 35649
+ bat_striker_mins         | 0
+ bat_striker_name         | Alusine Turay
+ bat_striker_runs         | 11
+ bat_striker_sixes        | 1
+ bat_striker_strk         | 183.33
+ bat_team_id              | 559
+ bat_team_score           | 13
+ bat_team_wkts            | 1
+ bowl_non_striker_economy | 13
+ bowl_non_striker_id      | 1470041
+ bowl_non_striker_maidens | 0
+ bowl_non_striker_name    | Nitesh
+ bowl_non_striker_noballs | 1
+ bowl_non_striker_ovs     | 1
+ bowl_non_striker_runs    | 13
+ bowl_non_striker_wides   | 1
+ bowl_non_striker_wkts    | 0
+ bowl_striker_economy     | 0
+ bowl_striker_id          | 52155
+ bowl_striker_maidens     | 1
+ bowl_striker_name        | Vincent Ateak
+ bowl_striker_noballs     | 0
+ bowl_striker_ovs         | 1.1
+ bowl_striker_runs        | 0
+ bowl_striker_wides       | 0
+ bowl_striker_wkts        | 0
+ comm_format              | {'bold': {format_id: ['B0$', 'B1$'], format_value: ['out', 'Raymond Coker run out (Obed Harvey/Joseph Theodore) 0(8)']}}
+ comm_style               | delivery-default
+ comm_txt                 | Vincent Ateak to Alusine Turay, B0$ Raymond Coker Run Out!! B1$
+ complete_over            | False
+ crr                      | 6
+ cur_ovr_stats            | W
+ cust_status              | Sierra Leone need 73 runs
+ extra_code               | NONE
+ fielder_id_1             | 31643
+ fielder_id_2             | 31706
+ fielder_id_3             | 0
+ highlights_id            | 8
+ is_ad_plugin             | False
+ is_bat_strike_rotate     | False
+ is_declared              | False
+ is_follow_on             | False
+ last_wkt                 | Raymond Coker  run out (Obed Harvey/Joseph Theodore)  0(8)  - 13/1 in 2.1 ov.
+ latest_perf              | {'last10Runs': 0, 'last10Wkts': 0, 'last5Runs': 0, 'last5Wkts': 0}
+ legal_runs               | 0
+ match_state              | inprogress
+ out_batsman_id           | 35374
+ partnership_balls        | 13
+ partnership_runs         | 13
+ rrr                      | 4.09
+ scorebook_id             | 8822
+ shot_position            |
+ shot_x_coord             | 0
+ shot_y_coord             | 0
+ target                   | 86
+ total_runs               | 0
+ video_id                 | null
+ wkt_code                 | run out

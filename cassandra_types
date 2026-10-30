@@ -1,0 +1,274 @@
+
+cassandra tables types:
+## Match Info
+CREATE TABLE matches_data.match_info (
+    match_id int PRIMARY KEY,
+    alert_type text,
+    complete boolean,
+    day_night boolean,
+    day_number int,
+    domestic boolean,
+    external_playing_xi_change map<int, text>,
+    external_team1 frozen<team>,
+    external_team2 frozen<team>,
+    external_update boolean,
+    fantasy_enabled boolean,
+    hys_enabled int,
+    is_forecast_enabled boolean,
+    is_match_not_covered boolean,
+    is_poll_enabled boolean,
+    livestream_enabled boolean,
+    livestream_enabled_geo set<text>,
+    match_complete_timestamp bigint,
+    match_description text,
+    match_format text,
+    match_image_id int,
+    match_start_timestamp bigint,
+    match_team_info frozen<list<frozen<match_team_info>>>,
+    match_type text,
+    players_of_the_match list<frozen<player>>,
+    players_of_the_series list<frozen<player>>,
+    referee frozen<official>,
+    result frozen<result>,
+    revised_target frozen<revised_target>,
+    series frozen<series>,
+    series_image_id int,
+    state text,
+    status text,
+    team1 frozen<team>,
+    team2 frozen<team>,
+    toss_results frozen<toss>,
+    umpire1 frozen<official>,
+    umpire2 frozen<official>,
+    umpire3 frozen<official>,
+    venue frozen<venue>,
+    year int
+) WITH bloom_filter_fp_chance = 0.01
+    AND caching = {'keys': 'ALL', 'rows_per_partition': 'NONE'}
+    AND comment = ''
+    AND compaction = {'class': 'org.apache.cassandra.db.compaction.SizeTieredCompactionStrategy', 'max_threshold': '32', 'min_threshold': '4'}
+    AND compression = {'chunk_length_in_kb': '64', 'class': 'org.apache.cassandra.io.compress.LZ4Compressor'}
+    AND crc_check_chance = 1.0
+    AND dclocal_read_repair_chance = 0.1
+    AND default_time_to_live = 0
+    AND gc_grace_seconds = 864000
+    AND max_index_interval = 2048
+    AND memtable_flush_period_in_ms = 0
+    AND min_index_interval = 128
+    AND read_repair_chance = 0.0
+    AND speculative_retry = '99PERCENTILE';
+
+
+    CREATE TYPE matches_data.venue (
+    id int,
+    name text,
+    city text,
+    country text,
+    timezone text,
+    latitude text,
+    longitude text
+);
+
+cqlsh:matches_data> describe type team;
+
+CREATE TYPE matches_data.team (
+    id int,
+    name text,
+    player_details list<frozen<player>>,
+    short_name text
+);
+
+
+CREATE TYPE matches_data.player (
+    id int,
+    name text,
+    full_name text,
+    nick_name text,
+    captain boolean,
+    role text,
+    keeper boolean,
+    substitute boolean,
+    team_id int,
+    batting_style text,
+    bowling_style text,
+    team_name text,
+    face_image_id int,
+    country_image_id int,
+    playing_xi_change text,
+    in_match_change text,
+    spl_substitute boolean,
+    is_overseas boolean,
+    is_unavailable boolean,
+    is_support_staff boolean
+);
+
+## match_bbb_miniscore
+
+cqlsh:matches_data> describe match_bbb_miniscore;
+
+CREATE TABLE matches_data.match_bbb_miniscore (
+    match_id int,
+    innings_id int,
+    ball_nbr int,
+    time_score timestamp,
+    bat_non_striker_balls int,
+    bat_non_striker_dots int,
+    bat_non_striker_fours int,
+    bat_non_striker_id int,
+    bat_non_striker_mins int,
+    bat_non_striker_name text,
+    bat_non_striker_runs int,
+    bat_non_striker_sixes int,
+    bat_non_striker_strk double,
+    bat_striker_balls int,
+    bat_striker_dots int,
+    bat_striker_fours int,
+    bat_striker_id int,
+    bat_striker_mins int,
+    bat_striker_name text,
+    bat_striker_runs int,
+    bat_striker_sixes int,
+    bat_striker_strk double,
+    bat_team_id int,
+    bat_team_score int,
+    bat_team_wkts int,
+    bowl_non_striker_economy double,
+    bowl_non_striker_id int,
+    bowl_non_striker_maidens int,
+    bowl_non_striker_name text,
+    bowl_non_striker_noballs int,
+    bowl_non_striker_ovs double,
+    bowl_non_striker_runs int,
+    bowl_non_striker_wides int,
+    bowl_non_striker_wkts int,
+    bowl_striker_economy double,
+    bowl_striker_id int,
+    bowl_striker_maidens int,
+    bowl_striker_name text,
+    bowl_striker_noballs int,
+    bowl_striker_ovs double,
+    bowl_striker_runs int,
+    bowl_striker_wides int,
+    bowl_striker_wkts int,
+    comm_format map<text, frozen<format_types>>,
+    comm_style text,
+    comm_txt text,
+    complete_over boolean,
+    crr double,
+    cur_ovr_stats text,
+    cust_status text,
+    extra_code text,
+    fielder_id_1 int,
+    fielder_id_2 int,
+    fielder_id_3 int,
+    highlights_id int,
+    is_ad_plugin boolean,
+    is_bat_strike_rotate boolean,
+    is_declared boolean,
+    is_follow_on boolean,
+    last_wkt text,
+    latest_perf map<text, int>,
+    legal_runs int,
+    match_state text,
+    out_batsman_id int,
+    partnership_balls int,
+    partnership_runs int,
+    rrr double,
+    scorebook_id int,
+    shot_position text,
+    shot_x_coord int,
+    shot_y_coord int,
+    target int,
+    total_runs int,
+    video_id text,
+    wkt_code text,
+    PRIMARY KEY (match_id, innings_id, ball_nbr, time_score)
+) WITH CLUSTERING ORDER BY (innings_id DESC, ball_nbr DESC, time_score DESC)
+    AND bloom_filter_fp_chance = 0.01
+    AND caching = {'keys': 'ALL', 'rows_per_partition': 'NONE'}
+    AND comment = ''
+    AND compaction = {'class': 'org.apache.cassandra.db.compaction.SizeTieredCompactionStrategy', 'max_threshold': '32', 'min_threshold': '4'}
+    AND compression = {'chunk_length_in_kb': '64', 'class': 'org.apache.cassandra.io.compress.LZ4Compressor'}
+    AND crc_check_chance = 1.0
+    AND dclocal_read_repair_chance = 0.1
+    AND default_time_to_live = 0
+    AND gc_grace_seconds = 864000
+    AND max_index_interval = 2048
+    AND memtable_flush_period_in_ms = 0
+    AND min_index_interval = 128
+    AND read_repair_chance = 0.0
+    AND speculative_retry = '99PERCENTILE';
+
+
+
+## match_bbb_full_scorecard
+
+cqlsh:matches_data> describe match_bbb_full_scorecard;
+
+CREATE TABLE matches_data.match_bbb_full_scorecard (
+    match_id int,
+    innings_id int,
+    ball_nbr int,
+    time_score timestamp,
+    bat_team_id int,
+    bat_team_name text,
+    bat_team_short_name text,
+    batsmen_data map<text, frozen<bat_card>>,
+    bowl_team_id int,
+    bowl_team_name text,
+    bowl_team_short_name text,
+    bowlers_data map<text, frozen<bowl_card>>,
+    extras_data map<text, int>,
+    is_declared boolean,
+    is_follow_on boolean,
+    overs double,
+    partnerships_data map<text, frozen<partnership_card>>,
+    pp_data map<text, frozen<pp_card>>,
+    revised_overs double,
+    run_rate double,
+    runs int,
+    wickets int,
+    wickets_data map<text, frozen<fow_card>>,
+    PRIMARY KEY (match_id, innings_id, ball_nbr, time_score)
+) WITH CLUSTERING ORDER BY (innings_id DESC, ball_nbr DESC, time_score DESC)
+    AND bloom_filter_fp_chance = 0.01
+    AND caching = {'keys': 'ALL', 'rows_per_partition': 'NONE'}
+    AND comment = ''
+    AND compaction = {'class': 'org.apache.cassandra.db.compaction.SizeTieredCompactionStrategy', 'max_threshold': '32', 'min_threshold': '4'}
+    AND compression = {'chunk_length_in_kb': '64', 'class': 'org.apache.cassandra.io.compress.LZ4Compressor'}
+    AND crc_check_chance = 1.0
+    AND dclocal_read_repair_chance = 0.1
+    AND default_time_to_live = 0
+    AND gc_grace_seconds = 864000
+    AND max_index_interval = 2048
+    AND memtable_flush_period_in_ms = 0
+    AND min_index_interval = 128
+    AND read_repair_chance = 0.0
+    AND speculative_retry = '99PERCENTILE';
+
+
+CREATE TYPE matches_data.bat_card (
+    bat_id int,
+    bat_name text,
+    bat_short_name text,
+    is_captain boolean,
+    is_keeper boolean,
+    runs int,
+    balls int,
+    dots int,
+    fours int,
+    sixes int,
+    mins int,
+    strike_rate double,
+    out_desc text,
+    bowler_id int,
+    fielder_id_1 int,
+    fielder_id_2 int,
+    fielder_id_3 int,
+    ones int,
+    twos int,
+    threes int,
+    fives int,
+    boundaries int,
+    sixers int
+);

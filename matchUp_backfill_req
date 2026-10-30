@@ -1,0 +1,216 @@
+    private static final Map<Integer, String> highlights = new LinkedHashMap<>();
+        highlights.put(8192, "TEAM_HUNDRED");
+        highlights.put(4096, "TEAM_FIFTY");
+        highlights.put(2048, "INJURY");
+        highlights.put(1024, "MILESTONE");
+        highlights.put(512, "UDRS");
+        highlights.put(256, "RUNOUT_MISS");
+        highlights.put(128, "DROPPED");
+        highlights.put(64, "PARTNERSHIP");
+        highlights.put(32, "HUNDRED");
+        highlights.put(16, "FIFTY");
+        highlights.put(8, "WICKET");
+        highlights.put(4, "SIX");
+        highlights.put(2, "FOUR");
+        highlights.put(1, "OTHER");
+        highlights.put(0, "NONE");
+public static List<String> getEvent(Integer highlightsId) {
+    List<String> events = new ArrayList<>();
+
+    if (highlightsId == null || highlightsId <= 0) {
+        return events;
+    }
+
+    int hid = highlightsId;
+
+    for (Map.Entry<Integer, String> entry : highlights.entrySet()) {
+        int code = entry.getKey();
+        String value = entry.getValue();
+
+        if (code > 1 && (hid / code) == 1) {
+            events.add(value);
+            hid = hid - code;
+        }
+    }
+
+    return events;
+}
+
+public static boolean hasFour(Integer highlightsId) {
+    return getEvent(highlightsId).contains(FOUR);
+}
+
+public static boolean hasSix(Integer highlightsId) {
+    return getEvent(highlightsId).contains(SIX);
+}
+
+
+Backfill Script behaviour
+1. if matchId given then backfill for that match only
+2. if seriesId is given then backfill for all matches of that series
+3. if range is given using from and to date then backfill for all matches within that range
+
+Backfill Logic() {
+if cliMatchId is provided through "--match-id="
+  matchIdsList = cliMatchId - "--exclude-matchIds-file"
+else if cliSeriesId is provide through "--series-id="
+  foundMatchIds = get all matchIds for that series (krik_match_archive.seriesId = cliSeriesId)
+  matchIdsList = foundMatchIds - "--exclude-matchIds-file"
+else if DateRange is provided through "--from-date=  &  --to-date="
+  foundMatchIds = get all matchIds (krik_match_archive.startdt >= from_date and krik_match_archive.startdt <= to_date)
+  matchIdsList = foundMatchIds - "--exclude-matchIds-file"
+
+
+matchIdsList which will be operated on one by one
+for each matchId from matchIdsList
+  allInningsData = select * from match_bbb_full_scorecard where match_id = ${matchId} group by innings_id;
+  matchInfo  =     select * from match_info where match_id = ${matchId}
+  howManyInnings = allInningsData.size()
+  matchFormat = matchInfo.match_format
+  venueId = matchInfo.venue.id
+
+  // if matchFormat is t20 then
+  phaseDefinition = { "powerplay": {startBallNbr: 1, endBallNbr: 36}
+                      "middle": {startBallNbr: 37, endBallNbr: 96}
+                      "death": {startBallNbr: 97, endBallNbr: 120}
+                    }
+
+  // if matchFormat is ODI then
+  phaseDefinition = { "powerplay": {startBallNbr: 1, endBallNbr: 60}
+                      "middle": {startBallNbr: 61, endBallNbr: 240}
+                      "death": {startBallNbr: 241, endBallNbr: 300}
+                    }
+
+
+
+  playersMap = playerId -> {batting_order, batting_hand, bowling_type, bowling_technique}
+  BowlingTypesMap = { Right-arm fast, Right-arm fast-medium, Right-arm medium, Left-arm fast,
+        Left-arm fast-medium, Left-arm medium,  => PACE
+                  Right-arm offbreak, Right-arm legbreak, Left-arm orthodox,
+        Left-arm wrist-spin => SPIN
+                  }
+
+  team1 = if matchInfo.external_team1 is not null then matchInfo.external_team1 otherwise matchInfo.team1
+  team2 = if matchInfo.external_team2 is not null then matchInfo.external_team2 otherwise matchInfo.team2
+  for each player in team1 and team2 {
+    if (Boolean.TRUE.equals(player.getIsSupportStaff())) supportStaffList.add(player);
+    else if (Boolean.TRUE.equals(player.getIsUnavailable())) unavailableList.add(player);
+    else if (Boolean.TRUE.equals(player.getSplSubstitute())) substitutesList.add(player);
+    else if (player.getSubstitute() == null || player.getSubstitute()) benchList.add(player);
+    else playingXIList.add(player);
+
+    for all players in playingXIList && substitutesList && benchList {
+     MariaAllPlayersBowlStyle =  select pm.id,  ps.StyleDesc from stats_import_player_master pm join stats_import_player_style ps on pm.bowl_playerstyle_id = ps.id
+  where pm.id in (all players Id);
+    }
+
+
+
+    for each player in playingXIList && substitutesList && benchList  {
+      playersMap.get(player.id).setBatting_hand(player.batting_style)
+      playersMap.get(player.id).setBowling_technique(cassandraBowlStyle present then use this otherwise use mariaMariaAllPlayersBowlStyle)
+      playersMap.get(player.id).setBowling_type(bowlingTypesMap.get(player.bowling_style))
+    }
+  }
+
+
+  for each Innings from allInningsData:
+    inningsId = Innings.innings_id
+    battingTeamId = Innings.bat_team_id
+    battingTeamId = Innings.bowl_team_id
+
+    create battingOrder for each player based on Innings.batsmen_data using it's key "bat_N" eg "bat_1" so posiiton is 1st
+    then set playersMap.get(playerId).setBatting_order(above calculated order)
+
+    // get all balls in that innnings
+    allrows = select * from match_bbb_miniscore where match_id = ${matchId} and innings_id = ${inningsId};
+
+    currentBallProcessingMap = phasewiseKey{phase, batsmanId, bowlerId} -> phasewiseValue{runs, balls, fours, sixes, dots, dismissalType}
+
+    // process each ball and build the currentBallProcessingMap
+    for each row in allrows {
+      if ballNbr == 0 then continue to next row - don't process ahead
+      if row.extra_code is wide (Wd, WD) then continue to next row - don't process ahead
+
+      if row.wkt_code == "run out" {
+        // miniscore row has incorrect data
+        fetchedRow = select * from match_bbb_commentary where match_id = ${matchId} and innings_id = row.innings_id and time_score = row.time_score and ball_nbr = row.ball_nbr
+
+         row = fetchedRow
+      }
+
+      phase = figure out from phaseDefinition based on startBallNbr and endBallNbr using row.ball_nbr
+      batsmanId = row.bat_striker_id
+      bowlerId = row.bowl_striker_id
+      phasewiseKey = {phase, batsmanId, bowlerId}
+
+      phasewiseValue = currentBallProcessingMap.get(phasewiseKey)
+
+      // wd, noball, Leg bye, bye
+      phasewiseValue.runs += row.legal_runs
+      phasewiseValue.balls += 1
+
+      if (hasFour(row.highlights_id)) {
+        phasewiseValue.fours += 1
+      }
+      if (hasSix(row.highlights_id)) {
+        phasewiseValue.sixes += 1
+      }
+
+      if (row.legal_runs == 0 && row.total_runs == 0) {
+        phasewiseValue.dots += 1
+      }
+
+      if (row.wkt_code != "NONE" && row.wkt_code != "run out") {
+        phasewiseValue.dismissalType = row.wkt_code
+      }
+
+
+    }
+
+}
+
+
+
+
+
+
+
+
+CLI Parameters:
+1. --match-id=
+2. --from-date=  &  --to-date=
+3. --series-id=9241
++++ --exclude-matchIds-file=
+
+
+
+Schema: table renamed to "batting_vs_bowling_matchups"
+CREATE TABLE `batting_vs_bowling_matchups` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `match_id` int(11) NOT NULL,
+  `innings_id` int(11) NOT NULL,
+  `match_format` enum('TEST','ODI','T20','HUN') NOT NULL,
+  `batting_team_id` int(11) NOT NULL,
+  `batsman_id` int(11) NOT NULL,
+  `bowler_id` int(11) NOT NULL,
+  `bowling_team_id` int(11) NOT NULL,
+  `phase` enum('POWERPLAY','MIDDLE_OVERS','DEATH_OVERS','NA') NOT NULL,
+  `phase_from_ball_nbr` int(11) DEFAULT NULL,
+  `phase_to_ball_nbr` int(11) DEFAULT NULL,
+  `runs` int(11) DEFAULT NULL,
+  `balls` int(11) DEFAULT NULL,
+  `fours` int(11) DEFAULT NULL,
+  `sixes` int(11) DEFAULT NULL,
+  `dots` int(11) DEFAULT NULL,
+  `dismissal_type` varchar(20) DEFAULT NULL,
+  `venue_id` int(11) NOT NULL,
+  `bowling_type` enum('PACE','SPIN') DEFAULT NULL,
+  `batting_hand` enum('RIGHT','LEFT') NOT NULL,
+  `batting_order` int(11) NOT NULL,
+  `bowling_technique` varchar(40) DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp()
+    ON UPDATE current_timestamp(),
+  PRIMARY KEY (`id`)
+);
