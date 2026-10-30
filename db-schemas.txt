@@ -1,0 +1,1122 @@
+krik_ball_by_ball_archive
+krik_ball_by_ball_live
+krik_series_archive
+krik_match_archive
+krik_match_venue
+krik_teams
+
+stats_import3_dump_matchheader_tbl
+stats_import3_dump_matchresult_tbl
+
+stats_import3_dump_bowlingcard_tbl
+stats_import3_dump_battingcard_tbl
+stats_import3_dump_innings_tbl
+stats_import3_dump_matchplayers_tbl
+stats_import_player_master
+stats_import_teams_playedfor
+stats_import_player_role
+stats_import_player_style
+
+
+
+
+
+MariaDB [cricbuzz_sitedb]> desc krik_series_archive;
++--------------------------------+---------------------------------------------------+------+-----+---------------+----------------+
+| Field                          | Type                                              | Null | Key | Default       | Extra          |
++--------------------------------+---------------------------------------------------+------+-----+---------------+----------------+
+| id                             | int(11)                                           | NO   | PRI | NULL          | auto_increment |
+| name                           | varchar(100)                                      | NO   | MUL | NULL          |                |
+| shortdesc                      | varchar(100)                                      | YES  |     | NULL          |                |
+| description                    | text                                              | YES  |     | NULL          |                |
+| name_alias                     | varchar(200)                                      | YES  |     | NULL          |                |
+| sponsor_alias                  | varchar(200)                                      | YES  |     | NULL          |                |
+| season_from                    | int(2)                                            | YES  |     | NULL          |                |
+| season_to                      | int(2)                                            | YES  |     | NULL          |                |
+| matches_type                   | int(2)                                            | YES  | MUL | NULL          |                |
+| ci_series_id                   | int(11)                                           | YES  | MUL | NULL          |                |
+| startdt                        | date                                              | YES  | MUL | 0000-00-00    |                |
+| enddt                          | date                                              | YES  | MUL | 0000-00-00    |                |
+| isTour                         | tinyint(1)                                        | NO   |     | 0             |                |
+| foldernm                       | varchar(80)                                       | NO   |     |               |                |
+| series_type                    | varchar(35)                                       | NO   |     |               |                |
+| odiSeriesResult                | varchar(100)                                      | NO   |     |               |                |
+| testSeriesResult               | varchar(100)                                      | NO   |     |               |                |
+| t20SeriesResult                | varchar(100)                                      | NO   |     |               |                |
+| series_category                | enum('International','Domestic','League','Women') | NO   |     | International |                |
+| domestic_country_id            | int(2)                                            | NO   |     | 0             |                |
+| is_confirmed                   | tinyint(1)                                        | NO   |     | 1             |                |
+| series_priority                | int(11)                                           | NO   |     | 10            |                |
+| aftermath                      | text                                              | YES  |     | NULL          |                |
+| prelude                        | text                                              | YES  |     | NULL          |                |
+| image_id                       | int(11)                                           | NO   |     | 0             |                |
+| short_name                     | varchar(100)                                      | NO   |     |               |                |
+| is_video_present               | tinyint(1)                                        | NO   |     | 0             |                |
+| is_history_present             | tinyint(1)                                        | NO   |     | 0             |                |
+| schedule_image_id              | int(11)                                           | NO   |     | 0             |                |
+| series_group_id                | int(11)                                           | NO   |     | 0             |                |
+| live_stream_enabled_countries  | varchar(255)                                      | YES  |     | NULL          |                |
+| fantasy_book_enabled_countries | varchar(255)                                      | YES  |     | NULL          |                |
+| thumbor_image_id               | int(11)                                           | YES  |     | NULL          |                |
++--------------------------------+---------------------------------------------------+------+-----+---------------+----------------+
+33 rows in set (0.002 sec)
+
+
+MariaDB [cricbuzz_sitedb]> select * from krik_series_archive where id in (9241, 12123)\G
+*************************** 1. row ***************************
+                            id: 9241
+                          name: Indian Premier League 2026
+                     shortdesc: Indian Premier League 2026
+                   description: Indian Premier League 2026
+                    name_alias:
+                 sponsor_alias:
+                   season_from: 0
+                     season_to: 0
+                  matches_type: 3
+                  ci_series_id: 0
+                       startdt: 2026-03-27
+                         enddt: 2026-06-01
+                        isTour: 1
+                      foldernm:
+                   series_type: IPL
+               odiSeriesResult:
+              testSeriesResult:
+               t20SeriesResult:
+               series_category: League
+           domestic_country_id: 2
+                  is_confirmed: 1
+               series_priority: 10
+                     aftermath:
+                       prelude:
+                      image_id: 1000350
+                    short_name: IPL 2026
+              is_video_present: 0
+            is_history_present: 0
+             schedule_image_id: 0
+               series_group_id: 1
+ live_stream_enabled_countries: DZ,BH,TD,DJ,IR,IQ,JO,KW,LB,LY,MR,MA,MU,YT,OM,PS,QA,RE,SO,SS,SD,SY,TN,YE,AE,SA,EG,BN,HK,ID,MY,PH,SG,TH,VN,US,CA,US,CA
+fantasy_book_enabled_countries: null
+              thumbor_image_id: 1000350
+*************************** 2. row ***************************
+                            id: 12123
+                          name: Caribbean Premier League 2026
+                     shortdesc: CPL 2026
+                   description: Caribbean Premier League 2026
+                    name_alias: NULL
+                 sponsor_alias: NULL
+                   season_from: 0
+                     season_to: 0
+                  matches_type: 3
+                  ci_series_id: 0
+                       startdt: 2026-08-06
+                         enddt: 2026-09-21
+                        isTour: 1
+                      foldernm:
+                   series_type:
+               odiSeriesResult:
+              testSeriesResult:
+               t20SeriesResult:
+               series_category: League
+           domestic_country_id: 10
+                  is_confirmed: 1
+               series_priority: 3
+                     aftermath: NULL
+                       prelude: NULL
+                      image_id: 1064822
+                    short_name: CPL 2026
+              is_video_present: 0
+            is_history_present: 0
+             schedule_image_id: 0
+               series_group_id: 0
+ live_stream_enabled_countries: DZ,BH,TD,DJ,IR,IQ,JO,KW,LB,LY,MR,MA,MU,YT,OM,PS,QA,RE,SO,SS,SD,SY,TN,YE,AE,SA,EG,BN,HK,ID,MY,PH,SG,TH,VN,KH,CN,CX,CC,TL,JP,LA,MO,FM,MN,NC,KR,TW,US,CA
+fantasy_book_enabled_countries: NULL
+              thumbor_image_id: 1064822
+2 rows in set (0.000 sec)
+
+
+================================================================================================================================================================================================
+
+MariaDB [cricbuzz_sitedb]> desc krik_match_archive;
++------------------------+--------------+------+-----+---------------------+----------------+
+| Field                  | Type         | Null | Key | Default             | Extra          |
++------------------------+--------------+------+-----+---------------------+----------------+
+| id                     | int(15)      | NO   | PRI | NULL                | auto_increment |
+| seriesid               | int(15)      | NO   | MUL | 0                   |                |
+| name                   | varchar(100) | NO   |     |                     |                |
+| teama                  | int(15)      | NO   | MUL | 0                   |                |
+| teamb                  | int(15)      | NO   | MUL | 0                   |                |
+| winner                 | int(11)      | YES  | MUL | 0                   |                |
+| result                 | varchar(100) | YES  |     |                     |                |
+| startdt                | date         | NO   | MUL | 0000-00-00          |                |
+| starttm                | time         | YES  |     | 00:00:00            |                |
+| isTimePrevDay          | tinyint(4)   | NO   |     | 0                   |                |
+| enddt                  | date         | NO   | MUL | 0000-00-00          |                |
+| match_type_id          | int(2)       | NO   | MUL | NULL                |                |
+| icc_match_nbr          | varchar(10)  | YES  |     | NULL                |                |
+| series_status_desc     | varchar(255) | YES  |     | NULL                |                |
+| matchtypecd            | char(1)      | NO   |     | 0                   |                |
+| scorecardfoldernm      | varchar(50)  | NO   |     |                     |                |
+| srcfoldernm            | varchar(20)  | NO   |     | match               |                |
+| isArchived             | tinyint(1)   | NO   | MUL | 0                   |                |
+| venueid                | int(11)      | YES  | MUL | 0                   |                |
+| venue                  | varchar(100) | YES  |     |                     |                |
+| isPublished            | tinyint(1)   | YES  |     | 0                   |                |
+| isCoverage             | tinyint(1)   | YES  |     | 1                   |                |
+| isMatchNotCovered      | tinyint(1)   | YES  |     | 0                   |                |
+| MatchEndTime           | timestamp    | YES  |     | NULL                |                |
+| isDomestic             | tinyint(1)   | NO   |     | 0                   |                |
+| isDataMigrated         | tinyint(1)   | NO   |     | 0                   |                |
+| isTwenty20             | tinyint(1)   | NO   |     | 0                   |                |
+| isDayNight             | tinyint(1)   | NO   |     | 0                   |                |
+| ci_match_id            | int(11)      | YES  | MUL | NULL                |                |
+| crici_id               | int(11)      | YES  |     | 0                   |                |
+| isRescheduled          | tinyint(1)   | NO   |     | 0                   |                |
+| isRainShortened        | tinyint(1)   | NO   |     | 0                   |                |
+| is_delayed             | int(1)       | NO   |     | 0                   |                |
+| start_tmstamp          | timestamp    | NO   |     | 0000-00-00 00:00:00 |                |
+| exp_end_tmstamp        | timestamp    | NO   |     | 0000-00-00 00:00:00 |                |
+| headline               | varchar(50)  | NO   |     |                     |                |
+| intro                  | text         | NO   |     | NULL                |                |
+| image_id               | int(11)      | NO   |     | 0                   |                |
+| is_time_next_day       | tinyint(1)   | NO   |     | 0                   |                |
+| is_must_follow         | tinyint(1)   | NO   |     | 0                   |                |
+| group_id               | int(11)      | YES  |     | 0                   |                |
+| is_time_announced      | tinyint(1)   | NO   |     | 1                   |                |
+| match_destination      | int(11)      | NO   |     | 0                   |                |
+| is_stats_considered    | tinyint(1)   | NO   |     | 1                   |                |
+| is_purged              | tinyint(1)   | NO   |     | 0                   |                |
+| hys_enabled            | tinyint(1)   | NO   |     | 0                   |                |
+| livestream_enabled     | tinyint(1)   | NO   |     | 0                   |                |
+| fantasy_enabled        | tinyint(1)   | NO   |     | 0                   |                |
+| fantasy_tabs           | varchar(100) | NO   |     |                     |                |
+| is_forecast_enabled    | tinyint(1)   | NO   |     | 0                   |                |
+| is_probability_enabled | tinyint(1)   | NO   |     | 0                   |                |
++------------------------+--------------+------+-----+---------------------+----------------+
+51 rows in set (0.002 sec)
+
+
+
+MariaDB [cricbuzz_sitedb]> select * from krik_match_archive where id in (118898, 105762)\G
+*************************** 1. row ***************************
+                    id: 105762
+              seriesid: 8786
+                  name: 1st Test
+                 teama: 9
+                 teamb: 2
+                winner: 9
+                result: England won by 5 wkts
+               startdt: 2025-06-20
+               starttm: 10:00:00
+         isTimePrevDay: 0
+                 enddt: 2025-06-24
+         match_type_id: 1
+         icc_match_nbr:
+    series_status_desc:
+           matchtypecd: T
+     scorecardfoldernm:
+           srcfoldernm: match
+            isArchived: 1
+               venueid: 66
+                 venue: Leeds
+           isPublished: 0
+            isCoverage: 1
+     isMatchNotCovered: 0
+          MatchEndTime: 2025-06-24 23:00:32
+            isDomestic: 0
+        isDataMigrated: 0
+            isTwenty20: 0
+            isDayNight: 0
+           ci_match_id: 0
+              crici_id: 0
+         isRescheduled: 0
+       isRainShortened: 0
+            is_delayed: 0
+         start_tmstamp: 2025-06-20 10:00:00
+       exp_end_tmstamp: 2025-06-24 17:00:00
+              headline:
+                 intro:
+              image_id: 0
+      is_time_next_day: 0
+        is_must_follow: 0
+              group_id: 0
+     is_time_announced: 1
+     match_destination: 0
+   is_stats_considered: 1
+             is_purged: 1
+           hys_enabled: 1
+    livestream_enabled: 0
+       fantasy_enabled: 0
+          fantasy_tabs:
+   is_forecast_enabled: 0
+is_probability_enabled: 0
+*************************** 2. row ***************************
+                    id: 118898
+              seriesid: 9237
+                  name: 70th Match
+                 teama: 966
+                 teamb: 59
+                winner: 59
+                result: Royal Challengers Bengaluru won by 6 wkts
+               startdt: 2025-05-27
+               starttm: 14:00:00
+         isTimePrevDay: 0
+                 enddt: 2025-05-27
+         match_type_id: 3
+         icc_match_nbr:
+    series_status_desc:
+           matchtypecd: O
+     scorecardfoldernm:
+           srcfoldernm: match
+            isArchived: 1
+               venueid: 485
+                 venue: Lucknow
+           isPublished: 0
+            isCoverage: 1
+     isMatchNotCovered: 0
+          MatchEndTime: 2025-05-27 23:41:05
+            isDomestic: 1
+        isDataMigrated: 0
+            isTwenty20: 1
+            isDayNight: 1
+           ci_match_id: 0
+              crici_id: 0
+         isRescheduled: 0
+       isRainShortened: 0
+            is_delayed: 0
+         start_tmstamp: 2025-05-27 14:00:00
+       exp_end_tmstamp: 2025-05-27 17:30:00
+              headline:
+                 intro:
+              image_id: 0
+      is_time_next_day: 0
+        is_must_follow: 0
+              group_id: 0
+     is_time_announced: 1
+     match_destination: 0
+   is_stats_considered: 1
+             is_purged: 1
+           hys_enabled: 1
+    livestream_enabled: 0
+       fantasy_enabled: 1
+          fantasy_tabs: expertPick|allPlayers|venue|matchUps
+   is_forecast_enabled: 0
+is_probability_enabled: 0
+2 rows in set (0.003 sec)
+
+================================================================================================================================================================================================
+
+MariaDB [cricbuzz_sitedb]> desc krik_match_venue;
++-------------------+--------------+------+-----+---------+----------------+
+| Field             | Type         | Null | Key | Default | Extra          |
++-------------------+--------------+------+-----+---------+----------------+
+| id                | int(11)      | NO   | PRI | NULL    | auto_increment |
+| ground            | varchar(100) | NO   | MUL |         |                |
+| city              | varchar(100) | NO   | MUL |         |                |
+| country           | varchar(100) | NO   | MUL |         |                |
+| country_alpha2_Cd | char(2)      | YES  | MUL | NULL    |                |
+| known_as          | varchar(200) | YES  |     | NULL    |                |
+| named_after       | varchar(200) | YES  |     | NULL    |                |
+| established       | int(11)      | YES  |     | NULL    |                |
+| capacity          | varchar(100) | YES  |     | NULL    |                |
+| ground_length     | float(5,2)   | YES  |     | NULL    |                |
+| ground_width      | float(5,2)   | YES  |     | NULL    |                |
+| floodlit          | tinyint(1)   | YES  |     | NULL    |                |
+| end_names         | varchar(100) | YES  |     | NULL    |                |
+| curator           | varchar(100) | YES  |     | NULL    |                |
+| timezone          | varchar(10)  | YES  |     | NULL    |                |
+| hometeam          | varchar(50)  | YES  |     | NULL    |                |
+| other_sports      | varchar(255) | YES  |     | NULL    |                |
+| ci_ground_id      | int(11)      | YES  |     | 0       |                |
+| country_id        | int(11)      | NO   |     | 0       |                |
+| city_id           | int(11)      | YES  |     | 0       |                |
+| latitude          | varchar(15)  | NO   |     |         |                |
+| longitude         | varchar(15)  | NO   |     |         |                |
+| description       | text         | YES  |     | NULL    |                |
+| ground_details    | varchar(500) | NO   |     |         |                |
+| pitch_details     | varchar(500) | NO   |     |         |                |
+| runs_expected     | varchar(500) | NO   |     |         |                |
++-------------------+--------------+------+-----+---------+----------------+
+26 rows in set (0.002 sec)
+
+*************************** 1. row ***************************
+               id: 12
+           ground: Kennington Oval
+             city: London
+          country: England
+country_alpha2_Cd: GB
+         known_as: The Oval; The AMP Oval; The Foster's Oval; The Brit Oval
+      named_after: NULL
+      established: 1845
+         capacity: 23500
+    ground_length: NULL
+     ground_width: NULL
+         floodlit: 1
+        end_names: Pavilion End, Vauxhall End
+          curator: NULL
+         timezone: +01:00
+         hometeam: England, Surrey
+     other_sports: NULL
+     ci_ground_id: 57127
+       country_id: 9
+          city_id: 110
+         latitude: 51.48368
+        longitude: -0.114885
+      description: NULL
+   ground_details: Value for shots:One of the fastest outfields in England with the ball racing away across the long square
+    pitch_details: Sporting pitch:Grass cover has been a feature here of late. Pacers do get help with new ball, pitch has good carry. Runs can be had once the ball gets old. Batters should enjoy the true nature of the surface
+    runs_expected: Par score:Anything under 150 could be difficult to defend
+
+
+================================================================================================================================================================================================
+
+
+MariaDB [cricbuzz_sitedb]> desc stats_import_player_master;
++----------------------+---------------+------+-----+------------+----------------+
+| Field                | Type          | Null | Key | Default    | Extra          |
++----------------------+---------------+------+-----+------------+----------------+
+| id                   | int(11)       | NO   | PRI | NULL       | auto_increment |
+| team_id              | int(3)        | NO   | MUL | 0          |                |
+| completeName         | varchar(100)  | NO   |     |            |                |
+| fullName             | varchar(50)   | NO   |     |            |                |
+| shortName            | varchar(30)   | NO   |     |            |                |
+| nickName             | varchar(25)   | NO   |     |            |                |
+| DoB                  | date          | YES  |     | 0000-00-00 |                |
+| birth_year           | int(4)        | YES  |     | NULL       |                |
+| date_of_death        | date          | YES  |     | NULL       |                |
+| death_year           | int(4)        | YES  |     | NULL       |                |
+| playerrole_id        | int(2)        | NO   |     | 0          |                |
+| bat_playerstyle_id   | int(2)        | NO   |     | 0          |                |
+| statsimage_id        | int(11)       | NO   |     | 0          |                |
+| bowl_playerstyle_id  | int(2)        | NO   |     | 0          |                |
+| known_as             | varchar(100)  | YES  |     | NULL       |                |
+| ci_player_id         | int(11)       | YES  |     | 0          |                |
+| birth_place          | varchar(200)  | YES  |     | NULL       |                |
+| place_of_death       | varchar(200)  | YES  |     | NULL       |                |
+| height               | varchar(30)   | YES  |     | NULL       |                |
+| education            | varchar(200)  | YES  |     | NULL       |                |
+| fielding_position_id | int(2)        | NO   |     | 0          |                |
+| other                | varchar(200)  | YES  |     | NULL       |                |
+| iplTeamId            | int(3)        | NO   |     | 0          |                |
+| twitterUrl           | varchar(50)   | NO   |     |            |                |
+| websiteUrl           | varchar(50)   | NO   |     |            |                |
+| intro                | varchar(255)  | NO   |     |            |                |
+| is_woman             | tinyint(1)    | NO   |     | 0          |                |
+| image_id             | int(11)       | NO   |     | 0          |                |
+| year_end_rank        | int(11)       | NO   |     | 0          |                |
+| year_end_review      | text          | YES  |     | NULL       |                |
+| badges               | varchar(1500) | NO   |     |            |                |
+| batting_position     | varchar(50)   | NO   |     |            |                |
+| bowling_role         | varchar(50)   | NO   |     |            |                |
+| batting_role         | varchar(50)   | NO   |     |            |                |
+| bowling_variations   | varchar(200)  | NO   |     |            |                |
+| stock_delivery       | varchar(50)   | NO   |     |            |                |
+| key_info             | varchar(255)  | NO   |     |            |                |
+| style                | varchar(1000) | NO   |     |            |                |
++----------------------+---------------+------+-----+------------+----------------+
+38 rows in set (0.001 sec)
+
+
+
+MariaDB [cricbuzz_sitedb]> select * from stats_import_player_master order by id desc limit 4\G
+*************************** 1. row ***************************
+                  id: 1479453
+             team_id: 10
+        completeName: Ameila Khan
+            fullName: Ameila Khan
+           shortName: Ameila Khan
+            nickName: Ameila Khan
+                 DoB: 2004-12-31
+          birth_year: NULL
+       date_of_death: NULL
+          death_year: NULL
+       playerrole_id: 23
+  bat_playerstyle_id: 1
+       statsimage_id: 0
+ bowl_playerstyle_id: 5
+            known_as: NULL
+        ci_player_id: 1552310
+         birth_place: NULL
+      place_of_death: NULL
+              height: NULL
+           education: NULL
+fielding_position_id: 0
+               other: NULL
+           iplTeamId: 0
+          twitterUrl:
+          websiteUrl:
+               intro:
+            is_woman: 1
+            image_id: 0
+       year_end_rank: 0
+     year_end_review: NULL
+              badges:
+    batting_position:
+        bowling_role:
+        batting_role:
+  bowling_variations:
+      stock_delivery:
+            key_info:
+               style:
+*************************** 2. row ***************************
+                  id: 1479450
+             team_id: 10
+        completeName: Celina Nickola Whyte
+            fullName: Celina Whyte
+           shortName: Celina Whyte
+            nickName: Celina Whyte
+                 DoB: 1997-10-05
+          birth_year: NULL
+       date_of_death: NULL
+          death_year: NULL
+       playerrole_id: 7
+  bat_playerstyle_id: 1
+       statsimage_id: 0
+ bowl_playerstyle_id: 5
+            known_as: NULL
+        ci_player_id: 908065
+         birth_place: NULL
+      place_of_death: NULL
+              height: NULL
+           education: NULL
+fielding_position_id: 0
+               other: NULL
+           iplTeamId: 0
+          twitterUrl:
+          websiteUrl:
+               intro:
+            is_woman: 1
+            image_id: 0
+       year_end_rank: 0
+     year_end_review: NULL
+              badges:
+    batting_position:
+        bowling_role:
+        batting_role:
+  bowling_variations:
+      stock_delivery:
+            key_info:
+               style:
+*************************** 3. row ***************************
+                  id: 1479441
+             team_id: 10
+        completeName: Shriya Jairam
+            fullName: Shriya Jairam
+           shortName: Shriya Jairam
+            nickName: Shriya Jairam
+                 DoB: 2010-08-28
+          birth_year: NULL
+       date_of_death: NULL
+          death_year: NULL
+       playerrole_id: 7
+  bat_playerstyle_id: 1
+       statsimage_id: 0
+ bowl_playerstyle_id: 7
+            known_as: NULL
+        ci_player_id: 1552322
+         birth_place: NULL
+      place_of_death: NULL
+              height: NULL
+           education: NULL
+fielding_position_id: 0
+               other: NULL
+           iplTeamId: 0
+          twitterUrl:
+          websiteUrl:
+               intro:
+            is_woman: 1
+            image_id: 0
+       year_end_rank: 0
+     year_end_review: NULL
+              badges:
+    batting_position:
+        bowling_role:
+        batting_role:
+  bowling_variations:
+      stock_delivery:
+            key_info:
+               style:
+*************************** 4. row ***************************
+                  id: 1479440
+             team_id: 10
+        completeName: Latoya Williams
+            fullName: Latoya Williams
+           shortName: Latoya Williams
+            nickName: Latoya Williams
+                 DoB: 2006-12-16
+          birth_year: NULL
+       date_of_death: NULL
+          death_year: NULL
+       playerrole_id: 23
+  bat_playerstyle_id: 2
+       statsimage_id: 0
+ bowl_playerstyle_id: 11
+            known_as: NULL
+        ci_player_id: 0
+         birth_place: NULL
+      place_of_death: NULL
+              height: NULL
+           education: NULL
+fielding_position_id: 0
+               other: NULL
+           iplTeamId: 0
+          twitterUrl:
+          websiteUrl:
+               intro:
+            is_woman: 1
+            image_id: 0
+       year_end_rank: 0
+     year_end_review: NULL
+              badges:
+    batting_position:
+        bowling_role:
+        batting_role:
+  bowling_variations:
+      stock_delivery:
+            key_info:
+               style:
+4 rows in set (0.001 sec)
+
+
+
+================================================================================================================================================================================================
+
+
+MariaDB [cricbuzz_sitedb]> desc stats_import_teams_playedfor;
++-----------+---------+------+-----+---------+----------------+
+| Field     | Type    | Null | Key | Default | Extra          |
++-----------+---------+------+-----+---------+----------------+
+| id        | int(11) | NO   | PRI | NULL    | auto_increment |
+| player_id | int(11) | NO   | MUL | 0       |                |
+| team_id   | int(3)  | NO   | MUL | 0       |                |
++-----------+---------+------+-----+---------+----------------+
+3 rows in set (0.002 sec)
+
+MariaDB [cricbuzz_sitedb]> select * from stats_import_teams_playedfor order by id desc limit 5;
++--------+-----------+---------+
+| id     | player_id | team_id |
++--------+-----------+---------+
+| 261270 |   1470967 |    1139 |
+| 261261 |   1449578 |    1139 |
+| 261260 |     14031 |    1139 |
+| 261250 |     15698 |    1139 |
+| 261240 |      9182 |    1139 |
++--------+-----------+---------+
+5 rows in set (0.001 sec)
+
+================================================================================================================================================================================================
+
+
+MariaDB [cricbuzz_sitedb]> desc stats_import3_dump_matchheader_tbl;
++----------------------+---------+------+-----+---------+----------------+
+| Field                | Type    | Null | Key | Default | Extra          |
++----------------------+---------+------+-----+---------+----------------+
+| id                   | int(11) | NO   | PRI | NULL    | auto_increment |
+| matchId              | int(11) | NO   | MUL | NULL    |                |
+| umpire1              | int(3)  | NO   |     | 0       |                |
+| umpire2              | int(3)  | NO   |     | 0       |                |
+| umpire3              | int(3)  | NO   |     | 0       |                |
+| tosswinner           | int(3)  | NO   |     | 0       |                |
+| toss_decision        | int(2)  | YES  |     | NULL    |                |
+| matchReferee         | int(3)  | NO   |     | 0       |                |
+| reserve_umpire       | int(3)  | YES  |     | NULL    |                |
+| balls_per_over       | int(2)  | NO   |     | 6       |                |
+| ci_umpire_id_1       | int(3)  | YES  |     | NULL    |                |
+| ci_umpire_id_2       | int(3)  | YES  |     | NULL    |                |
+| ci_umpire_id_3       | int(3)  | YES  |     | NULL    |                |
+| ci_match_referee_id  | int(3)  | YES  |     | NULL    |                |
+| ci_reserve_umpire_id | int(3)  | YES  |     | NULL    |                |
++----------------------+---------+------+-----+---------+----------------+
+15 rows in set (0.001 sec)
+
+MariaDB [cricbuzz_sitedb]> select * from stats_import3_dump_matchheader_tbl where matchId = 170103\G
+*************************** 1. row ***************************
+                  id: 411836
+             matchId: 170103
+             umpire1: 11152
+             umpire2: 47224
+             umpire3: 11151
+          tosswinner: 2
+       toss_decision: 2
+        matchReferee: 8304
+      reserve_umpire: NULL
+      balls_per_over: 6
+      ci_umpire_id_1: NULL
+      ci_umpire_id_2: NULL
+      ci_umpire_id_3: NULL
+ ci_match_referee_id: NULL
+ci_reserve_umpire_id: NULL
+1 row in set (0.002 sec)
+
+
+================================================================================================================================================================================================
+MariaDB [cricbuzz_sitedb]> desc stats_import_player_style;
++-----------+-------------+------+-----+---------+-------+
+| Field     | Type        | Null | Key | Default | Extra |
++-----------+-------------+------+-----+---------+-------+
+| id        | int(11)     | NO   | PRI | NULL    |       |
+| StyleDesc | varchar(40) | NO   |     | NULL    |       |
++-----------+-------------+------+-----+---------+-------+
+2 rows in set (0.002 sec)
+
+MariaDB [cricbuzz_sitedb]> select * from stats_import_player_style order by id desc;
++----+-----------------------+
+| id | StyleDesc             |
++----+-----------------------+
+| 12 | Left-arm wrist-spin   |
+| 11 | Left-arm orthodox     |
+| 10 | Left-arm medium       |
+|  9 | Left-arm fast-medium  |
+|  8 | Left-arm fast         |
+|  7 | Right-arm legbreak    |
+|  6 | Right-arm offbreak    |
+|  5 | Right-arm medium      |
+|  4 | Right-arm fast-medium |
+|  3 | Right-arm fast        |
+|  2 | Left-hand bat         |
+|  1 | Right-hand bat        |
+|  0 |                       |
++----+-----------------------+
+13 rows in set (0.001 sec)
+
+
+================================================================================================================================================================================================
+
+
+MariaDB [cricbuzz_sitedb]> desc stats_import_player_role;
++----------+-------------+------+-----+---------+----------------+
+| Field    | Type        | Null | Key | Default | Extra          |
++----------+-------------+------+-----+---------+----------------+
+| id       | int(11)     | NO   | PRI | NULL    | auto_increment |
+| roleDesc | varchar(40) | NO   |     |         |                |
++----------+-------------+------+-----+---------+----------------+
+2 rows in set (0.001 sec)
+
+MariaDB [cricbuzz_sitedb]> select * from stats_import_player_role;
++----+------------------------------+
+| id | roleDesc                     |
++----+------------------------------+
+|  0 |                              |
+|  1 | Captain                      |
+|  2 | Vice captain                 |
+|  3 | Wicket-Keeper                |
+|  4 | Opening Batsman              |
+|  5 | Middle order batsman         |
+|  7 | Bowler                       |
+| 10 | Higher Middle Order Batsman  |
+| 11 | Middle Order Batsman         |
+| 13 | Opening/middle order batsman |
+| 14 | Allrounder                   |
+| 15 | Top-order Batsman            |
+| 16 | Opener                       |
+| 17 | Hard hitting batsman         |
+| 18 | Offspin bowler               |
+| 19 | Lower middle-order batsman   |
+| 20 | Wrist Spinner                |
+| 22 | Batting Allrounder           |
+| 23 | Bowling Allrounder           |
+| 24 | Batsman                      |
+| 25 | WK-Batsman                   |
++----+------------------------------+
+21 rows in set (0.001 sec)
+
+
+================================================================================================================================================================================================
+
+
+MariaDB [cricbuzz_sitedb]> desc stats_import3_dump_matchplayers_tbl;
++----------------+-------------+------+-----+---------+----------------+
+| Field          | Type        | Null | Key | Default | Extra          |
++----------------+-------------+------+-----+---------+----------------+
+| id             | int(11)     | NO   | PRI | NULL    | auto_increment |
+| teamId         | int(3)      | NO   | MUL | 0       |                |
+| playerId       | int(5)      | NO   | MUL | 0       |                |
+| iskeeper       | tinyint(1)  | NO   |     | 0       |                |
+| isCaptain      | tinyint(1)  | NO   |     | 0       |                |
+| isSuperSub     | tinyint(1)  | NO   |     | 0       |                |
+| isSubstitute   | tinyint(1)  | NO   |     | 0       |                |
+| matchId        | int(11)     | NO   | MUL | 0       |                |
+| ci_player_id   | int(11)     | YES  |     | NULL    |                |
+| ci_player_name | varchar(50) | YES  |     | NULL    |                |
++----------------+-------------+------+-----+---------+----------------+
+10 rows in set (0.002 sec)
+
+MariaDB [cricbuzz_sitedb]>
+MariaDB [cricbuzz_sitedb]>
+MariaDB [cricbuzz_sitedb]>
+MariaDB [cricbuzz_sitedb]> select * from stats_import3_dump_matchplayers_tbl limit 1;
++----+--------+----------+----------+-----------+------------+--------------+---------+--------------+----------------+
+| id | teamId | playerId | iskeeper | isCaptain | isSuperSub | isSubstitute | matchId | ci_player_id | ci_player_name |
++----+--------+----------+----------+-----------+------------+--------------+---------+--------------+----------------+
+|  1 |      4 |      563 |        0 |         0 |          0 |            0 |    3000 |         6683 | SE Marsh       |
++----+--------+----------+----------+-----------+------------+--------------+---------+--------------+----------------+
+1 row in set (0.002 sec)
+
+MariaDB [cricbuzz_sitedb]> select * from stats_import3_dump_matchplayers_tbl order by id desc limit 1;
++----------+--------+----------+----------+-----------+------------+--------------+---------+--------------+----------------+
+| id       | teamId | playerId | iskeeper | isCaptain | isSuperSub | isSubstitute | matchId | ci_player_id | ci_player_name |
++----------+--------+----------+----------+-----------+------------+--------------+---------+--------------+----------------+
+| 15028766 |   3591 |  1479261 |        0 |         0 |          0 |            1 |  171097 |         NULL | NULL           |
++----------+--------+----------+----------+-----------+------------+--------------+---------+--------------+----------------+
+1 row in set (0.001 sec)
+
+================================================================================================================================================================================================
+
+MariaDB [cricbuzz_sitedb]> desc stats_import3_dump_battingcard_tbl;
++----------------+--------------+------+-----+---------+----------------+
+| Field          | Type         | Null | Key | Default | Extra          |
++----------------+--------------+------+-----+---------+----------------+
+| id             | int(2)       | NO   | PRI | NULL    | auto_increment |
+| matchId        | int(5)       | NO   | MUL | 0       |                |
+| inningsId      | int(1)       | NO   |     | 0       |                |
+| playerId       | int(5)       | NO   | MUL | 0       |                |
+| out_cd         | int(3)       | NO   |     | 0       |                |
+| bowlerId       | int(5)       | NO   |     | 0       |                |
+| fielderId1     | int(5)       | NO   |     | 0       |                |
+| fielderId2     | int(5)       | NO   |     | 0       |                |
+| fielderId3     | int(5)       | NO   |     | 0       |                |
+| runs           | int(3)       | NO   |     | 0       |                |
+| minutes        | int(3)       | YES  |     | NULL    |                |
+| balls          | int(11)      | YES  |     | NULL    |                |
+| fours          | int(3)       | NO   |     | 0       |                |
+| sixes          | int(3)       | NO   |     | 0       |                |
+| outDescription | varchar(150) | NO   |     |         |                |
+| isOnStrike     | tinyint(1)   | NO   |     | 0       |                |
+| nines          | int(3)       | YES  |     | 0       |                |
+| ci_player_id   | int(11)      | YES  |     | NULL    |                |
+| ci_player_name | varchar(50)  | YES  |     | NULL    |                |
+| ci_role_cd     | varchar(2)   | YES  |     | NULL    |                |
++----------------+--------------+------+-----+---------+----------------+
+20 rows in set (0.002 sec)
+
+
+MariaDB [cricbuzz_sitedb]> select * from stats_import3_dump_battingcard_tbl order by id desc limit 5;
++----------+---------+-----------+----------+--------+----------+------------+------------+------------+------+---------+-------+-------+-------+--------------------------------+------------+-------+--------------+----------------+------------+
+| id       | matchId | inningsId | playerId | out_cd | bowlerId | fielderId1 | fielderId2 | fielderId3 | runs | minutes | balls | fours | sixes | outDescription                 | isOnStrike | nines | ci_player_id | ci_player_name | ci_role_cd |
++----------+---------+-----------+----------+--------+----------+------------+------------+------------+------+---------+-------+-------+-------+--------------------------------+------------+-------+--------------+----------------+------------+
+| 11069925 |  163043 |         3 |    10754 |     16 |        0 |          0 |          0 |          0 |    0 |       0 |     0 |     0 |     0 |                                |          0 |     0 |         NULL | NULL           | NULL       |
+| 11069915 |  163043 |         3 |    10252 |     16 |        0 |          0 |          0 |          0 |    0 |       0 |     0 |     0 |     0 |                                |          0 |     0 |         NULL | NULL           | NULL       |
+| 11069905 |  163043 |         3 |  1467783 |     16 |        0 |          0 |          0 |          0 |    0 |       0 |     0 |     0 |     0 |                                |          0 |     0 |         NULL | NULL           | NULL       |
+| 11069895 |  163043 |         3 |     7909 |     15 |        0 |          0 |          0 |          0 |    8 |      11 |     5 |     2 |     0 | not out                        |          1 |     0 |         NULL | NULL           | NULL       |
+| 11069885 |  163043 |         3 |    18133 |      3 |    10285 |      10636 |          0 |          0 |   14 |      54 |    16 |     1 |     0 | c Rajat Patidar b Saransh Jain |          0 |     0 |         NULL | NULL           | NULL       |
++----------+---------+-----------+----------+--------+----------+------------+------------+------------+------+---------+-------+-------+-------+--------------------------------+------------+-------+--------------+----------------+------------+
+5 rows in set (0.001 sec)
+
+
+================================================================================================================================================================================================
+
+
+MariaDB [cricbuzz_sitedb]> desc stats_import3_dump_bowlingcard_tbl;
++----------------+-------------+------+-----+---------+----------------+
+| Field          | Type        | Null | Key | Default | Extra          |
++----------------+-------------+------+-----+---------+----------------+
+| id             | int(11)     | NO   | PRI | NULL    | auto_increment |
+| inningsId      | int(1)      | NO   |     | 0       |                |
+| matchId        | int(5)      | NO   | MUL | 0       |                |
+| bowlerId       | int(5)      | NO   | MUL | 0       |                |
+| overs          | float       | NO   |     | 0       |                |
+| maidens        | int(2)      | NO   |     | 0       |                |
+| wickets        | int(2)      | NO   |     | 0       |                |
+| noballs        | int(3)      | NO   |     | 0       |                |
+| wideBalls      | int(3)      | NO   |     | 0       |                |
+| runsGiven      | int(3)      | NO   |     | 0       |                |
+| isCurrent      | tinyint(1)  | NO   |     | 0       |                |
+| ci_player_id   | int(11)     | YES  |     | NULL    |                |
+| ci_player_name | varchar(50) | YES  |     | NULL    |                |
++----------------+-------------+------+-----+---------+----------------+
+13 rows in set (0.002 sec)
+
+MariaDB [cricbuzz_sitedb]> select * from stats_import3_dump_bowlingcard_tbl order by id desc limit 5;
++---------+-----------+---------+----------+-------+---------+---------+---------+-----------+-----------+-----------+--------------+----------------+
+| id      | inningsId | matchId | bowlerId | overs | maidens | wickets | noballs | wideBalls | runsGiven | isCurrent | ci_player_id | ci_player_name |
++---------+-----------+---------+----------+-------+---------+---------+---------+-----------+-----------+-----------+--------------+----------------+
+| 5867875 |         3 |  163043 |    14695 |    14 |       1 |       4 |       0 |         0 |        53 |         0 |         NULL | NULL           |
+| 5867865 |         3 |  163043 |    12096 |     6 |       0 |       1 |       0 |         2 |        37 |         0 |         NULL | NULL           |
+| 5867855 |         3 |  163043 |    54686 |     8 |       0 |       0 |       0 |         0 |        26 |         0 |         NULL | NULL           |
+| 5867845 |         3 |  163043 |    10285 |  11.3 |       1 |       1 |       0 |         0 |        45 |         0 |         NULL | NULL           |
+| 5867835 |         2 |  163043 |  1467783 |     6 |       0 |       1 |       0 |         0 |        14 |         0 |         NULL | NULL           |
++---------+-----------+---------+----------+-------+---------+---------+---------+-----------+-----------+-----------+--------------+----------------+
+5 rows in set (0.001 sec)
+
+
+================================================================================================================================================================================================
+
+
+MariaDB [cricbuzz_sitedb]> desc stats_import3_dump_innings_tbl;
++---------------+-------------+------+-----+---------+----------------+
+| Field         | Type        | Null | Key | Default | Extra          |
++---------------+-------------+------+-----+---------+----------------+
+| id            | int(11)     | NO   | PRI | NULL    | auto_increment |
+| matchId       | int(11)     | NO   | MUL | 0       |                |
+| inningsId     | int(1)      | NO   | MUL | 0       |                |
+| battingTeam   | varchar(50) | NO   |     |         |                |
+| bowlingTeam   | varchar(50) | NO   |     |         |                |
+| battingTeamId | int(3)      | NO   |     | 0       |                |
+| bowlingTeamId | int(3)      | NO   |     | 0       |                |
+| runs          | int(3)      | NO   |     | 0       |                |
+| wickets       | int(2)      | NO   |     | 0       |                |
+| overs         | float       | NO   |     | 0       |                |
+| runRate       | float       | NO   |     | 0       |                |
+| isDeclared    | tinyint(1)  | NO   |     | 0       |                |
+| isFollowOn    | tinyint(1)  | NO   |     | 0       |                |
+| revisedOvers  | float       | NO   |     | 0       |                |
++---------------+-------------+------+-----+---------+----------------+
+14 rows in set (0.002 sec)
+
+
+MariaDB [cricbuzz_sitedb]> select * from stats_import3_dump_innings_tbl order by id desc limit 5;
++--------+---------+-----------+----------------+-----------------+---------------+---------------+------+---------+-------+---------+------------+------------+--------------+
+| id     | matchId | inningsId | battingTeam    | bowlingTeam     | battingTeamId | bowlingTeamId | runs | wickets | overs | runRate | isDeclared | isFollowOn | revisedOvers |
++--------+---------+-----------+----------------+-----------------+---------------+---------------+------+---------+-------+---------+------------+------------+--------------+
+| 933595 |  163043 |         3 | East Zone      | Central Zone    |           235 |           237 |  162 |       6 |  39.3 |    4.12 |          0 |          0 |            0 |
+| 933585 |  163043 |         2 | Central Zone   | East Zone       |           237 |           235 |  158 |      10 |  50.2 |    3.15 |          0 |          0 |            0 |
+| 933575 |  163043 |         1 | East Zone      | Central Zone    |           235 |           237 |  266 |      10 |    57 |    4.67 |          0 |          0 |            0 |
+| 933565 |  163043 |         0 | Central Zone   | East Zone       |           237 |           235 |  266 |      10 |  80.1 |    3.32 |          0 |          0 |            0 |
+| 933516 |  171097 |         1 | Ludhiana Lions | Bathinda Royals |          3591 |          3571 |  169 |       7 |  18.4 |    9.18 |          0 |          0 |            0 |
++--------+---------+-----------+----------------+-----------------+---------------+---------------+------+---------+-------+---------+------------+------------+--------------+
+5 rows in set (0.001 sec)
+
+================================================================================================================================================================================================
+
+
+MariaDB [cricbuzz_sitedb]> desc stats_import3_dump_matchresult_tbl;
++---------------+-------------+------+-----+---------+----------------+
+| Field         | Type        | Null | Key | Default | Extra          |
++---------------+-------------+------+-----+---------+----------------+
+| id            | int(11)     | NO   | PRI | NULL    | auto_increment |
+| matchId       | int(11)     | NO   | MUL | 0       |                |
+| winningMargin | int(5)      | NO   |     | 0       |                |
+| winByRuns     | tinyint(1)  | NO   |     | 0       |                |
+| winByInnings  | tinyint(1)  | NO   |     | 0       |                |
+| winningTeamId | int(2)      | NO   |     | 0       |                |
+| resultType    | varchar(25) | NO   |     |         |                |
+| result_cd     | int(2)      | NO   |     | 0       |                |
+| win_cd        | int(2)      | NO   |     | 0       |                |
++---------------+-------------+------+-----+---------+----------------+
+9 rows in set (0.001 sec)
+
+MariaDB [cricbuzz_sitedb]> select * from stats_import3_dump_matchresult_tbl order by id desc limit 5;
++--------+---------+---------------+-----------+--------------+---------------+------------+-----------+--------+
+| id     | matchId | winningMargin | winByRuns | winByInnings | winningTeamId | resultType | result_cd | win_cd |
++--------+---------+---------------+-----------+--------------+---------------+------------+-----------+--------+
+| 407256 |  170213 |            93 |         1 |            0 |            71 | win        |         2 |      1 |
+| 407255 |  163043 |             4 |         0 |            0 |           235 | win        |         2 |      2 |
+| 407236 |  171097 |             3 |         0 |            0 |          3591 | win        |         2 |      2 |
+| 407216 |  163047 |             0 |         0 |            0 |             0 | draw       |         1 |      2 |
+| 407215 |  170223 |           153 |         1 |            0 |           298 | win        |         2 |      1 |
++--------+---------+---------------+-----------+--------------+---------------+------------+-----------+--------+
+5 rows in set (0.001 sec)
+
+================================================================================================================================================================================================
+
+MariaDB [cricbuzz_sitedb]> desc krik_ball_by_ball_archive;
++---------------------+--------------+------+-----+----------+-------+
+| Field               | Type         | Null | Key | Default  | Extra |
++---------------------+--------------+------+-----+----------+-------+
+| id                  | int(11)      | NO   |     | 0        |       |
+| battingTeamId       | int(11)      | YES  |     | NULL     |       |
+| matchId             | int(11)      | YES  | MUL | NULL     |       |
+| inningsId           | int(11)      | YES  |     | NULL     |       |
+| ballNbr             | int(15)      | YES  |     | NULL     |       |
+| extraCode           | varchar(15)  | YES  |     | NULL     |       |
+| totalRuns           | int(11)      | YES  |     | 0        |       |
+| legalRuns           | int(11)      | YES  | MUL | 0        |       |
+| batsmanIdStriker    | int(11)      | YES  |     | NULL     |       |
+| batsmanIdNonStriker | int(11)      | YES  |     | NULL     |       |
+| bowlerId            | int(11)      | YES  |     | NULL     |       |
+| bowlerIdNonStriker  | int(11)      | YES  |     | NULL     |       |
+| wicketCode          | varchar(15)  | YES  |     | NULL     |       |
+| outBatsmanId        | int(11)      | YES  |     | NULL     |       |
+| fielderId_1         | int(11)      | YES  |     | NULL     |       |
+| fielderId_2         | int(11)      | YES  |     | NULL     |       |
+| fielderId_3         | int(11)      | YES  |     | NULL     |       |
+| tmScore             | varchar(25)  | YES  | MUL | NULL     |       |
+| shotXCoord          | int(11)      | YES  |     | NULL     |       |
+| shotYCoord          | int(11)      | YES  |     | NULL     |       |
+| shotPosition        | varchar(100) | YES  |     | NULL     |       |
+| matchState          | varchar(50)  | YES  |     | NULL     |       |
+| commtxt             | text         | YES  |     | NULL     |       |
+| isDeleted           | int(1)       | YES  |     | NULL     |       |
+| isDefault           | int(1)       | YES  |     | NULL     |       |
+| isAdPlugin          | int(1)       | YES  |     | NULL     |       |
+| completeOver        | int(1)       | YES  |     | NULL     |       |
+| Score_time          | text         | YES  |     | NULL     |       |
+| highlights_type     | varchar(25)  | YES  |     | none     |       |
+| commStyle           | varchar(25)  | YES  |     | freeform |       |
+| scorebookId         | int(11)      | YES  |     | NULL     |       |
+| highlightsId        | int(11)      | NO   |     | 0        |       |
+| video_id            | varchar(50)  | NO   |     |          |       |
++---------------------+--------------+------+-----+----------+-------+
+33 rows in set (0.002 sec)
+
+MariaDB [cricbuzz_sitedb]> select * from krik_ball_by_ball_archive limit 5\G
+*************************** 1. row ***************************
+                 id: 1
+      battingTeamId: -1
+            matchId: 9535
+          inningsId: -1
+            ballNbr: 0
+          extraCode: NULL
+          totalRuns: 0
+          legalRuns: 0
+   batsmanIdStriker: 0
+batsmanIdNonStriker: 63
+           bowlerId: 0
+ bowlerIdNonStriker: 64
+         wicketCode: NULL
+       outBatsmanId: 0
+        fielderId_1: 0
+        fielderId_2: 0
+        fielderId_3: 0
+            tmScore: 1282576109243
+         shotXCoord: 0
+         shotYCoord: 0
+       shotPosition: NULL
+         matchState: preview
+            commtxt: Plugin: <a target=\"_blank\" href=\"http://ads.cricbuzz.com/adserver/adclick.php?bannerid=7277&zoneid=18&source=&dest=http%3A%2F%2Fwww.youtube.com%2Fairtelt20%3Futm_source%3DCricbuzz%26utm_medium%3DBanner_CPC%26utm_content%3DCricbuzz_CPC_300x250%26utm_campaign%3DACLT20_Youtube_Aug2010\">Win a chance to go to South Africa to watch CLT20 Final</a>
+          isDeleted: NULL
+          isDefault: 0
+         isAdPlugin: 1
+       completeOver: NULL
+         Score_time: 1282576109243
+    highlights_type: none
+          commStyle: freeform
+        scorebookId: 0
+       highlightsId: 0
+           video_id:
+*************************** 2. row ***************************
+                 id: 2
+      battingTeamId: -1
+            matchId: 9535
+          inningsId: -1
+            ballNbr: 0
+          extraCode: NULL
+          totalRuns: 0
+          legalRuns: 0
+   batsmanIdStriker: 0
+batsmanIdNonStriker: 63
+           bowlerId: 0
+ bowlerIdNonStriker: 64
+         wicketCode: NULL
+       outBatsmanId: 0
+        fielderId_1: 0
+        fielderId_2: 0
+        fielderId_3: 0
+            tmScore: 1282577242343
+         shotXCoord: 0
+         shotYCoord: 0
+       shotPosition: NULL
+         matchState: preview
+            commtxt: <b>Essex have won the toss and elected to field</b>
+          isDeleted: NULL
+          isDefault: 0
+         isAdPlugin: 0
+       completeOver: NULL
+         Score_time: 1282577242343
+    highlights_type: none
+          commStyle: freeform
+        scorebookId: 0
+       highlightsId: 0
+           video_id:
+*************************** 3. row ***************************
+                 id: 3
+      battingTeamId: -1
+            matchId: 9535
+          inningsId: -1
+            ballNbr: 0
+          extraCode: NULL
+          totalRuns: 0
+          legalRuns: 0
+   batsmanIdStriker: 0
+batsmanIdNonStriker: 63
+           bowlerId: 0
+ bowlerIdNonStriker: 64
+         wicketCode: NULL
+       outBatsmanId: 0
+        fielderId_1: 0
+        fielderId_2: 0
+        fielderId_3: 0
+            tmScore: 1282577327906
+         shotXCoord: 0
+         shotYCoord: 0
+       shotPosition: NULL
+         matchState: preview
+            commtxt: <b>Gloucestershire</b> (Playing XI): Alex Gidman(c), William Porterfield, James Franklin, Hamish Marshall, Jack Taylor, Steve Snell(w), Ed Young, Richard Dawson, Jon Lewis, Steve Kirby, David Payne
+          isDeleted: NULL
+          isDefault: 0
+         isAdPlugin: 0
+       completeOver: NULL
+         Score_time: 1282577327906
+    highlights_type: none
+          commStyle: freeform
+        scorebookId: 0
+       highlightsId: 0
+           video_id:
+*************************** 4. row ***************************
+                 id: 4
+      battingTeamId: -1
+            matchId: 9535
+          inningsId: -1
+            ballNbr: 0
+          extraCode: NULL
+          totalRuns: 0
+          legalRuns: 0
+   batsmanIdStriker: 0
+batsmanIdNonStriker: 63
+           bowlerId: 0
+ bowlerIdNonStriker: 64
+         wicketCode: NULL
+       outBatsmanId: 0
+        fielderId_1: 0
+        fielderId_2: 0
+        fielderId_3: 0
+            tmScore: 1282577406875
+         shotXCoord: 0
+         shotYCoord: 0
+       shotPosition: NULL
+         matchState: preview
+            commtxt: <b>Essex</b> (Playing XI): Mark Pettini, Ravi Bopara, Grant Flower, Matt Walker, Ryan ten Doeschate, James Foster(w/c), Adam Wheater, Tony Palladino, Danish Kaneria, David Masters, Chris Wright
+          isDeleted: NULL
+          isDefault: 0
+         isAdPlugin: 0
+       completeOver: NULL
+         Score_time: 1282577406875
+    highlights_type: none
+          commStyle: freeform
+        scorebookId: 0
+       highlightsId: 0
+           video_id:
+*************************** 5. row ***************************
+                 id: 5
+      battingTeamId: -1
+            matchId: 9535
+          inningsId: -1
+            ballNbr: 0
+          extraCode: NULL
+          totalRuns: 0
+          legalRuns: 0
+   batsmanIdStriker: 0
+batsmanIdNonStriker: 63
+           bowlerId: 0
+ bowlerIdNonStriker: 64
+         wicketCode: NULL
+       outBatsmanId: 0
+        fielderId_1: 0
+        fielderId_2: 0
+        fielderId_3: 0
+            tmScore: 1282577415765
+         shotXCoord: 0
+         shotYCoord: 0
+       shotPosition: NULL
+         matchState: preview
+            commtxt: Plugin: <a target=\"_blank\" href=\"http://ads.cricbuzz.com/adserver/adclick.php?bannerid=7243&zoneid=18&source=&dest=http%3A%2F%2Fsportshero.com%2Fcricket_landing.aspx%3Fafid%3DyOQ5bBOrgS\">Play Cricket Predictor and win cash prizes upto Rs. 10 lakhs</a>
+          isDeleted: NULL
+          isDefault: 0
+         isAdPlugin: 1
+       completeOver: NULL
+         Score_time: 1282577415765
+    highlights_type: none
+          commStyle: freeform
+        scorebookId: 0
+       highlightsId: 0
+           video_id:
+5 rows in set (0.002 sec)
