@@ -909,6 +909,25 @@ class CalculateMatchupRowsTests(unittest.TestCase):
         with self.assertRaisesRegex(MatchCannotBeBackfilled, "invalid over.ball value"):
             calculate_matchup_rows(*sources, allotted_balls_by_innings={1: 105})
 
+    def test_selects_opening_powerplay_by_start_ball_not_map_key(self) -> None:
+        sources = phase_sources(pp_to=6, ball_numbers=(1, 37))
+        sources[1][0]["pp_data"] = {
+            "pp_1": {"pp_overs_from": 6.1, "pp_overs_to": 10, "pp_type": "batting"},
+            "pp_2": {"pp_overs_from": 0.1, "pp_overs_to": 6, "pp_type": "mandatory"},
+        }
+        with self.assertLogs("backfill_matchups", level="DEBUG") as logs:
+            rows = calculate_matchup_rows(*sources)
+        self.assertEqual([(row["phase"], row["phase_from_ball_nbr"], row["phase_to_ball_nbr"])
+                          for row in rows],
+                         [("POWERPLAY", 1, 36), ("MIDDLE_OVERS", 37, 96)])
+        self.assertIn("pp_key=pp_2", "\n".join(logs.output))
+
+        sources[1][0]["pp_data"]["pp_3"] = {
+            "pp_overs_from": 0.1, "pp_overs_to": 6, "pp_type": "mandatory",
+        }
+        with self.assertRaisesRegex(MatchCannotBeBackfilled, "multiple powerplay entries start at ball 1"):
+            calculate_matchup_rows(*sources)
+
     def test_uses_separate_phase_boundaries_for_each_innings(self) -> None:
         match_info, scorecards, events = phase_sources(pp_to=6, ball_numbers=(31,))
         second_scorecard = {
@@ -947,7 +966,7 @@ class CalculateMatchupRowsTests(unittest.TestCase):
             calculate_matchup_rows(*sources, allotted_balls_by_innings={2: 105})
 
         sources[1][0]["pp_data"] = {}
-        with self.assertRaisesRegex(MatchCannotBeBackfilled, "innings 1.*pp_1 is missing"):
+        with self.assertRaisesRegex(MatchCannotBeBackfilled, "innings 1.*opening powerplay is missing"):
             calculate_matchup_rows(*sources)
 
         sources[1][0]["pp_data"] = {"pp_1": "invalid"}
@@ -979,7 +998,7 @@ class CalculateMatchupRowsTests(unittest.TestCase):
             (rows[0]["phase"], rows[0]["phase_from_ball_nbr"], rows[0]["phase_to_ball_nbr"], rows[0]["balls"]),
             ("NA", 1, 85, 2),
         )
-        self.assertIn("mandatory pp_1 is missing; using NA for balls 1-85", "\n".join(logs.output))
+        self.assertIn("opening powerplay is missing; using NA for balls 1-85", "\n".join(logs.output))
         self.assertIn("match 10 innings 1: missing-powerplay-na phases", "\n".join(logs.output))
 
         rows = calculate_matchup_rows(
@@ -998,7 +1017,7 @@ class CalculateMatchupRowsTests(unittest.TestCase):
             calculate_matchup_rows(*sources, missing_pp_as_na=True)
 
         sources[1][0]["pp_data"] = []
-        with self.assertRaisesRegex(MatchCannotBeBackfilled, "pp_1 is invalid"):
+        with self.assertRaisesRegex(MatchCannotBeBackfilled, "pp_data is invalid"):
             calculate_matchup_rows(*sources, missing_pp_as_na=True)
 
     def test_missing_powerplay_na_rejects_balls_beyond_regular_or_csv_limit(self) -> None:

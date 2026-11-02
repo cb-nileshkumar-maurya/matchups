@@ -145,22 +145,45 @@ def over_ball_to_ball_number(value: Any, *, allow_rounding_noise: bool = False) 
     return full_overs * 6 + remaining_balls
 
 
-def innings_phases(
-    scorecard: Mapping[str, Any], match_format: str, allotted_balls: int | None,
-    last_ball_nbr: int | None = None, missing_pp_as_na: bool = False,
-) -> tuple[tuple[int, int, str], ...]:
+def opening_powerplay(scorecard: Mapping[str, Any]) -> tuple[str | None, dict[str, Any] | None]:
     innings_id = scorecard["innings_id"]
     pp_data = scorecard.get("pp_data")
     if pp_data is None:
         pp_data = {}
     if not isinstance(pp_data, Mapping):
-        raise MatchCannotBeBackfilled(f"innings {innings_id}: pp_1 is invalid", "invalid-powerplay")
-    pp_source = pp_data.get("pp_1")
-    if pp_source is None:
+        raise MatchCannotBeBackfilled(f"innings {innings_id}: pp_data is invalid", "invalid-powerplay")
+    opening = []
+    for key, source in pp_data.items():
+        if not str(key).startswith("pp_"):
+            continue
+        try:
+            powerplay = as_dict(source)
+            start = over_ball_to_ball_number(powerplay.get("pp_overs_from"), allow_rounding_noise=True)
+        except (TypeError, ValueError) as error:
+            raise MatchCannotBeBackfilled(
+                f"innings {innings_id}: {key} is invalid: {error}", "invalid-powerplay"
+            ) from error
+        if start == 1:
+            opening.append((key, powerplay))
+    if len(opening) > 1:
+        raise MatchCannotBeBackfilled(
+            f"innings {innings_id}: multiple powerplay entries start at ball 1: "
+            f"{', '.join(str(key) for key, _ in opening)}", "invalid-powerplay",
+        )
+    return opening[0] if opening else (None, None)
+
+
+def innings_phases(
+    scorecard: Mapping[str, Any], match_format: str, allotted_balls: int | None,
+    last_ball_nbr: int | None = None, missing_pp_as_na: bool = False,
+) -> tuple[tuple[int, int, str], ...]:
+    innings_id = scorecard["innings_id"]
+    pp_key, powerplay = opening_powerplay(scorecard)
+    if powerplay is None:
         if missing_pp_as_na:
             if last_ball_nbr is None:
                 raise MatchCannotBeBackfilled(
-                    f"innings {innings_id}: pp_1 is missing and no eligible ball number is available for NA phase",
+                    f"innings {innings_id}: opening powerplay is missing and no eligible ball number is available for NA phase",
                     "no-eligible-ball",
                 )
             limit = allotted_balls if allotted_balls is not None else PHASES[match_format][-1][1]
@@ -171,17 +194,11 @@ def innings_phases(
                 )
             return ((1, last_ball_nbr, "NA"),)
         raise MatchCannotBeBackfilled(
-            f"innings {innings_id}: mandatory pp_1 is missing", "missing-powerplay"
+            f"innings {innings_id}: opening powerplay is missing", "missing-powerplay"
         )
-    try:
-        powerplay = as_dict(pp_source)
-    except TypeError as error:
-        raise MatchCannotBeBackfilled(
-            f"innings {innings_id}: pp_1 is invalid", "invalid-powerplay"
-        ) from error
     if str(powerplay.get("pp_type", "")).casefold() != "mandatory":
         raise MatchCannotBeBackfilled(
-            f"innings {innings_id}: pp_1 is not mandatory", "invalid-powerplay"
+            f"innings {innings_id}: {pp_key} is not mandatory", "invalid-powerplay"
         )
     try:
         pp_start = over_ball_to_ball_number(powerplay.get("pp_overs_from"), allow_rounding_noise=True)
@@ -190,7 +207,7 @@ def innings_phases(
         raise MatchCannotBeBackfilled(f"innings {innings_id}: {error}", "invalid-powerplay") from error
     if pp_start != 1 or pp_end < pp_start:
         raise MatchCannotBeBackfilled(
-            f"innings {innings_id}: invalid pp_1 ball range {pp_start}-{pp_end}",
+            f"innings {innings_id}: invalid {pp_key} ball range {pp_start}-{pp_end}",
             "invalid-powerplay",
         )
     if allotted_balls == PHASES[match_format][-1][1] and pp_end == PHASES[match_format][0][1]:
@@ -201,12 +218,12 @@ def innings_phases(
             limit = phases[-1][1]
             if pp_end > limit:
                 raise MatchCannotBeBackfilled(
-                    f"innings {innings_id}: nonstandard pp_1 ends at ball {pp_end} beyond format limit {limit}",
+                    f"innings {innings_id}: nonstandard {pp_key} ends at ball {pp_end} beyond format limit {limit}",
                     "ball-beyond-limit",
                 )
             if last_ball_nbr is None or pp_end > last_ball_nbr:
                 raise MatchCannotBeBackfilled(
-                    f"innings {innings_id}: nonstandard pp_1 ends at ball {pp_end}, "
+                    f"innings {innings_id}: nonstandard {pp_key} ends at ball {pp_end}, "
                     f"last eligible ball is {last_ball_nbr}, format limit is {limit}",
                     "powerplay-beyond-play",
                 )
@@ -221,7 +238,7 @@ def innings_phases(
         return phases
     if pp_end >= allotted_balls:
         raise MatchCannotBeBackfilled(
-            f"innings {innings_id}: pp_1 ending at ball {pp_end} is at or beyond "
+            f"innings {innings_id}: {pp_key} ending at ball {pp_end} is at or beyond "
             f"reduced-overs allotment of {allotted_balls} balls "
             f"(last eligible ball {last_ball_nbr})",
             "invalid-powerplay",
@@ -397,7 +414,7 @@ def calculate_matchup_rows(
     for innings_id, phases in sorted(phase_definitions.items()):
         if phases[0][2] == "NA":
             LOGGER.warning(
-                "match %s innings %s: mandatory pp_1 is missing; using NA for balls 1-%s",
+                "match %s innings %s: opening powerplay is missing; using NA for balls 1-%s",
                 match_info["match_id"], innings_id, phases[0][1],
             )
         elif allotted_balls_by_innings is None and phases[0][1] != PHASES[match_format][0][1]:
@@ -416,11 +433,12 @@ def calculate_matchup_rows(
             ", ".join(f"{phase}={start}-{end}" for start, end, phase in phases),
         )
         if LOGGER.isEnabledFor(logging.DEBUG) and phases[0][2] != "NA":
-            powerplay = as_dict(scorecards[innings_id]["pp_data"]["pp_1"])
+            pp_key, powerplay = opening_powerplay(scorecards[innings_id])
             LOGGER.debug(
-                "phase source match_id=%s innings_id=%s pp_overs_from=%s pp_overs_to=%s "
+                "phase source match_id=%s innings_id=%s pp_key=%s pp_overs_from=%s pp_overs_to=%s "
                 "allotted_balls=%s",
                 match_info["match_id"], innings_id,
+                pp_key,
                 powerplay["pp_overs_from"], powerplay["pp_overs_to"],
                 allotted_balls_by_innings[innings_id] if allotted_balls_by_innings is not None
                 else (phases[-1][1] if len(phases) == 3 else None),
@@ -946,7 +964,7 @@ def parse_arguments(arguments: list[str] | None = None) -> argparse.Namespace:
     parser.add_argument("--verbose", action="store_true", help="Log each ball event as it is processed")
     parser.add_argument(
         "--missing-pp-as-na", action="store_true",
-        help="Use NA for an innings with missing pp_1, bounded by its last eligible ball number",
+        help="Use NA when the opening powerplay is missing, bounded by the last eligible ball number",
     )
     parser.add_argument(
         "--reduced-overs-file",

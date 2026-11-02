@@ -5,7 +5,7 @@ Terms used when deriving batter-versus-bowler statistics from ball-by-ball crick
 ## Language
 
 **Mandatory powerplay**:
-The opening powerplay interval of an innings. It is the only powerplay interval used for matchup phase classification.
+The interval whose `pp_overs_from` is ball 1. Its `pp_*` key need not be `pp_1`. It is the only powerplay interval used for matchup phase classification.
 
 **Nonstandard powerplay**:
 A valid mandatory powerplay whose final ball differs from the standard boundary for its match format. Its presence alone does not establish the innings' allotted overs.
