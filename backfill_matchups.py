@@ -19,10 +19,11 @@ from typing import Any
 LOGGER = logging.getLogger(__name__)
 
 PHASES = {
-    "T20": ((1, 36, "POWERPLAY"), (37, 96, "MIDDLE_OVERS"), (97, 120, "DEATH_OVERS")),
+    "T20": ((1, 36, "POWERPLAY"), (37, 90, "MIDDLE_OVERS"), (91, 120, "DEATH_OVERS")),
     "ODI": ((1, 60, "POWERPLAY"), (61, 240, "MIDDLE_OVERS"), (241, 300, "DEATH_OVERS")),
 }
-PHASE_ORDER = {"POWERPLAY": 0, "MIDDLE_OVERS": 1, "DEATH_OVERS": 2, "NA": 3}
+BBL_PHASES = ((1, 24, "POWERPLAY"), (25, 90, "MIDDLE_OVERS"), (91, 120, "DEATH_OVERS"))
+PHASE_ORDER = {"POWERPLAY": 0, "MIDDLE_OVERS": 1, "DEATH_OVERS": 2}
 BOWLING_STYLES = {
     "right arm fast": ("Right-arm fast", "PACE"),
     "right arm fast medium": ("Right-arm fast-medium", "PACE"),
@@ -175,24 +176,11 @@ def opening_powerplay(scorecard: Mapping[str, Any]) -> tuple[str | None, dict[st
 
 def innings_phases(
     scorecard: Mapping[str, Any], match_format: str, allotted_balls: int | None,
-    last_ball_nbr: int | None = None, missing_pp_as_na: bool = False,
+    last_ball_nbr: int | None = None, series_type: str = "",
 ) -> tuple[tuple[int, int, str], ...]:
     innings_id = scorecard["innings_id"]
     pp_key, powerplay = opening_powerplay(scorecard)
     if powerplay is None:
-        if missing_pp_as_na:
-            if last_ball_nbr is None:
-                raise MatchCannotBeBackfilled(
-                    f"innings {innings_id}: opening powerplay is missing and no eligible ball number is available for NA phase",
-                    "no-eligible-ball",
-                )
-            limit = allotted_balls if allotted_balls is not None else PHASES[match_format][-1][1]
-            if last_ball_nbr > limit:
-                raise MatchCannotBeBackfilled(
-                    f"innings {innings_id}: last eligible ball {last_ball_nbr} exceeds innings limit {limit}",
-                    "ball-beyond-limit",
-                )
-            return ((1, last_ball_nbr, "NA"),)
         raise MatchCannotBeBackfilled(
             f"innings {innings_id}: opening powerplay is missing", "missing-powerplay"
         )
@@ -210,45 +198,45 @@ def innings_phases(
             f"innings {innings_id}: invalid {pp_key} ball range {pp_start}-{pp_end}",
             "invalid-powerplay",
         )
-    if allotted_balls == PHASES[match_format][-1][1] and pp_end == PHASES[match_format][0][1]:
-        return PHASES[match_format]
-    if allotted_balls is None:
-        phases = PHASES[match_format]
-        if pp_end != phases[0][1]:
-            limit = phases[-1][1]
-            if pp_end > limit:
-                raise MatchCannotBeBackfilled(
-                    f"innings {innings_id}: nonstandard {pp_key} ends at ball {pp_end} beyond format limit {limit}",
-                    "ball-beyond-limit",
-                )
-            if last_ball_nbr is None or pp_end > last_ball_nbr:
-                raise MatchCannotBeBackfilled(
-                    f"innings {innings_id}: nonstandard {pp_key} ends at ball {pp_end}, "
-                    f"last eligible ball is {last_ball_nbr}, format limit is {limit}",
-                    "powerplay-beyond-play",
-                )
-            if last_ball_nbr > limit:
-                raise MatchCannotBeBackfilled(
-                    f"innings {innings_id}: last eligible ball {last_ball_nbr} exceeds format limit {limit}",
-                    "ball-beyond-limit",
-                )
-            if pp_end == last_ball_nbr:
-                return ((1, pp_end, "POWERPLAY"),)
-            return ((1, pp_end, "POWERPLAY"), (pp_end + 1, last_ball_nbr, "NA"))
-        return phases
-    if pp_end >= allotted_balls:
+    standard = PHASES[match_format]
+    format_limit = standard[-1][1]
+    limit = allotted_balls if allotted_balls is not None else format_limit
+    if limit > format_limit:
         raise MatchCannotBeBackfilled(
-            f"innings {innings_id}: {pp_key} ending at ball {pp_end} is at or beyond "
-            f"reduced-overs allotment of {allotted_balls} balls "
-            f"(last eligible ball {last_ball_nbr})",
+            f"innings {innings_id}: allotted limit {limit} exceeds {match_format} maximum {format_limit}",
+            "invalid-allotment",
+        )
+    if last_ball_nbr is not None and last_ball_nbr > limit:
+        raise MatchCannotBeBackfilled(
+            f"innings {innings_id}: last eligible ball {last_ball_nbr} exceeds innings limit {limit}",
+            "ball-beyond-limit",
+        )
+    if pp_end > standard[0][1] or pp_end > limit:
+        raise MatchCannotBeBackfilled(
+            f"innings {innings_id}: {pp_key} ends at ball {pp_end} beyond "
+            f"powerplay maximum {standard[0][1]} or allotted limit {limit}",
             "invalid-powerplay",
         )
-    death_balls = (allotted_balls - pp_end + 4) // 5
-    death_start = allotted_balls - death_balls + 1
+    if limit == format_limit:
+        phases = BBL_PHASES if match_format == "T20" and series_type.casefold() == "bbl" else standard
+        if pp_end != phases[0][1]:
+            raise MatchCannotBeBackfilled(
+                f"innings {innings_id}: {pp_key} powerplay ends at ball {pp_end}; "
+                f"expected ball {phases[0][1]} for regular {series_type or match_format}",
+                "powerplay-mismatch",
+            )
+        return phases
     phases = [(1, pp_end, "POWERPLAY")]
+    if pp_end == limit:
+        return tuple(phases)
+    short_limit = 60 if match_format == "T20" else 90
+    if limit <= short_limit and pp_end == standard[0][1]:
+        return ((1, pp_end, "POWERPLAY"), (pp_end + 1, limit, "DEATH_OVERS"))
+    death_balls = (limit + 3) // 4
+    death_start = max(pp_end + 1, limit - death_balls + 1)
     if pp_end + 1 < death_start:
         phases.append((pp_end + 1, death_start - 1, "MIDDLE_OVERS"))
-    phases.append((death_start, allotted_balls, "DEATH_OVERS"))
+    phases.append((death_start, limit, "DEATH_OVERS"))
     return tuple(phases)
 
 
@@ -267,12 +255,10 @@ def phase_for(
 def phase_behavior(
     phases: tuple[tuple[int, int, str], ...], match_format: str, reduced_overs: bool
 ) -> str:
-    if phases[0][2] == "NA":
-        return "missing-powerplay-na"
     if reduced_overs:
         return "reduced-overs"
-    if phases[0][1] != PHASES[match_format][0][1]:
-        return "regular-powerplay-na"
+    if match_format == "T20" and phases == BBL_PHASES:
+        return "regular-bbl"
     return "regular-fixed"
 
 
@@ -343,7 +329,7 @@ def calculate_matchup_rows(
     event_sources: Iterable[Any],
     maria_bowling_styles: Mapping[int, str] | None = None,
     allotted_balls_by_innings: Mapping[int, int] | None = None,
-    missing_pp_as_na: bool = False,
+    series_type: str = "",
     phase_behaviors: set[str] | None = None,
 ) -> list[dict[str, Any]]:
     """Calculate target-table rows without performing database mutations."""
@@ -407,32 +393,20 @@ def calculate_matchup_rows(
         innings_id: innings_phases(
             scorecard, match_format,
             allotted_balls_by_innings[innings_id] if allotted_balls_by_innings is not None else None,
-            last_ball_by_innings.get(innings_id), missing_pp_as_na,
+            last_ball_by_innings.get(innings_id), series_type,
         )
         for innings_id, scorecard in scorecards.items()
     }
     for innings_id, phases in sorted(phase_definitions.items()):
-        if phases[0][2] == "NA":
-            LOGGER.warning(
-                "match %s innings %s: opening powerplay is missing; using NA for balls 1-%s",
-                match_info["match_id"], innings_id, phases[0][1],
-            )
-        elif allotted_balls_by_innings is None and phases[0][1] != PHASES[match_format][0][1]:
-            LOGGER.info(
-                "match %s innings %s: nonstandard powerplay expected_pp_end=%s "
-                "actual_pp_end=%s last_eligible_ball=%s phases %s",
-                match_info["match_id"], innings_id, PHASES[match_format][0][1],
-                phases[0][1], last_ball_by_innings.get(innings_id),
-                ", ".join(f"{phase}={start}-{end}" for start, end, phase in phases),
-            )
+        reduced = (allotted_balls_by_innings is not None
+                   and allotted_balls_by_innings[innings_id] < PHASES[match_format][-1][1])
         LOGGER.info(
             "match %s innings %s: %s phases %s",
             match_info["match_id"], innings_id,
-            phase_behavior(phases, match_format,
-                           allotted_balls_by_innings is not None and phases != PHASES[match_format]),
+            phase_behavior(phases, match_format, reduced),
             ", ".join(f"{phase}={start}-{end}" for start, end, phase in phases),
         )
-        if LOGGER.isEnabledFor(logging.DEBUG) and phases[0][2] != "NA":
+        if LOGGER.isEnabledFor(logging.DEBUG):
             pp_key, powerplay = opening_powerplay(scorecards[innings_id])
             LOGGER.debug(
                 "phase source match_id=%s innings_id=%s pp_key=%s pp_overs_from=%s pp_overs_to=%s "
@@ -441,7 +415,7 @@ def calculate_matchup_rows(
                 pp_key,
                 powerplay["pp_overs_from"], powerplay["pp_overs_to"],
                 allotted_balls_by_innings[innings_id] if allotted_balls_by_innings is not None
-                else (phases[-1][1] if len(phases) == 3 else None),
+                else PHASES[match_format][-1][1],
             )
 
     players = player_details(match_info)
@@ -576,10 +550,11 @@ def calculate_matchup_rows(
             limit < PHASES[match_format][-1][1] for limit in allotted_balls_by_innings.values()
         ):
             phase_behaviors.add("reduced-overs")
-        for phases in phase_definitions.values():
+        for innings_id, phases in phase_definitions.items():
             phase_behaviors.add(
                 phase_behavior(phases, match_format,
-                               allotted_balls_by_innings is not None and phases != PHASES[match_format])
+                               allotted_balls_by_innings is not None
+                               and allotted_balls_by_innings[innings_id] < PHASES[match_format][-1][1])
             )
 
     return sorted(
@@ -733,6 +708,24 @@ def fetch_mariadb_bowling_styles(mariadb_connection: Any, player_ids: Iterable[i
         return {row["id"]: row["StyleDesc"] for row in cursor.fetchall()}
     finally:
         cursor.close()
+
+
+def fetch_series_type(mariadb_connection: Any, match_id: int) -> str:
+    cursor = mariadb_connection.cursor()
+    try:
+        cursor.execute(
+            "SELECT s.series_type FROM krik_match_archive AS m "
+            "JOIN krik_series_archive AS s ON s.id = m.seriesid WHERE m.id = %s",
+            (match_id,),
+        )
+        row = cursor.fetchone()
+    finally:
+        cursor.close()
+    if row is None:
+        raise MatchCannotBeBackfilled(
+            f"match {match_id}: linked krik_series_archive row is missing", "missing-series"
+        )
+    return (row["series_type"] or "").strip()
 
 
 def reduced_overs_by_match(path: str | None) -> dict[int, dict[int, int]]:
@@ -902,14 +895,13 @@ def run_backfill(arguments: argparse.Namespace, config: DatabaseConfig) -> bool:
         backfilled_count = 0
         skipped_match_ids: list[int] = []
         behavior_match_ids: dict[str, set[int]] = {
-            behavior: set() for behavior in (
-                "regular-fixed", "regular-powerplay-na", "reduced-overs", "missing-powerplay-na"
-            )
+            behavior: set() for behavior in ("regular-fixed", "regular-bbl", "reduced-overs")
         }
         skipped_by_reason: dict[str, list[int]] = {}
         for match_id in match_ids:
             LOGGER.info("match %s: starting backfill", match_id)
             try:
+                series_type = fetch_series_type(mariadb_connection, match_id)
                 sources = fetch_match_sources(cassandra_session, match_id)
                 player_ids = player_details(as_dict(sources[0]))
                 maria_bowling_styles = fetch_mariadb_bowling_styles(mariadb_connection, player_ids)
@@ -918,7 +910,7 @@ def run_backfill(arguments: argparse.Namespace, config: DatabaseConfig) -> bool:
                     *sources,
                     maria_bowling_styles=maria_bowling_styles,
                     allotted_balls_by_innings=overs_plan.get(match_id),
-                    missing_pp_as_na=arguments.missing_pp_as_na,
+                    series_type=series_type,
                     phase_behaviors=phase_behaviors,
                 )
                 if not rows:
@@ -962,10 +954,6 @@ def parse_arguments(arguments: list[str] | None = None) -> argparse.Namespace:
     selectors.add_argument("--from-date", type=date.fromisoformat, help="Inclusive UTC start date")
     parser.add_argument("--to-date", type=date.fromisoformat, help="Inclusive UTC end date")
     parser.add_argument("--verbose", action="store_true", help="Log each ball event as it is processed")
-    parser.add_argument(
-        "--missing-pp-as-na", action="store_true",
-        help="Use NA when the opening powerplay is missing, bounded by the last eligible ball number",
-    )
     parser.add_argument(
         "--reduced-overs-file",
         help="CSV containing matchId,inningsId,scheduledOvers,reducedOvers for every innings of listed matches",
