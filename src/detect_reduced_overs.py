@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Find reduced-overs matches from Cricbuzz livescore responses."""
+"""Find reduced-overs matches from Cricbuzz commentary responses."""
 
 import argparse
 import csv
@@ -7,8 +7,13 @@ from concurrent.futures import ThreadPoolExecutor
 from itertools import repeat
 import json
 import os
+from pathlib import Path
 import re
+import subprocess
 import sys
+import traceback
+from time import sleep
+from urllib.error import HTTPError, URLError
 from urllib.request import urlopen
 
 import pymysql
@@ -43,33 +48,54 @@ def first_innings_limit(first, standard):
     return None
 
 
+def latest_commentary(payload):
+    comments = payload.get("commentaryList") or []
+    if not comments:
+        return ""
+    latest = max(comments, key=lambda item: item.get("timestamp") or 0)
+    text = latest.get("commText") or ""
+    extra = []
+    for formatting in latest.get("commentaryFormats", {}).values():
+        markers = formatting.get("formatId", [])
+        for index, value in enumerate(formatting.get("formatValue", [])):
+            marker = markers[index] if index < len(markers) else None
+            if marker and marker in text:
+                text = text.replace(marker, value)
+            else:
+                extra.append(value)
+    return " ".join(filter(None, (text, *extra)))
+
+
 def detect(payload, match_format):
     score = payload.get("miniscore", payload)
     details = score.get("matchScoreDetails", {})
     innings = {item.get("inningsId"): item for item in details.get("inningsScoreList", [])}
     first, second = innings.get(1), innings.get(2)
-    status = " ".join(dict.fromkeys(filter(None, (score.get("status"), details.get("customStatus")))))
+    match_status = " ".join(dict.fromkeys(filter(None, (score.get("status"), details.get("customStatus")))))
     standard = STANDARD_OVERS.get(match_format)
     match_id = details.get("matchId")
-    specific = list(INNINGS_OVERS.finditer(status))
-    general_status = status
-    for mention in reversed(specific):
-        general_status = general_status[:mention.start()] + " " + general_status[mention.end():]
-    scheduled = SCHEDULED_OVERS.search(general_status)
+    for source, text in (("status", match_status), ("commentary", latest_commentary(payload))):
+        specific = list(INNINGS_OVERS.finditer(text))
+        general_text = text
+        for mention in reversed(specific):
+            general_text = general_text[:mention.start()] + " " + general_text[mention.end():]
+        scheduled = SCHEDULED_OVERS.search(general_text)
 
-    if specific:
-        common = int(next(value for value in scheduled.groups() if value)) if scheduled else None
-        limits = {1: common, 2: common} if common else {}
-        for mention in specific:
-            limits[1 if mention.group(1).lower() in {"1st", "first"} else 2] = int(mention.group(2))
-        if 2 in limits and 1 not in limits and standard:
-            limits[1] = first_innings_limit(first, standard)
-        return result(match_id, match_format, standard, True, common, "status", status, first, second, limits)
-    if scheduled:
-        scheduled_overs = int(next(value for value in scheduled.groups() if value))
-        return result(match_id, match_format, standard, scheduled_overs < standard if standard else True, scheduled_overs, "status", status, first, second)
-    if REDUCED_WORDS.search(status):
-        return result(match_id, match_format, standard, True, None, "status", status, first, second)
+        if specific:
+            common = int(next(value for value in scheduled.groups() if value)) if scheduled else None
+            limits = {1: common, 2: common} if common else {}
+            for mention in specific:
+                limits[1 if mention.group(1).lower() in {"1st", "first"} else 2] = int(mention.group(2))
+            if 2 in limits and 1 not in limits and standard:
+                limits[1] = first_innings_limit(first, standard)
+            return result(match_id, match_format, standard, True, common, source, text, first, second, limits)
+        if scheduled:
+            scheduled_overs = int(next(value for value in scheduled.groups() if value))
+            if not standard or scheduled_overs < standard:
+                return result(match_id, match_format, standard, True, scheduled_overs,
+                              source, text, first, second)
+        elif REDUCED_WORDS.search(text):
+            return result(match_id, match_format, standard, True, None, source, text, first, second)
     if standard:
         played_balls = balls(first.get("overs", 0)) if first else 0
         if details.get("state") == "Complete" and first and first.get("wickets", 10) < 10 and played_balls < standard * 6:
@@ -94,10 +120,28 @@ def result(match_id, match_format, standard_overs, reduced_overs, scheduled_over
 
 
 def read_payload(match_id):
-    with urlopen(f"http://apiserver.cricbuzz.com/w/mcenter/v1/{match_id}/livescore", timeout=15) as response:
-        if response.status == 204:
-            return None
-        return json.load(response)
+    url = f"http://apiserver.cricbuzz.com/w/mcenter/v1/{match_id}/comm"
+    for attempt in range(3):
+        try:
+            with urlopen(url, timeout=15) as response:
+                if response.status == 204:
+                    return None
+                return json.load(response)
+        except URLError as error:
+            if isinstance(error, HTTPError):
+                raise
+            if attempt < 2:
+                sleep(0.5 * 2 ** attempt)
+                continue
+            try:
+                response = subprocess.run(
+                    ["curl", "--fail", "--silent", "--show-error", "--max-time", "15", url],
+                    capture_output=True, text=True, check=True,
+                )
+            except (OSError, subprocess.CalledProcessError) as curl_error:
+                reason = getattr(curl_error, "stderr", None) or str(curl_error)
+                raise URLError(f"{error}; curl fallback failed: {reason.strip()}") from curl_error
+            return json.loads(response.stdout) if response.stdout else None
 
 
 def database_match_ids(predicate, values):
@@ -113,61 +157,55 @@ def database_match_ids(predicate, values):
         with connection.cursor() as cursor:
             cursor.execute(
                 """
-                SELECT m.id, m.startdt, m.match_type_id, i.inningsId, i.revisedOvers
+                SELECT m.id, m.startdt, m.match_type_id
                 FROM krik_match_archive AS m
-                LEFT JOIN stats_import3_dump_innings_tbl AS i ON i.matchId = m.id
                 WHERE {predicate}
                   AND (m.match_type_id NOT IN (1, 4) OR m.match_type_id IS NULL)
-                ORDER BY m.startdt, m.id, i.inningsId
+                ORDER BY m.startdt, m.id
                 """.format(predicate=predicate),
                 values,
             )
-            matches = {}
-            for match_id, start_date, match_type_id, innings_id, revised_overs in cursor:
-                match = matches.setdefault(match_id, {
+            return [
+                {
                     "matchId": match_id,
                     "startDate": start_date.isoformat(),
                     "matchFormat": MATCH_FORMATS.get(match_type_id, "T20"),
-                    "revisedOversByInnings": {},
-                })
-                if innings_id is not None and revised_overs:
-                    match["revisedOversByInnings"][innings_id] = revised_overs
-            return list(matches.values())
+                }
+                for match_id, start_date, match_type_id in cursor
+            ]
     finally:
         connection.close()
 
 
 def inspect_match(match, regular_match_ids=()):
     match_id = match["matchId"]
-    if match_id in regular_match_ids:
-        standard = STANDARD_OVERS[match["matchFormat"]]
-        return {
-            **result(match_id, match["matchFormat"], standard, False, standard,
-                     "override", None, None, None),
-            "startDate": match["startDate"],
-            "inningsIds": [],
-            "revisedOversByInnings": {},
-        }
     try:
         payload = read_payload(match_id)
         if payload is None:
             return None
         score = payload.get("miniscore", payload)
         details = score.get("matchScoreDetails", {})
-        statuses = (score.get("status"), details.get("customStatus"))
+        statuses = (score.get("status"), details.get("customStatus"), latest_commentary(payload))
         if any(NO_RESULT.search(status or "") for status in statuses):
             return None
         status = " ".join(filter(None, statuses))
-        if DLS.search(status) and not (INNINGS_OVERS.search(status) or SCHEDULED_OVERS.search(status)):
-            return None
-        detection = detect(payload, match["matchFormat"])
+        if match_id in regular_match_ids:
+            standard = STANDARD_OVERS[match["matchFormat"]]
+            detection = result(match_id, match["matchFormat"], standard, False, standard,
+                               "override", None, None, None)
+        else:
+            if DLS.search(status) and not (INNINGS_OVERS.search(status) or SCHEDULED_OVERS.search(status)):
+                return None
+            detection = detect(payload, match["matchFormat"])
         innings = details.get("inningsScoreList", [])
         return {
             **detection, "matchId": match_id, "startDate": match["startDate"],
             "inningsIds": sorted({item["inningsId"] for item in innings}),
-            "revisedOversByInnings": match["revisedOversByInnings"],
+            "playedOversByInnings": {item["inningsId"]: item.get("overs") for item in innings},
+            "status": score.get("status") or details.get("customStatus") or "",
         }
     except Exception as error:
+        sys.stderr.write(f"match {match_id} failed:\n{traceback.format_exc()}")
         return {"matchId": match_id, "startDate": match["startDate"], "error": str(error)}
 
 
@@ -184,12 +222,9 @@ def write_overs_file(path, matches):
             issues.append((match["matchId"], None, "no innings found"))
             continue
         for innings_id in match["inningsIds"]:
-            limit = (match["revisedOversByInnings"].get(innings_id)
-                     or match.get("allottedOversByInnings", {}).get(innings_id)
-                     or match["scheduledOvers"])
+            limit = match.get("allottedOversByInnings", {}).get(innings_id) or match["scheduledOvers"]
             if limit is None:
-                issues.append((match["matchId"], innings_id,
-                               "allotted overs unknown; archive revisedOvers is 0 or missing and status gives no limit for this innings"))
+                issues.append((match["matchId"], innings_id, "allotted overs unknown for this innings"))
                 continue
             if (not re.fullmatch(r"\d+(?:\.[0-6])?", str(limit))
                     or limit <= 0 or limit > match["standardOvers"]):
@@ -213,6 +248,21 @@ def write_overs_file(path, matches):
     return len(rows)
 
 
+def write_normal_file(path, matches):
+    rows = []
+    for match in matches:
+        if not match or "error" in match or match["reducedOvers"]:
+            continue
+        for innings_id in match["inningsIds"] or [None]:
+            rows.append((match["matchId"], innings_id, match["standardOvers"],
+                         match["playedOversByInnings"].get(innings_id), match["status"]))
+    with open(path, "w", encoding="utf-8", newline="") as output:
+        writer = csv.writer(output, lineterminator="\n")
+        writer.writerow(("matchId", "inningsId", "standardOvers", "playedOvers", "status"))
+        writer.writerows(rows)
+    return len(rows)
+
+
 def parse_match_ids(value):
     ids = [item.strip() for item in value.split(",")]
     if not ids or any(not item.isdecimal() or int(item) <= 0 for item in ids):
@@ -227,11 +277,12 @@ def main():
     source.add_argument("--series-id", type=int, help="scan every non-Test, non-Hundred match in this series")
     source.add_argument("--match-id", type=int, help="inspect this non-Test, non-Hundred match")
     parser.add_argument("--to-date", help="inclusive YYYY-MM-DD archive end date, required with --from-date")
-    parser.add_argument("--workers", type=int, default=8, help="parallel livescore requests")
-    parser.add_argument("--all", action="store_true", help="include matches that are not reduced")
+    parser.add_argument("--workers", type=int, default=8, help="parallel commentary requests")
+    parser.add_argument("--all", action="store_true", help="include ordinary matches with --print-json")
+    parser.add_argument("--print-json", action="store_true", help="print selected match details as JSON")
     parser.add_argument("--regular-match-ids", type=parse_match_ids, default=frozenset(),
-                        help="comma-separated match IDs to treat as regular without inspecting livescore")
-    parser.add_argument("--output-file", help="write UTF-8 innings overs CSV for backfill_matchups.py")
+                        help="comma-separated match IDs to treat as regular without checking reduced overs")
+    parser.add_argument("--output-file", help="write UTF-8 reduced overs CSV and companion _normal CSV")
     args = parser.parse_args()
     if args.from_date and not args.to_date:
         parser.error("--to-date is required with --from-date")
@@ -250,14 +301,19 @@ def main():
         match for match in results
         if match and (args.all or args.match_id is not None or match.get("reducedOvers") or match.get("error"))
     ]
-    print(json.dumps(selected, indent=2), flush=True)
+    if args.print_json:
+        print(json.dumps(selected, indent=2), flush=True)
     reduced = sum(bool(match and match.get("reducedOvers")) for match in results)
     errors = sum(bool(match and "error" in match) for match in results)
     excluded = sum(match is None for match in results)
     ordinary = len(matches) - reduced - errors - excluded
     csv_rows = "not_requested" if not args.output_file else "not_written"
+    normal_csv_rows = csv_rows
     try:
         if args.output_file:
+            output_path = Path(args.output_file)
+            normal_path = output_path.with_name(f"{output_path.stem}_normal{output_path.suffix}")
+            normal_csv_rows = write_normal_file(normal_path, results)
             csv_rows = write_overs_file(args.output_file, [match for match in results if match])
     except ValueError as error:
         print(error, file=sys.stderr)
@@ -265,7 +321,8 @@ def main():
     finally:
         print(
             f"Summary: scanned={len(matches)} reduced={reduced} ordinary={ordinary} "
-            f"excluded={excluded} errors={errors} json_entries={len(selected)} csv_rows={csv_rows}",
+            f"excluded={excluded} errors={errors} json_entries={len(selected) if args.print_json else 0} "
+            f"csv_rows={csv_rows} normal_csv_rows={normal_csv_rows}",
             file=sys.stderr,
         )
     return 0

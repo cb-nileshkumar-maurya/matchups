@@ -8,7 +8,7 @@ from contextlib import redirect_stderr, redirect_stdout
 from tempfile import NamedTemporaryFile
 from unittest.mock import Mock, patch
 
-from backfill_matchups import (
+from src.backfill_matchups import (
     LOGGER,
     MatchCannotBeBackfilled,
     DatabaseConfig,
@@ -155,9 +155,9 @@ class CalculateMatchupRowsTests(unittest.TestCase):
     def test_main_resets_logging_level_between_verbose_and_info_runs(self) -> None:
         previous_level = LOGGER.level
         try:
-            with patch("backfill_matchups.logging.basicConfig"), \
-                    patch("backfill_matchups.database_config", return_value=Mock()), \
-                    patch("backfill_matchups.run_backfill", return_value=True):
+            with patch("src.backfill_matchups.logging.basicConfig"), \
+                    patch("src.backfill_matchups.database_config", return_value=Mock()), \
+                    patch("src.backfill_matchups.run_backfill", return_value=True):
                 self.assertEqual(main(["--match-id", "10", "--verbose"]), 0)
                 self.assertEqual(LOGGER.level, logging.DEBUG)
                 self.assertEqual(main(["--match-id", "10"]), 0)
@@ -167,7 +167,7 @@ class CalculateMatchupRowsTests(unittest.TestCase):
 
     def test_info_logs_phase_ranges_without_per_ball_details(self) -> None:
         sources = phase_sources(pp_to=5, ball_numbers=(30, 31, 97))
-        with self.assertLogs("backfill_matchups", level="INFO") as logs:
+        with self.assertLogs("src.backfill_matchups", level="INFO") as logs:
             calculate_matchup_rows(*sources, allotted_balls_by_innings={1: 105})
         output = "\n".join(logs.output)
         self.assertIn("match 10 innings 1: reduced-overs phases", output)
@@ -181,7 +181,7 @@ class CalculateMatchupRowsTests(unittest.TestCase):
     def test_verbose_logs_players_events_and_phase_source(self) -> None:
         sources = phase_sources(pp_to=5, ball_numbers=(30,))
         sources[0]["team1"]["player_details"][0]["name"] = "Test Batter"
-        with self.assertLogs("backfill_matchups", level="DEBUG") as logs:
+        with self.assertLogs("src.backfill_matchups", level="DEBUG") as logs:
             calculate_matchup_rows(*sources, allotted_balls_by_innings={1: 105})
         output = "\n".join(logs.output)
         self.assertIn("match 10 innings 1: reduced-overs phases", output)
@@ -329,15 +329,15 @@ class CalculateMatchupRowsTests(unittest.TestCase):
             return rows
 
         with patch.dict(sys.modules, driver_modules), patch.dict(os.environ, {}, clear=True), \
-                patch("backfill_matchups.fetch_match_sources", side_effect=[
+                patch("src.backfill_matchups.fetch_match_sources", side_effect=[
                     sources, MatchCannotBeBackfilled(
                         "unsupported match format: 'HUN'", "unsupported format 'HUN'"
                     ), sources,
                 ]), \
-                patch("backfill_matchups.fetch_series_type", return_value=""), \
-                patch("backfill_matchups.calculate_matchup_rows", side_effect=calculate_rows) as calculate, \
-                patch("backfill_matchups.replace_rows") as replace, \
-                self.assertLogs("backfill_matchups", level="INFO") as logs:
+                patch("src.backfill_matchups.fetch_series_type", return_value=""), \
+                patch("src.backfill_matchups.calculate_matchup_rows", side_effect=calculate_rows) as calculate, \
+                patch("src.backfill_matchups.replace_rows") as replace, \
+                self.assertLogs("src.backfill_matchups", level="INFO") as logs:
             result = run_backfill(parse_arguments(["--match-id", "11,12,13"]), config)
 
         self.assertTrue(result)
@@ -358,7 +358,7 @@ class CalculateMatchupRowsTests(unittest.TestCase):
         self.assertNotIn("skipped match: match_id=", "\n".join(logs.output))
 
     def test_match_id_groups_wrap_long_lists(self) -> None:
-        with self.assertLogs("backfill_matchups", level="INFO") as logs:
+        with self.assertLogs("src.backfill_matchups", level="INFO") as logs:
             log_match_groups("skipped matches by reason", {"missing-powerplay": range(101, 115)})
 
         id_lines = [line for line in logs.output if "match IDs:" in line]
@@ -376,12 +376,12 @@ class CalculateMatchupRowsTests(unittest.TestCase):
             cassandra_tunnel_mode=True, cassandra_keyspace="matches_data",
         )
         with patch.dict(sys.modules, fake_driver_modules(Mock())), \
-                patch("backfill_matchups.selected_match_ids", return_value=[10]), \
-                patch("backfill_matchups.fetch_series_type", return_value=""), \
-                patch("backfill_matchups.fetch_match_sources", return_value=sources), \
-                patch("backfill_matchups.fetch_mariadb_bowling_styles", return_value={}), \
-                patch("backfill_matchups.replace_rows") as replace, \
-                self.assertLogs("backfill_matchups", level="INFO") as logs:
+                patch("src.backfill_matchups.selected_match_ids", return_value=[10]), \
+                patch("src.backfill_matchups.fetch_series_type", return_value=""), \
+                patch("src.backfill_matchups.fetch_match_sources", return_value=sources), \
+                patch("src.backfill_matchups.fetch_mariadb_bowling_styles", return_value={}), \
+                patch("src.backfill_matchups.replace_rows") as replace, \
+                self.assertLogs("src.backfill_matchups", level="INFO") as logs:
             result = run_backfill(parse_arguments(["--match-id", "10"]), config)
 
         self.assertFalse(result)
@@ -411,7 +411,7 @@ class CalculateMatchupRowsTests(unittest.TestCase):
             raise AssertionError(statement)
 
         session.execute.side_effect = execute
-        with self.assertLogs("backfill_matchups", level="INFO") as logs:
+        with self.assertLogs("src.backfill_matchups", level="INFO") as logs:
             _, _, fetched_events = fetch_match_sources(session, 10)
 
         self.assertEqual(fetched_events, events)
@@ -460,7 +460,7 @@ class CalculateMatchupRowsTests(unittest.TestCase):
             arguments = parse_arguments([
                 "--match-id", "10", "--reduced-overs-file", overs_file.name,
             ])
-            with patch("backfill_matchups.replace_rows") as replace:
+            with patch("src.backfill_matchups.replace_rows") as replace:
                 with self.assertRaisesRegex(ValueError, "line 2.*17.7"):
                     run_backfill(arguments, Mock())
             replace.assert_not_called()
@@ -473,7 +473,7 @@ class CalculateMatchupRowsTests(unittest.TestCase):
             arguments = parse_arguments([
                 "--match-id", "10", "--reduced-overs-file", overs_file.name,
             ])
-            with patch("backfill_matchups.replace_rows") as replace:
+            with patch("src.backfill_matchups.replace_rows") as replace:
                 with self.assertRaisesRegex(ValueError, "line 3.*10.*1"):
                     run_backfill(arguments, Mock())
             replace.assert_not_called()
@@ -509,11 +509,11 @@ class CalculateMatchupRowsTests(unittest.TestCase):
             ])
             connection = Mock()
             with patch.dict(sys.modules, fake_driver_modules(connection)), \
-                    patch("backfill_matchups.fetch_series_type", return_value=""), \
-                    patch("backfill_matchups.fetch_match_sources", return_value=phase_sources()), \
-                    patch("backfill_matchups.fetch_mariadb_bowling_styles", return_value={}), \
-                    patch("backfill_matchups.replace_rows") as replace, \
-                    self.assertLogs("backfill_matchups", level="WARNING") as logs:
+                    patch("src.backfill_matchups.fetch_series_type", return_value=""), \
+                    patch("src.backfill_matchups.fetch_match_sources", return_value=phase_sources()), \
+                    patch("src.backfill_matchups.fetch_mariadb_bowling_styles", return_value={}), \
+                    patch("src.backfill_matchups.replace_rows") as replace, \
+                    self.assertLogs("src.backfill_matchups", level="WARNING") as logs:
                 result = run_backfill(arguments, Mock(cassandra_contacts=("127.0.0.1",)))
             self.assertFalse(result)
             replace.assert_not_called()
@@ -540,11 +540,11 @@ class CalculateMatchupRowsTests(unittest.TestCase):
             ])
             connection = Mock()
             with patch.dict(sys.modules, fake_driver_modules(connection)), \
-                    patch("backfill_matchups.fetch_series_type", return_value=""), \
-                    patch("backfill_matchups.fetch_match_sources", return_value=sources), \
-                    patch("backfill_matchups.fetch_mariadb_bowling_styles", return_value={}), \
-                    patch("backfill_matchups.replace_rows") as replace, \
-                    self.assertLogs("backfill_matchups", level="DEBUG") as logs:
+                    patch("src.backfill_matchups.fetch_series_type", return_value=""), \
+                    patch("src.backfill_matchups.fetch_match_sources", return_value=sources), \
+                    patch("src.backfill_matchups.fetch_mariadb_bowling_styles", return_value={}), \
+                    patch("src.backfill_matchups.replace_rows") as replace, \
+                    self.assertLogs("src.backfill_matchups", level="DEBUG") as logs:
                 result = run_backfill(arguments, Mock(cassandra_contacts=("127.0.0.1",)))
             self.assertTrue(result)
             output = "\n".join(logs.output)
@@ -616,7 +616,7 @@ class CalculateMatchupRowsTests(unittest.TestCase):
         replacement.update({"match_id": 10, "match_format": "ODI", "phase": "POWERPLAY"})
         output = io.StringIO()
 
-        with redirect_stdout(output), self.assertLogs("backfill_matchups", level="DEBUG") as logs:
+        with redirect_stdout(output), self.assertLogs("src.backfill_matchups", level="DEBUG") as logs:
             replace_rows(connection, 10, [replacement])
 
         self.assertIn("match 10: existing rows to delete: 1", output.getvalue())
@@ -703,7 +703,7 @@ class CalculateMatchupRowsTests(unittest.TestCase):
                    "wkt_code": "NONE", "extra_code": "NONE", "unused_field": "ignore"}]
         events.append({**events[0], "ball_nbr": 100, "time_score": "2026-10-06T16:40:00"})
 
-        with self.assertLogs("backfill_matchups", level="DEBUG") as logs:
+        with self.assertLogs("src.backfill_matchups", level="DEBUG") as logs:
             rows = calculate_matchup_rows(match_info, scorecards, events)
         self.assertEqual(len(rows), 2)
         self.assertTrue(all(row["bowling_type"] is None and row["bowling_technique"] is None
@@ -721,7 +721,7 @@ class CalculateMatchupRowsTests(unittest.TestCase):
         self.assertTrue(any("bowler_id=11543" in line and "bowler_name='Test Bowler'" in line
                             for line in logs.output))
 
-        with self.assertLogs("backfill_matchups", level="DEBUG") as fallback_logs:
+        with self.assertLogs("src.backfill_matchups", level="DEBUG") as fallback_logs:
             rows = calculate_matchup_rows(
                 match_info, scorecards, events,
                 maria_bowling_styles={11543: "Right Arm fast medium"},
@@ -781,7 +781,7 @@ class CalculateMatchupRowsTests(unittest.TestCase):
         ]
         events[0]["unused_field"] = "do not log"
 
-        with self.assertLogs("backfill_matchups", level="DEBUG") as logs:
+        with self.assertLogs("src.backfill_matchups", level="DEBUG") as logs:
             rows = calculate_matchup_rows(match_info, scorecards, events)
 
         self.assertTrue(any("playersMap match_id=10 player_id=101" in line
@@ -915,7 +915,7 @@ class CalculateMatchupRowsTests(unittest.TestCase):
             "pp_1": {"pp_overs_from": 6.1, "pp_overs_to": 10, "pp_type": "batting"},
             "pp_2": {"pp_overs_from": 0.1, "pp_overs_to": 6, "pp_type": "mandatory"},
         }
-        with self.assertLogs("backfill_matchups", level="DEBUG") as logs:
+        with self.assertLogs("src.backfill_matchups", level="DEBUG") as logs:
             rows = calculate_matchup_rows(*sources)
         self.assertEqual([(row["phase"], row["phase_from_ball_nbr"], row["phase_to_ball_nbr"])
                           for row in rows],

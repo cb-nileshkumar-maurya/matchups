@@ -1,6 +1,6 @@
 # Matchup backfill pseudocode
 
-This describes the current behavior of `backfill_matchups.py`.
+This describes the current behavior of `src/backfill_matchups.py`.
 
 ```text
 MAIN
