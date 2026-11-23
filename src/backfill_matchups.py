@@ -331,6 +331,7 @@ def calculate_matchup_rows(
     allotted_balls_by_innings: Mapping[int, int] | None = None,
     series_type: str = "",
     phase_behaviors: set[str] | None = None,
+    ignore_empty_striker: bool = False,
 ) -> list[dict[str, Any]]:
     """Calculate target-table rows without performing database mutations."""
 
@@ -358,9 +359,15 @@ def calculate_matchup_rows(
     if not scorecards:
         raise MatchCannotBeBackfilled("no scorecards found", "missing scorecards")
     eligible_events = []
+    ignored_empty_striker_balls = 0
     for source in event_sources:
         event = as_dict(source)
         if event.get("extra_code") in {"Wd", "WD"} or event.get("ball_nbr") == 0:
+            continue
+        if ignore_empty_striker and any(
+            event.get(field) in (None, 0) for field in ("bat_striker_id", "bowl_striker_id")
+        ):
+            ignored_empty_striker_balls += 1
             continue
         ball_nbr = event.get("ball_nbr")
         if not isinstance(ball_nbr, int) or isinstance(ball_nbr, bool) or ball_nbr < 1:
@@ -383,6 +390,11 @@ def calculate_matchup_rows(
                     "invalid-event",
                 )
         eligible_events.append(event)
+    if ignored_empty_striker_balls:
+        LOGGER.warning(
+            "match %s: ignored %s balls with null or zero striker IDs",
+            match_info["match_id"], ignored_empty_striker_balls,
+        )
     last_ball_by_innings: dict[int, int] = {}
     for event in eligible_events:
         innings_id = event["innings_id"]
@@ -912,6 +924,7 @@ def run_backfill(arguments: argparse.Namespace, config: DatabaseConfig) -> bool:
                     allotted_balls_by_innings=overs_plan.get(match_id),
                     series_type=series_type,
                     phase_behaviors=phase_behaviors,
+                    ignore_empty_striker=arguments.ignore_empty_striker,
                 )
                 if not rows:
                     LOGGER.warning(
@@ -954,6 +967,10 @@ def parse_arguments(arguments: list[str] | None = None) -> argparse.Namespace:
     selectors.add_argument("--from-date", type=date.fromisoformat, help="Inclusive UTC start date")
     parser.add_argument("--to-date", type=date.fromisoformat, help="Inclusive UTC end date")
     parser.add_argument("--verbose", action="store_true", help="Log each ball event as it is processed")
+    parser.add_argument(
+        "--ignore-empty-striker", action="store_true",
+        help="Skip balls whose batting or bowling striker ID is null or zero",
+    )
     parser.add_argument(
         "--reduced-overs-file",
         help="CSV containing matchId,inningsId,scheduledOvers,reducedOvers for every innings of listed matches",

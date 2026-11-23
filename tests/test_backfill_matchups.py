@@ -393,6 +393,29 @@ class CalculateMatchupRowsTests(unittest.TestCase):
         self.assertIn("'bowl_striker_id': 202", warning)
         self.assertNotIn("processing match_id=10", "\n".join(logs.output))
 
+    def test_ignore_empty_striker_backfills_remaining_balls(self) -> None:
+        sources = phase_sources(ball_numbers=(1, 2, 3))
+        sources[2][1]["bat_striker_id"] = None
+        sources[2][2]["bowl_striker_id"] = 0
+        config = Mock(cassandra_contacts=("127.0.0.1",), cassandra_port=9042,
+                      cassandra_tunnel_mode=False, cassandra_keyspace="matches_data")
+        with patch.dict(sys.modules, fake_driver_modules(Mock())), \
+                patch("src.backfill_matchups.selected_match_ids", return_value=[10]), \
+                patch("src.backfill_matchups.fetch_series_type", return_value=""), \
+                patch("src.backfill_matchups.fetch_match_sources", return_value=sources), \
+                patch("src.backfill_matchups.fetch_mariadb_bowling_styles", return_value={}), \
+                patch("src.backfill_matchups.replace_rows") as replace, \
+                self.assertLogs("src.backfill_matchups", level="INFO") as logs:
+            result = run_backfill(
+                parse_arguments(["--match-id", "10", "--ignore-empty-striker"]), config
+            )
+
+        self.assertTrue(result)
+        self.assertEqual(replace.call_args.args[1], 10)
+        self.assertEqual(replace.call_args.args[2][0]["balls"], 1)
+        self.assertIn("ignored 2 balls with null or zero striker IDs", "\n".join(logs.output))
+        self.assertIn("match summary: selected=1 backfilled=1 skipped=0", "\n".join(logs.output))
+
     def test_fetches_all_ball_events_from_commentary(self) -> None:
         events = [
             {"innings_id": 1, "time_score": "t1", "ball_nbr": 1, "wkt_code": "NONE"},
@@ -1077,6 +1100,21 @@ class CalculateMatchupRowsTests(unittest.TestCase):
                 with self.assertRaisesRegex(MatchCannotBeBackfilled, missing_field) as error:
                     calculate_matchup_rows(*sources)
                 self.assertEqual(error.exception.reason, "invalid-event")
+
+    def test_ignore_empty_striker_keeps_valid_balls(self) -> None:
+        sources = phase_sources(ball_numbers=(1, 2, 3, 4, 5))
+        sources[2][1]["bat_striker_id"] = None
+        sources[2][2]["bat_striker_id"] = 0
+        sources[2][3]["bowl_striker_id"] = None
+        sources[2][4]["bowl_striker_id"] = 0
+
+        with self.assertRaises(MatchCannotBeBackfilled):
+            calculate_matchup_rows(*sources)
+
+        rows = calculate_matchup_rows(*sources, ignore_empty_striker=True)
+        self.assertEqual(len(rows), 1)
+        self.assertEqual(rows[0]["balls"], 1)
+        self.assertEqual(rows[0]["dots"], 1)
 
     def test_rejects_event_beyond_allotted_innings(self) -> None:
         sources = phase_sources(pp_to=4, ball_numbers=(31,))
